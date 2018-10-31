@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <!-- Base application theme no actionbar. -->
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+
+    </style>
+
+    <!-- Button styles -->
+    <style name="MyButtonStyle" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:foreground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="android:background">@drawable/btn_bg_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--TextInputLayout style-->
+    <style name="MyHintTextStyle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <!--EditText style-->
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+    </style>
+
+    <!--ProgressBar style-->
+    <style name="MyProgressBarStyle" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/indigo_500</item>
+    </style>
+
+
+</resources>

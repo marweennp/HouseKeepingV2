@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activites.MaintenanceOrdersActivity">
+
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Progress View -->
+    <include layout="@layout/include_loading_view" />
+
+    <!-- Orders Container -->
+    <RelativeLayout
+        android:id="@+id/rl_orders_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:layout_marginBottom="8dp">
+
+        <!-- Type Spinner -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_orders_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:popupBackground="@color/white"
+            android:spinnerMode="dropdown" />
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/v_orders_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/sp_orders_types"
+            android:background="@color/colorAccent" />
+
+        <RelativeLayout
+            android:id="@+id/rl_orders_date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/v_orders_divider">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_orders_from_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:text="@string/text_from_date"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_orders_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="3dp"
+                android:layout_toEndOf="@+id/tv_orders_from_date"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="00/00/0000"
+                android:inputType="date"
+                android:textColor="@color/colorPrimaryDark"
+                android:theme="@style/MyEditTextStyle" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_orders_to_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6dp"
+                android:layout_toEndOf="@+id/et_orders_start_date"
+                android:text="@string/text_to_date"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_orders_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_toEndOf="@+id/tv_orders_to_date"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="00/00/0000"
+                android:inputType="text"
+                android:textColor="@color/colorPrimaryDark"
+                android:theme="@style/MyEditTextStyle" />
+
+        </RelativeLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/v_orders_top_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/rl_orders_date"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/colorAccent" />
+
+        <!-- Orders List -->
+        <ListView
+            android:id="@+id/lv_orders_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/v_orders_top_divider"
+            android:divider="@color/colorPrimaryDark"
+            android:dividerHeight="1px"
+            android:drawSelectorOnTop="true" />
+
+
+    </RelativeLayout>
+
+    <!-- Empty View -->
+    <include layout="@layout/include_empty_view" />
+
+</RelativeLayout>

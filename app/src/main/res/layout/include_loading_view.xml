@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Loading View -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_loading_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <!-- Loading ProgressBar -->
+    <ProgressBar
+        android:id="@+id/pb_loading_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Loading Progress TextView -->
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_loading_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/all_loading"
+        android:textColor="@color/grey_400"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

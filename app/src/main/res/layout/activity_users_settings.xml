@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activites.SettingsActivity">
+
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Progress View -->
+    <include layout="@layout/include_loading_view" />
+
+    <!-- Users List -->
+    <RelativeLayout
+        android:id="@+id/rl_users_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbar"
+        android:layout_marginBottom="8dp">
+
+        <!-- Users Spinner -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_users_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:popupBackground="@color/white"
+            android:spinnerMode="dropdown" />
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/v_users_settings_top_ivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/sp_users_settings"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/colorAccent" />
+
+        <!-- Sittings Container -->
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/v_users_settings_top_ivider">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical">
+
+                <!-- Settings Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_users_settings_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text="@string/text_user_settings"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Setting Configuration -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_configuration_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_configuration"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_configuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting HouseKeepers -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_housekeepers_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_see_housekeepers"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_housekeepers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Declare Orders -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_declare_orders_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_declare_maintenance_orders"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_declare_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Close Orders -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_close_orders_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_close_maintenance_orders"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_close_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Declare Found -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_declare_found_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_declare_object_found"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_declare_found"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Close Found -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_close_found_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_close_object_found"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_close_found"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Room Status -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_room_status_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_view_room_status"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_room_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Room State -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_room_state_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_change_room_state"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_room_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting Location State -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_location_state_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_change_location_state"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_location_state"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+                <!-- Setting View Guests -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <!-- Configuration Title -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_users_settings_view_geusts_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_view_guests"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/sw_users_settings_view_geusts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:checked="false"
+                        android:text="@string/all_off"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+    <!-- Empty View -->
+    <include layout="@layout/include_empty_view" />
+
+</RelativeLayout>

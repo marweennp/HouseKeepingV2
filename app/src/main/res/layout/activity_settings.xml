@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activites.SettingsActivity">
+
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Sittings Container -->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Serveur Config -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_settings_server_config_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/text_serveur_config"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Public IP -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_settings_public_ip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_settings_public_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_public_ip"
+                    android:inputType="text"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Local IP -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_settings_Local_ip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_settings_local_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_local_ip"
+                    android:inputType="text"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorAccent" />
+
+            <!-- Hotel code Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_settings_hotel_code_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/text_hotel_code"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Hotel code -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_settings_hotel_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_settings_hotel_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_code"
+                    android:inputType="text"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorAccent" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!-- Picture Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_settings_picture_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/text_picture"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/sw_settings_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:checked="false"
+                    android:text="@string/hide"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

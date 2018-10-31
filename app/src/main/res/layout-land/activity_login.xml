@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activites.LoginActivity">
+
+    <!-- Custom ImageView With Ken Burns Effect -->
+    <com.hotix.myhotixhousekeeping.views.kbv.KenBurnsView
+        android:id="@+id/ken_burns_images"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Login Form -->
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="36dp"
+        android:background="@drawable/transparent_background"
+        android:orientation="horizontal">
+
+        <!-- Login Logo -->
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_login_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/ic_lock_white_48"
+            app:tint="@color/grey_500" />
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Login -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_login_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_login_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_login"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password  -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Login Button -->
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                style="@style/MyButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/text_login_button"
+                android:textSize="24sp" />
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <!-- Footer -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/transparent_background">
+
+        <!-- Version -->
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_login_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0.0.0"
+            android:textColor="@color/light_bg_dark_secondary_text"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- MySettings -->
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/ibtn_login_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_settings_white_36" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
