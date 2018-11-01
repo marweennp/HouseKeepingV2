@@ -1,5 +1,6 @@
 package com.hotix.myhotixhousekeeping.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -20,16 +21,16 @@ public class LoginData {
     private String dateFront;
     @SerializedName("Etages")
     @Expose
-    private List<Etage> etages = null;
+    private ArrayList<Etage> etages = null;
     @SerializedName("Techniciens")
     @Expose
-    private List<Technicien> techniciens = null;
+    private ArrayList<Technicien> techniciens = null;
     @SerializedName("TypesPanne")
     @Expose
-    private List<TypesPanne> typesPanne = null;
+    private ArrayList<TypesPanne> typesPanne = null;
     @SerializedName("FemmesMenage")
     @Expose
-    private List<FemmesMenage> femmesMenage = null;
+    private ArrayList<FemmesMenage> femmesMenage = null;
     @SerializedName("Error")
     @Expose
     private Integer error;
@@ -103,31 +104,31 @@ public class LoginData {
         return etages;
     }
 
-    public void setEtages(List<Etage> etages) {
+    public void setEtages(ArrayList<Etage> etages) {
         this.etages = etages;
     }
 
-    public List<Technicien> getTechniciens() {
+    public ArrayList<Technicien> getTechniciens() {
         return techniciens;
     }
 
-    public void setTechniciens(List<Technicien> techniciens) {
+    public void setTechniciens(ArrayList<Technicien> techniciens) {
         this.techniciens = techniciens;
     }
 
-    public List<TypesPanne> getTypesPanne() {
+    public ArrayList<TypesPanne> getTypesPanne() {
         return typesPanne;
     }
 
-    public void setTypesPanne(List<TypesPanne> typesPanne) {
+    public void setTypesPanne(ArrayList<TypesPanne> typesPanne) {
         this.typesPanne = typesPanne;
     }
 
-    public List<FemmesMenage> getFemmesMenage() {
+    public ArrayList<FemmesMenage> getFemmesMenage() {
         return femmesMenage;
     }
 
-    public void setFemmesMenage(List<FemmesMenage> femmesMenage) {
+    public void setFemmesMenage(ArrayList<FemmesMenage> femmesMenage) {
         this.femmesMenage = femmesMenage;
     }
 

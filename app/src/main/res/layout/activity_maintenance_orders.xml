@@ -16,12 +16,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!-- Progress View -->
-    <include layout="@layout/include_loading_view" />
-
     <!-- Orders Container -->
     <RelativeLayout
-        android:id="@+id/rl_orders_container"
+        android:id="@+id/rl_orders_main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbar"
@@ -77,7 +74,7 @@
                 android:focusable="false"
                 android:hint="00/00/0000"
                 android:inputType="date"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/light_bg_dark_secondary_text"
                 android:theme="@style/MyEditTextStyle" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -102,7 +99,7 @@
                 android:focusable="false"
                 android:hint="00/00/0000"
                 android:inputType="text"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/light_bg_dark_secondary_text"
                 android:theme="@style/MyEditTextStyle" />
 
         </RelativeLayout>
@@ -117,20 +114,32 @@
             android:layout_marginBottom="6dp"
             android:background="@color/colorAccent" />
 
-        <!-- Orders List -->
-        <ListView
-            android:id="@+id/lv_orders_list"
+        <RelativeLayout
+            android:id="@+id/rl_orders_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/v_orders_top_divider"
-            android:divider="@color/colorPrimaryDark"
-            android:dividerHeight="1px"
-            android:drawSelectorOnTop="true" />
+            android:layout_below="@id/v_orders_top_divider">
+
+            <!-- Progress View -->
+            <include layout="@layout/include_loading_view" />
+
+            <!-- Orders List -->
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/lv_orders_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/colorPrimary"
+                android:dividerHeight="0px"
+                android:drawSelectorOnTop="true"
+                android:visibility="gone" />
+
+            <!-- Empty View -->
+            <include layout="@layout/include_empty_view" />
+
+        </RelativeLayout>
 
 
     </RelativeLayout>
 
-    <!-- Empty View -->
-    <include layout="@layout/include_empty_view" />
 
 </RelativeLayout>

@@ -12,6 +12,11 @@ public class Technicien {
     @Expose
     private String name;
 
+    public Technicien(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

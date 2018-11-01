@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.InputValidation;
+import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.helpers.UpdateChecker;
 import com.hotix.myhotixhousekeeping.models.Login;
@@ -76,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     AppCompatImageButton btnSetting;
     //MySettings
     private MySettings mMySettings;
+    //MySession
+    private MySession mMySession;
 
     private boolean permissionGranted = true;
     private KenBurnsView mKenBurns;
@@ -90,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //settings
         mMySettings = new MySettings(getApplicationContext());
+        mMySession = new MySession(getApplicationContext());
         //Force portrait on phones
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -340,6 +344,8 @@ public class LoginActivity extends AppCompatActivity {
 
         final String sLogin = etLogin.getText().toString().trim();
         final String sPassword = etPassword.getText().toString().trim();
+        mMySession.clearSessionDetails();
+        mMySession.setLogin(sLogin);
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
         Call<Login> userCall = service.loginQuery(sLogin, sPassword);

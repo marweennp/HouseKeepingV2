@@ -38,7 +38,9 @@
 
         <activity android:name=".activites.HomeActivity" />
         <activity android:name=".activites.UsersSettingsActivity" />
-        <activity android:name=".activites.MaintenanceOrdersActivity"></activity>
+        <activity android:name=".activites.MaintenanceOrdersActivity" />
+        <activity android:name=".activites.NewOrderActivity" />
+        <activity android:name=".activites.ShowOrderActivity"></activity>
     </application>
 
 </manifest>

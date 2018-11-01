@@ -11,6 +11,7 @@
     <string name="all_loading">Loading...</string>
     <string name="all_off">OFF</string>
     <string name="all_on">ON</string>
+    <string name="all_select_technician">Select a Technician</string>
     <!-- Menu Items  -->
     <string name="menu_item_save">Save</string>
     <string name="menu_item_settings">Settings</string>
@@ -58,11 +59,15 @@
     <string name="text_maintenance">Maintenance</string>
     <string name="text_state_outstanding">Outstanding</string>
     <string name="text_state_fenced">Fenced</string>
-    <string name="text_from_date">"From :"</string>
-    <string name="text_to_date">"To :"</string>
+    <string name="text_from_date">"From : "</string>
+    <string name="text_to_date">"To : "</string>
+    <string name="text_order_row_location">"Location : "</string>
+    <string name="text_order_urgent">URGENT</string>
+    <string name="text_successfully_closed">Order successfully closed</string>
     <!-- Messages  -->
     <string name="message_settings_updated">Settings successfully Updated</string>
     <string name="message_successfully_updated">User Permission Successfully Updated</string>
+    <string name="message_no_maintenance_orders_to_show">No Maintenance Orders To Show!  Good Job.</string>
     <!-- Errors Messages  -->
     <string name="error_message_login_is_empty">Enter your Login!</string>
     <string name="error_message_password_empty">Enter Your Password!</string>
@@ -80,6 +85,8 @@
     <string name="error_message_wrong_pass">Wrong Password!</string>
     <string name="error_message_unknow_user">This User does not Exist!</string>
     <string name="error_message_not_authorized">You are not authorized</string>
+    <string name="error_message_invalid_date">Invalid date range!</string>
+    <string name="error_message_select_technician">you need to select a technician</string>
     <!-- Dialogs  -->
     <string name="dialog_update_title">Version Update</string>
     <string name="dialog_update_text">Your application is outdate.\nClic UPDATE to download and install the last version</string>
@@ -90,6 +97,8 @@
     <string name="dialog_logout_title">Logout</string>
     <string name="dialog_exit_text">Are you sure you want to exit?</string>
     <string name="dialog_logout_text">Are you sure you want to log out?</string>
+    <string name="dialog_claim_closing_title">Claim Closing</string>
+    <string name="dialog_claim_closing_comment">Comment</string>
 
 
 </resources>

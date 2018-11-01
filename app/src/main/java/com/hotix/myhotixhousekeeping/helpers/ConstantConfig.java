@@ -1,6 +1,7 @@
 package com.hotix.myhotixhousekeeping.helpers;
 
 import com.hotix.myhotixhousekeeping.models.LoginData;
+import com.hotix.myhotixhousekeeping.models.Panne;
 
 public class ConstantConfig {
 
@@ -15,6 +16,9 @@ public class ConstantConfig {
 
     //Global Login data
     public static LoginData GLOBAL_LOGIN_DATA = new LoginData();
+
+    //Global Panne
+    public static Panne GLOBAL_LOGIN_PANNE = new Panne();
 
     // Update Available
     public static boolean NWE_VERSION = false;

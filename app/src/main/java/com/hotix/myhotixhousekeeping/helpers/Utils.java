@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,6 +29,26 @@ public class Utils {
     public static void setBaseUrl(Context context) {
         MySettings mySettings = new MySettings(context);
         BASE_URL = mySettings.getLocalIp();
+    }
+
+    //validate date range
+    public static boolean validDates(String startDate, String endDate) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date start;
+        Date end;
+        try {
+
+            start = df.parse(startDate);
+            end = df.parse(endDate);
+            if (start.compareTo(end) == 0) {
+                return true;
+            } else {
+                return start.before(end);
+            }
+
+        } catch (Exception e) {
+        }
+        return false;
     }
 
 
