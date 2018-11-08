@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
@@ -49,6 +50,12 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBaseUrl(this);
     }
 
     @Override
@@ -109,7 +116,9 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.rl_home_check_in)
     public void checkIn() {
-        showSnackbar(findViewById(android.R.id.content), "Check In");
+        //Start the GuestArrivalsActivity
+        Intent i = new Intent(this, GuestArrivalsActivity.class);
+        startActivity(i);
     }
 
     @OnClick(R.id.rl_home_lost_and_found)
@@ -118,7 +127,9 @@ public class HomeActivity extends AppCompatActivity {
         if (GLOBAL_LOGIN_DATA.getProfileId() == 16) {
             showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
         } else {
-            showSnackbar(findViewById(android.R.id.content), "lost Found");
+            //Start the LostAndFoundActivity
+            Intent i = new Intent(this, LostAndFoundActivity.class);
+            startActivity(i);
         }
 
     }
@@ -211,6 +222,9 @@ public class HomeActivity extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Start the LoginActivity
+                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(i);
                 finish();
                 dialog.dismiss();
             }

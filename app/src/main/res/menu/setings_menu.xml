@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_synic"
+        android:icon="@drawable/ic_sync_white_36dp"
+        android:title="@string/menu_item_sync"
+        app:showAsAction="ifRoom"></item>
+
+    <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_save_white_36"
         android:title="@string/menu_item_save"

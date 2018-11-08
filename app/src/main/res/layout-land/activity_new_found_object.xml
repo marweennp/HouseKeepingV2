@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activites.NewFoundObjectActivity">
+
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- New object found location Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_new_object_found_location_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_new_order_location"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- New object found Location -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_new_object_found_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_new_object_found_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_new_order_location"
+                    android:inputType="text"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- New object found Description Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_new_object_found_description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_new_order_description"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- New object _found Description -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_new_object_found_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_new_object_found_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_new_order_description"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:minLines="1"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- New object found By Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_new_object_found_by_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_show_lost_and_found_found_by"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- New object found First Name -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/il_new_object_found_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:hintTextAppearance="@style/MyHintTextStyle">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/et_new_object_found_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_new_order_first_name"
+                            android:inputType="text"
+                            android:theme="@style/MyEditTextStyle" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- New object found Last Name -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/il_new_object_found_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:hintTextAppearance="@style/MyHintTextStyle">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/et_new_object_found_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_new_order_last_name"
+                            android:inputType="text"
+                            android:theme="@style/MyEditTextStyle" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- New object found belong to Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_new_object_found_belong_by_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_show_lost_and_found_belong_to"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- New object found Belong First Name -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/il_new_object_found_belong_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:hintTextAppearance="@style/MyHintTextStyle">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/et_new_object_found_belong_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_new_order_first_name"
+                            android:inputType="text"
+                            android:theme="@style/MyEditTextStyle" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- New object found Belong Last Name -->
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/il_new_object_found_belong_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        app:hintTextAppearance="@style/MyHintTextStyle">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/et_new_object_found_belong_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/hint_new_order_last_name"
+                            android:inputType="text"
+                            android:theme="@style/MyEditTextStyle" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- New object found Comment Title -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_new_object_found_comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/text_show_lost_and_found_comment"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- New object found Comment -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/il_new_object_found_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="42dp"
+                app:hintTextAppearance="@style/MyHintTextStyle">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/et_new_object_found_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_show_lost_and_found_comment"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:minLines="1"
+                    android:theme="@style/MyEditTextStyle" />
+            </android.support.design.widget.TextInputLayout>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

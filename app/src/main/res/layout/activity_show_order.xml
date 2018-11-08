@@ -1,9 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activites.ShowOrderActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Main Container -->
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv_main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Order Details -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_order_details"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details Close Button -->
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_order_details_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:drawableEnd="@drawable/ic_check_white_24dp"
+                    android:drawableTint="@color/green_500"
+                    android:text="@string/text_order_details_close_btn"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </RelativeLayout>
+
+            <!-- Location -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Urgent  -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_urgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/text_order_urgent"
+                    android:textAllCaps="true"
+                    android:textColor="@color/red_800"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details location Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_location_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_urgent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/text_show_order_location"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details location -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_location_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_location_on_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!-- Type -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details location Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_type"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details location -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@id/tv_order_details_type_title"
+                    android:text=""
+                    android:textColor="@color/light_bg_dark_primary_text"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <!-- Date and Time -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Treatment Time Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_date_time_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_date_time"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details Date -->
+                <LinearLayout
+                    android:id="@+id/ll_order_details_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_date_time_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_today_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <!-- Order Details Time -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_date_time_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toEndOf="@id/ll_order_details_date"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_access_time_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/grey_700"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!-- Treatment Time -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Treatment Time Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_treatment_time_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_treatment_time"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details Treatment Time -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_treatment_time_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_timer_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_treatment_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!-- Declared By -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Declared By Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_declared_by_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_declared_by_time"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details Declared By -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_declared_by_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_person_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_declared_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!-- Repaired By -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Repaired By Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_repaired_by_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_repaired_by"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Order Details Repaired By -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_repaired_by_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_person_white_24dp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_repaired_by"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <!-- Description -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Order Details Description Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_order_details_description_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_show_order_description"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_order_details_description_title"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="42dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_order_details_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text=""
+                        android:textColor="@color/light_bg_dark_primary_text"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

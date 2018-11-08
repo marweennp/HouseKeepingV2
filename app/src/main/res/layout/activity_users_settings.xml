@@ -25,7 +25,7 @@
         android:id="@+id/rl_users_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appbar"
+        android:layout_below="@id/appbar"
         android:layout_marginBottom="8dp">
 
         <!-- Users Spinner -->
@@ -75,7 +75,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:text="@string/text_user_settings"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorSecondaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -84,6 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp">
+
                     <!-- Configuration Title -->
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_users_settings_configuration_title"
@@ -93,7 +94,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_configuration"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -124,7 +125,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_see_housekeepers"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -155,7 +156,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_declare_maintenance_orders"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -186,7 +187,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_close_maintenance_orders"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -217,7 +218,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_declare_object_found"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -248,7 +249,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_close_object_found"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -279,7 +280,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_view_room_status"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -310,7 +311,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_change_room_state"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -341,7 +342,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_change_location_state"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -372,7 +373,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_view_guests"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorSecondary"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 

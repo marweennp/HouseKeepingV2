@@ -4,12 +4,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.hotix.myhotixhousekeeping.helpers.ConnectionChecher.pingServeur;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
 
 public class Utils {
@@ -28,8 +30,16 @@ public class Utils {
     /*Set BASE_URL*/
     public static void setBaseUrl(Context context) {
         MySettings mySettings = new MySettings(context);
-        BASE_URL = mySettings.getLocalIp();
+        if (mySettings.getLocalIpEnabled() && pingServeur(mySettings.getLocalIp())) {
+            BASE_URL = mySettings.getLocalBaseUrl();
+        } else if (mySettings.getPublicIpEnabled() && pingServeur(mySettings.getPublicIp())) {
+            BASE_URL = mySettings.getPublicBaseUrl();
+        }else {
+            //Default value is Local ip
+            BASE_URL = mySettings.getLocalBaseUrl();
+        }
     }
+
 
     //validate date range
     public static boolean validDates(String startDate, String endDate) {

@@ -60,4 +60,14 @@ public class ConnectionChecher {
         return false;
     }
 
+    /* Check if Serveur Online (ping) */
+    public static boolean pingServeur(String ip) {
+        try {
+            return (Runtime.getRuntime().exec("ping -c 1 w 1 "+ip).waitFor() == 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

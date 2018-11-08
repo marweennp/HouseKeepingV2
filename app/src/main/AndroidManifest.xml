@@ -25,6 +25,11 @@
         </activity>
         <activity android:name=".activites.SettingsActivity" />
         <activity android:name=".activites.LoginActivity" />
+        <activity android:name=".activites.HomeActivity" />
+        <activity android:name=".activites.UsersSettingsActivity" />
+        <activity android:name=".activites.MaintenanceOrdersActivity" />
+        <activity android:name=".activites.NewOrderActivity" />
+        <activity android:name=".activites.ShowOrderActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -36,11 +41,10 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activites.HomeActivity" />
-        <activity android:name=".activites.UsersSettingsActivity" />
-        <activity android:name=".activites.MaintenanceOrdersActivity" />
-        <activity android:name=".activites.NewOrderActivity" />
-        <activity android:name=".activites.ShowOrderActivity"></activity>
+        <activity android:name=".activites.GuestArrivalsActivity" />
+        <activity android:name=".activites.LostAndFoundActivity" />
+        <activity android:name=".activites.NewFoundObjectActivity" />
+        <activity android:name=".activites.ShowFoundObjectActivity"></activity>
     </application>
 
 </manifest>

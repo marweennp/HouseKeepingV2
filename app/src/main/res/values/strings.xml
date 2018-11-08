@@ -1,23 +1,28 @@
 <resources>
+    <!-- START STRINGS -->
     <!-- App All -->
     <string name="app_name">House Keeping v2</string>
     <string name="all_retry">RETRY</string>
     <string name="all_ok">OK</string>
     <string name="all_cancel">Cancel</string>
     <string name="all_refresh">Refresh</string>
+    <string name="all_download">Download</string>
     <string name="all_yes">Yes</string>
     <string name="all_settings">Settings</string>
     <string name="all_downloading">Downloading...</string>
     <string name="all_loading">Loading...</string>
+    <string name="all_please_wait">Please wait...</string>
     <string name="all_off">OFF</string>
     <string name="all_on">ON</string>
     <string name="all_select_technician">Select a Technician</string>
     <!-- Menu Items  -->
     <string name="menu_item_save">Save</string>
+    <string name="menu_item_sync">Sync</string>
     <string name="menu_item_settings">Settings</string>
     <string name="menu_item_logout">Logout</string>
     <string name="menu_item_refresh">Refresh</string>
     <string name="menu_item_add">Add</string>
+    <string name="menu_item_send">Send</string>
     <!-- Splash Screen Activity-->
     <string name="splash_screen_footer">www.MyHotixHouseKeeping.com</string>
     <!-- Login Activity -->
@@ -28,8 +33,11 @@
     <!-- MySettings Activity -->
     <string name="text_settings">Settings</string>
     <string name="text_serveur_config">Serveur Config</string>
+    <string name="text_SSL">SSL</string>
     <string name="hint_public_ip">Public IP</string>
     <string name="hint_local_ip">Local IP</string>
+    <string name="hint_api_public_url">API Public URL</string>
+    <string name="hint_api_local_url">API Local URL</string>
     <string name="text_hotel_code">Hotel Code</string>
     <string name="hint_code">Code</string>
     <string name="text_picture">Picture</string>
@@ -41,7 +49,7 @@
     <string name="text_maintenance_orders">Maintenance Orders</string>
     <string name="text_forecast">Forecast</string>
     <string name="text_check_in">Expected Check In</string>
-    <string name="text_lost_and_found">Lost and found</string>
+    <string name="text_lost_and_found">Lost and Found</string>
     <string name="text_maintenance_team">Maintenance Team</string>
     <!-- Users Settings Activity -->
     <string name="text_user_settings">User Settings</string>
@@ -63,18 +71,56 @@
     <string name="text_to_date">"To : "</string>
     <string name="text_order_row_location">"Location : "</string>
     <string name="text_order_urgent">URGENT</string>
-    <string name="text_successfully_closed">Order successfully closed</string>
+    <string name="text_successfully_closed">Successfully Closed</string>
+    <!-- Show Orders Activity -->
+    <string name="text_order_details">Order Details</string>
+    <string name="text_order_details_close_btn">Close</string>
+    <string name="text_show_order_location">Location</string>
+    <string name="text_show_order_type">Type</string>
+    <string name="text_show_order_treatment_time">Treatment Time</string>
+    <string name="text_show_order_date_time">Date and Time</string>
+    <string name="text_show_order_declared_by_time">Declared By</string>
+    <string name="text_show_order_repaired_by">Repaired By</string>
+    <string name="text_show_order_description">Description</string>
+    <!-- New Orders Activity -->
+    <string name="text_new_order_location">Location</string>
+    <string name="hint_new_order_location">Location</string>
+    <string name="text_new_order_service_type">Service Type</string>
+    <string name="text_new_order_priority_and_time">Priority And Time</string>
+    <string name="text_new_order_priority">URGENT</string>
+    <string name="hint_new_order_time">Treatment Time</string>
+    <string name="text_new_order_declared_by">Declared By</string>
+    <string name="hint_new_order_first_name">First Name</string>
+    <string name="hint_new_order_last_name">Last Name</string>
+    <string name="text_new_order_description">Description</string>
+    <string name="hint_new_order_description">Description</string>
+    <string name="text_new_order">New Order</string>
+    <string name="text_select_type">Select a Type</string>
+    <string name="text_new_order_hours">Hour(s)</string>
+    <string name="text_successfully_added">Successfully added</string>
+    <!-- GuestArrivalsActivity -->
+    <string name="text_guest_arrivals">Guest Arrivals</string>
+    <string name="text_scheduled_arrivals">" Scheduled Arrivals"</string>
+    <string name="text_total_scheduled_arrival">Total scheduled arrival</string>
+    <!-- LostAndFoundActivity -->
+    <string name="text_found_obj_details">Found Object Details</string>
+    <string name="text_lost_and_found_details">Lost And Found Details</string>
+    <string name="text_show_lost_and_found_found_by">Found by</string>
+    <string name="text_show_lost_and_found_belong_to">Belong to</string>
+    <string name="text_show_lost_and_found_comment">Comment</string>
     <!-- Messages  -->
     <string name="message_settings_updated">Settings successfully Updated</string>
     <string name="message_successfully_updated">User Permission Successfully Updated</string>
     <string name="message_no_maintenance_orders_to_show">No Maintenance Orders To Show!  Good Job.</string>
+    <string name="message_no_lost_object_to_show">No Lost and Found object To Show!</string>
+    <string name="message_no_scheduled_arrivals_to_show">No Scheduled Arrivals To Show!</string>
     <!-- Errors Messages  -->
     <string name="error_message_login_is_empty">Enter your Login!</string>
     <string name="error_message_password_empty">Enter Your Password!</string>
     <string name="error_message_field_required">This field is required!</string>
     <string name="error_message_login">Something went wrong. please verify your login or password!</string>
     <string name="error_message_something_wrong">Something went wrong!</string>
-    <string name="error_message_check_settings">Something went wrong. Check your mySettings!</string>
+    <string name="error_message_check_settings">Something went wrong. Check your Settings!</string>
     <string name="error_message_server_down">Server is down please try after some time</string>
     <string name="error_message_server_unreachable">The server is unreachable!</string>
     <string name="error_message_no_internet">No Internet Connection!</string>
@@ -87,18 +133,30 @@
     <string name="error_message_not_authorized">You are not authorized</string>
     <string name="error_message_invalid_date">Invalid date range!</string>
     <string name="error_message_select_technician">you need to select a technician</string>
+    <string name="error_message_hotel_not_active">Something went wrong.\nContact the administrator!</string>
+    <string name="error_message_app_not_active">You dont have permission to use this application!</string>
+    <string name="error_message_select_type">you need to select a type</string>
     <!-- Dialogs  -->
     <string name="dialog_update_title">Version Update</string>
     <string name="dialog_update_text">Your application is outdate.\nClic UPDATE to download and install the last version</string>
     <string name="dialog_update_btn_text">UPDATE</string>
     <string name="dialog_permission_title">Need Permissions</string>
-    <string name="dialog_permission_text">This app needs permission to perform correctly. You can grant them in app mySettings.</string>
+    <string name="dialog_permission_text">This app needs permission to perform correctly. You can grant them in app Settings.</string>
     <string name="dialog_exit_title">Exit</string>
     <string name="dialog_logout_title">Logout</string>
     <string name="dialog_exit_text">Are you sure you want to exit?</string>
     <string name="dialog_logout_text">Are you sure you want to log out?</string>
     <string name="dialog_claim_closing_title">Claim Closing</string>
     <string name="dialog_claim_closing_comment">Comment</string>
+    <string name="dialog_hotel_settings_title">Hotel Settings</string>
+    <string name="dialog_hotel_settings_text">Please enter your hotel code to download settings.</string>
+    <string name="dialog_hotel_settings_hotel_code">Hotel Code</string>
+    <string name="dialog_contact_support_title">Contact Support</string>
+    <string name="dialog_contact_support_text">You have entered an invalid Hotel Code! \nPlease contact your administrator.</string>
+    <string name="dialog_lost_and_found_title">Close Lost Object</string>
+    <string name="dialog_lost_and_found_text">Are you sure you want to close this claim?</string>
+    <string name="text_new_lost_object">New Lost Object</string>
+    <!-- END STRINGS -->
 
 
 </resources>

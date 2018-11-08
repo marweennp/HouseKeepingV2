@@ -18,11 +18,23 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- Login ProgressBar -->
+    <ProgressBar
+        android:id="@+id/pb_settings"
+        android:theme="@style/MyProgressBarStyle"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appbar"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true"/>
+
     <!-- Sittings Container -->
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar">
+        android:layout_below="@+id/pb_settings">
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -34,20 +46,121 @@
                 android:id="@+id/tv_settings_server_config_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:clickable="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:text="@string/text_serveur_config"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorSecondaryDark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <!-- SSL on/off (http/https) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp">
+
+                <!-- SSL Title -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_settings_SSL_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_SSL"
+                    android:textColor="@color/colorSecondary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/sw_settings_ssl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:checked="false"
+                    android:text="@string/all_off"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
             <!-- Public IP -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/il_settings_public_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_toStartOf="@id/chb_settings_public_ip"
+                    app:hintTextAppearance="@style/MyHintTextStyle">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_settings_public_ip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_public_ip"
+                        android:inputType="text"
+                        android:theme="@style/MyEditTextStyle" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/chb_settings_public_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <!-- Local IP -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/il_settings_Local_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_toStartOf="@id/chb_settings_Local_ip"
+                    app:hintTextAppearance="@style/MyHintTextStyle">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/et_settings_local_ip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_local_ip"
+                        android:inputType="text"
+                        android:theme="@style/MyEditTextStyle" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/chb_settings_Local_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:checked="true" />
+
+            </RelativeLayout>
+
+            <!-- API Public URL -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/il_settings_public_ip"
+                android:id="@+id/il_settings_api_public_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -55,17 +168,18 @@
                 app:hintTextAppearance="@style/MyHintTextStyle">
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/et_settings_public_ip"
+                    android:id="@+id/et_settings_api_public_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_public_ip"
+                    android:enabled="false"
+                    android:hint="@string/hint_api_public_url"
                     android:inputType="text"
                     android:theme="@style/MyEditTextStyle" />
             </android.support.design.widget.TextInputLayout>
 
-            <!-- Local IP -->
+            <!-- API Local URL -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/il_settings_Local_ip"
+                android:id="@+id/il_settings_api_local_url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -73,10 +187,11 @@
                 app:hintTextAppearance="@style/MyHintTextStyle">
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/et_settings_local_ip"
+                    android:id="@+id/et_settings_api_local_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_local_ip"
+                    android:enabled="false"
+                    android:hint="@string/hint_api_local_url"
                     android:inputType="text"
                     android:theme="@style/MyEditTextStyle" />
             </android.support.design.widget.TextInputLayout>
@@ -98,7 +213,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="@string/text_hotel_code"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorSecondaryDark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -128,10 +243,11 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/colorAccent" />
 
-
+            <!-- Report photos feature disabled -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
                 <!-- Picture Title -->
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_settings_picture_title"

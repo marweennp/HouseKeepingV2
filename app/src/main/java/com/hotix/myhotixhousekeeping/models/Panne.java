@@ -39,6 +39,20 @@ public class Panne {
     @Expose
     private String technicien;
 
+    public Panne() {
+        this.id = -101;
+        this.lieu = "";
+        this.type = "";
+        this.duree = "";
+        this.urgent = false;
+        this.nom = "";
+        this.prenom = "";
+        this.image = "";
+        this.description = "";
+        this.date = "";
+        this.technicien = "";
+    }
+
     public Integer getId() {
         return id;
     }

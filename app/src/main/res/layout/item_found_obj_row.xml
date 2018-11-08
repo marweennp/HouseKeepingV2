@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/white">
+
+    <!-- Found obj Row -->
+    <RelativeLayout
+        android:id="@+id/rl_found_obj_row"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_found_obj_row_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_found_obj_row_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_found_obj_row_location"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="@color/light_bg_dark_secondary_text"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_found_obj_row_date_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_found_obj_row_date_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_today_white_24dp"
+                app:tint="@color/colorSecondary" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_found_obj_row_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/img_found_obj_row_date_icon"
+                android:text=""
+                android:textColor="@color/light_bg_dark_secondary_text"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_found_obj_row_time_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:layout_toEndOf="@id/tv_found_obj_row_date"
+                app:srcCompat="@drawable/ic_access_time_white_24dp"
+                app:tint="@color/colorSecondary" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_found_obj_row_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:layout_toEndOf="@id/img_found_obj_row_time_icon"
+                android:text=""
+                android:textColor="@color/grey_700"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <!-- Bottom Divider -->
+    <View
+        android:id="@+id/bottom_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent" />
+
+
+</RelativeLayout>

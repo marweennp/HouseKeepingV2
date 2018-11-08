@@ -6,7 +6,11 @@
     <color name="colorPrimaryDark">#008266</color>
     <color name="colorAccent">#60e6c4</color>
 
+    <color name="colorSecondary">@color/cyan_700</color>
+    <color name="colorSecondaryDark">@color/cyan_900</color>
+
     <color name="colorBackGround">#76c2af</color>
+    <color name="error_red">#B00020</color>
 
     <!--Dark Background Light Text-->
     <color name="light_bg_dark_primary_text">#DE000000</color>

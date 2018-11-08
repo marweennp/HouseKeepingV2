@@ -13,6 +13,8 @@ import com.hotix.myhotixhousekeeping.models.Technicien;
 
 import java.util.ArrayList;
 
+import static android.support.v4.content.ContextCompat.getColor;
+
 public class TechniciansSpinnerAdapter extends BaseAdapter {
 
     Context context;
@@ -46,6 +48,11 @@ public class TechniciansSpinnerAdapter extends BaseAdapter {
         AppCompatImageView icon = (AppCompatImageView) view.findViewById(R.id.img_spinner_row_icon);
         AppCompatTextView names = (AppCompatTextView) view.findViewById(R.id.tv_spinner_row_text);
         names.setText(mData.get(i).getName());
+        if (mData.get(i).getId() == -1) {
+            names.setTextColor(getColor(context, R.color.grey_500));
+        } else {
+            names.setTextColor(getColor(context, R.color.colorPrimary));
+        }
         return view;
     }
 }

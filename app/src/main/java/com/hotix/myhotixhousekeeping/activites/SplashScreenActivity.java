@@ -13,12 +13,22 @@ import android.util.Log;
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.helpers.UpdateChecker;
+import com.hotix.myhotixhousekeeping.models.HotelSettings;
+import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
+import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.NWE_VERSION;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -43,22 +53,33 @@ public class SplashScreenActivity extends AppCompatActivity {
         //settings
         mMySettings = new MySettings(getApplicationContext());
         mChecker = new UpdateChecker(this, false);
-
+        //load logo img
+        Picasso.get().load(R.mipmap.ic_launcher).fit().placeholder(R.mipmap.ic_launcher).into(imgLogo);
         //Force portrait on phones
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
         CheckForUpdates check = new CheckForUpdates();
         try {
             check.execute();
         } catch (Exception e) {
-            Log.e(TAG,getString(R.string.error_message_check_settings));
+            Log.e(TAG, getString(R.string.error_message_check_settings));
         }
+        if (mMySettings.getConfigured()) {
+            UpdateHotelInfos(mMySettings.getHotelCode());
+        }else {startDelay();}
 
+    }
 
-        //load logo img
-        Picasso.get().load(R.mipmap.ic_launcher).fit().placeholder(R.mipmap.ic_launcher).into(imgLogo);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBaseUrl(this);
+    }
+
+    /**********************************************************************************************/
+
+    private void startDelay() {
 
         new Handler().postDelayed(new Runnable() {
 
@@ -77,11 +98,72 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     /**********************************************************************************************/
 
+    public void UpdateHotelInfos(String code) {
+
+        RetrofitInterface service = RetrofitClient.getHotixSupportApi().create(RetrofitInterface.class);
+        Call<HotelSettings> userCall = service.getInfosQuery(code, FINAL_APP_ID);
+
+        userCall.enqueue(new Callback<HotelSettings>() {
+            @Override
+            public void onResponse(Call<HotelSettings> call, Response<HotelSettings> response) {
+
+                if (response.raw().code() == 200) {
+                    HotelSettings hotelSettings = response.body();
+
+                    //Get Public IP
+                    if (!stringEmptyOrNull(hotelSettings.getIPPublic())) {
+                        mMySettings.setPublicIp(hotelSettings.getIPPublic());
+                        mMySettings.setPublicBaseUrl("http://"+hotelSettings.getIPPublic()+"/");
+                        mMySettings.setPublicIpEnabled(true);
+                    } else {
+                        mMySettings.setPublicIp("0.0.0.0");
+                        mMySettings.setPublicBaseUrl("http://0.0.0.0/");
+                        mMySettings.setPublicIpEnabled(false);
+                    }
+
+                    //Get Local IP
+                    if (!stringEmptyOrNull(hotelSettings.getIPLocal())) {
+                        mMySettings.setLocalIp(hotelSettings.getIPLocal());
+                        mMySettings.setLocalBaseUrl("http://"+hotelSettings.getIPLocal()+"/");
+                        mMySettings.setLocalIpEnabled(true);
+                    } else {
+                        mMySettings.setLocalIp("0.0.0.0");
+                        mMySettings.setLocalBaseUrl("http://0.0.0.0/");
+                        mMySettings.setLocalIpEnabled(false);
+                    }
+
+                    //Get Hotel ID
+                    if (!stringEmptyOrNull(hotelSettings.getCode())) {
+                        mMySettings.setHotelCode(hotelSettings.getCode());
+                    } else {
+                        mMySettings.setHotelCode("0000");
+                    }
+
+                    mMySettings.setSettingsUpdated(true);
+
+
+                } else {
+                    mMySettings.setSettingsUpdated(true);
+                }
+
+                startDelay();
+            }
+
+            @Override
+            public void onFailure(Call<HotelSettings> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    /**********************************************************************************************/
+
     private class CheckForUpdates extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... strings) {
-            mChecker.checkForUpdateByVersionCode(mMySettings.getLocalIp() + "Android/versionHouseKeeping.txt");
+            mChecker.checkForUpdateByVersionCode(mMySettings.getLocalBaseUrl() + "Android/versionHouseKeeping.txt");
             return String.valueOf(mChecker.isUpdateAvailable());
         }
 

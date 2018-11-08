@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +17,7 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,40 +57,43 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
-import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_PANNE;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_PANNE;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.dateColored;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFormater;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.validDates;
 
 public class MaintenanceOrdersActivity extends AppCompatActivity {
 
-    private static OrderAdapter mListAdapter;
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.et_orders_start_date)
-    AppCompatEditText etStartDate;
-    @BindView(R.id.et_orders_end_date)
-    AppCompatEditText etEndDate;
-    @BindView(R.id.sp_orders_types)
-    AppCompatSpinner spOrdersTypes;
-    @BindView(R.id.lv_orders_list)
-    SwipeMenuListView lvOrdersList;
+
+    //landscap
+    private AppCompatButton btnClose;
+    private AppCompatTextView tvUrgent;
+    private AppCompatTextView tvLocation;
+    private AppCompatTextView tvType;
+    private AppCompatTextView tvDate;
+    private AppCompatTextView tvTime;
+    private AppCompatTextView tvTreatTime;
+    private AppCompatTextView tvDeclaredBy;
+    private AppCompatTextView tvRepairedBy;
+    private AppCompatTextView tvDescription;
+
     // Loading View & Empty ListView
-    @BindView(R.id.ll_loading_view)
-    LinearLayout llLoadingView;
-    @BindView(R.id.rl_empty_view)
-    RelativeLayout rlEmptyView;
-    @BindView(R.id.tv_empty_view_text)
-    AppCompatTextView tvEmptyViewText;
-    @BindView(R.id.img_empty_view_icon)
-    AppCompatImageView imgEmptyViewIcon;
-    @BindView(R.id.btn_empty_view_refresh)
-    AppCompatButton btnEmptyViewRefresh;
-    @BindView(R.id.rl_orders_container)
-    RelativeLayout rlOrdersContainer;
-    AppCompatTextView etError;
+    private LinearLayout llLoadingView;
+    private RelativeLayout rlEmptyView;
+    private AppCompatTextView tvEmptyViewText;
+    private AppCompatImageView imgEmptyViewIcon;
+    private AppCompatButton btnEmptyViewRefresh;
+    private AppCompatEditText etEndDate;
+    private AppCompatSpinner spOrdersTypes;
+    private SwipeMenuListView lvOrdersList;
+    private AppCompatEditText etStartDate;
+    private AppCompatTextView etError;
     private AppCompatEditText etComment;
     private MySettings mMySettings;
     private MySession mMySession;
@@ -96,10 +101,10 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     private ArrayList<Panne> mPannes;
     private OrdersTypesSpinnerAdapter mSpinnerAdapter;
     private TechniciansSpinnerAdapter mTecSpinnerAdapter;
+    private OrderAdapter mListAdapter;
     private ArrayList<Technicien> mTechs;
     private int mTypeId = 1;
     private int techId = -1;
-    private int orderId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,13 +118,21 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
         init();
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            initPortrait();
+        } else {
+            initLandscape();
+        }
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        setBaseUrl(this);
         if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
             try {
                 loadOrders(mTypeId);
@@ -219,6 +232,18 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        etStartDate = (AppCompatEditText) findViewById(R.id.et_orders_start_date);
+        etEndDate = (AppCompatEditText) findViewById(R.id.et_orders_end_date);
+        spOrdersTypes = (AppCompatSpinner) findViewById(R.id.sp_orders_types);
+        lvOrdersList = (SwipeMenuListView) findViewById(R.id.lv_orders_list);
+
+        // Loading View & Empty ListView
+        llLoadingView = (LinearLayout) findViewById(R.id.ll_loading_view);
+        rlEmptyView = (RelativeLayout) findViewById(R.id.rl_empty_view);
+        tvEmptyViewText = (AppCompatTextView) findViewById(R.id.tv_empty_view_text);
+        imgEmptyViewIcon = (AppCompatImageView) findViewById(R.id.img_empty_view_icon);
+        btnEmptyViewRefresh = (AppCompatButton) findViewById(R.id.btn_empty_view_refresh);
+
         etStartDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
         etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
 
@@ -228,79 +253,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         mSpinnerAdapter = new OrdersTypesSpinnerAdapter(getApplicationContext(), mStates);
         spOrdersTypes.setAdapter(mSpinnerAdapter);
-
-        spOrdersTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
-                mTypeId = mStates.get(position).getId();
-                if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
-                    try {
-                        loadOrders(mTypeId);
-                    } catch (Exception e) {
-                        showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
-                    }
-                } else {
-                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_invalid_date));
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
-        //Create Swipe list menue
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
-
-            @Override
-            public void create(SwipeMenu menu) {
-                // create "checked" item
-                SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
-                checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark)));
-                checkedItem.setWidth(180);
-                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
-                menu.addMenuItem(checkedItem);
-
-                // create "show" item
-                SwipeMenuItem showItem = new SwipeMenuItem(getApplicationContext());
-                showItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary)));
-                showItem.setWidth(180);
-                showItem.setIcon(R.drawable.ic_check_white_36dp);
-                menu.addMenuItem(showItem);
-            }
-        };
-
-        // set creator
-        lvOrdersList.setMenuCreator(creator);
-
-        lvOrdersList.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index) {
-                    case 0:
-                        // show
-                        GLOBAL_LOGIN_PANNE = mPannes.get(position);
-                        //Start the ShowOrderActivity
-                        Intent i = new Intent(getApplicationContext(), ShowOrderActivity.class);
-                        startActivity(i);
-                        break;
-                    case 1:
-                        // checked
-                        orderId = mPannes.get(position).getId();
-                        startClaimClosingDialog();
-                        break;
-                }
-                // false : close the menu; true : not close the menu
-                return false;
-            }
-        });
-
-        lvOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-                lvOrdersList.smoothOpenMenu(position);
-            }
-        });
 
         etStartDate.addTextChangedListener(new TextWatcher() {
 
@@ -356,6 +308,168 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
     }
 
+    private void initPortrait() {
+
+        //Create Swipe list menue 1
+        final SwipeMenuCreator menuOne = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "checked" item
+                SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
+                checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
+                checkedItem.setWidth(180);
+                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                menu.addMenuItem(checkedItem);
+
+                // create "show" item
+                SwipeMenuItem showItem = new SwipeMenuItem(getApplicationContext());
+                showItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondary)));
+                showItem.setWidth(180);
+                showItem.setIcon(R.drawable.ic_check_white_36dp);
+                menu.addMenuItem(showItem);
+            }
+        };
+
+        //Create Swipe list menue 2
+        final SwipeMenuCreator menuTow = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "checked" item
+                SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
+                checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
+                checkedItem.setWidth(180);
+                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                menu.addMenuItem(checkedItem);
+            }
+        };
+
+        // set menu
+        if (mTypeId == 1) {
+            lvOrdersList.setMenuCreator(menuOne);
+        } else {
+            lvOrdersList.setMenuCreator(menuTow);
+        }
+
+        lvOrdersList.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        // show
+                        GLOBAL_PANNE = mPannes.get(position);
+                        //Start the ShowOrderActivity
+                        Intent i = new Intent(getApplicationContext(), ShowOrderActivity.class);
+                        if (mTypeId == 1) {
+                            i.putExtra("btnClose", true);
+                        } else {
+                            i.putExtra("btnClose", false);
+                        }
+                        startActivity(i);
+                        break;
+                    case 1:
+                        // checked
+                        GLOBAL_PANNE = mPannes.get(position);
+                        startClaimClosingDialog();
+                        break;
+                }
+                // false : close the menu; true : not close the menu
+                return false;
+            }
+        });
+
+        lvOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                lvOrdersList.smoothOpenMenu(position);
+            }
+        });
+
+        spOrdersTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
+                mTypeId = mStates.get(position).getId();
+                if (mTypeId == 1) {
+                    lvOrdersList.setMenuCreator(menuOne);
+                } else {
+                    lvOrdersList.setMenuCreator(menuTow);
+                }
+                if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
+                    try {
+                        loadOrders(mTypeId);
+                    } catch (Exception e) {
+                        showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
+                    }
+                } else {
+                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_invalid_date));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+
+    }
+
+    private void initLandscape() {
+
+        tvDescription = (AppCompatTextView) findViewById(R.id.tv_order_detail_description);
+        tvRepairedBy = (AppCompatTextView) findViewById(R.id.tv_order_detail_repaired_by);
+        tvDeclaredBy = (AppCompatTextView) findViewById(R.id.tv_order_detail_declared_by);
+        tvTreatTime = (AppCompatTextView) findViewById(R.id.tv_order_detail_treatment_time);
+        tvTime = (AppCompatTextView) findViewById(R.id.tv_order_detail_time);
+        tvDate = (AppCompatTextView) findViewById(R.id.tv_order_detail_date);
+        tvType = (AppCompatTextView) findViewById(R.id.tv_order_detail_type);
+        tvLocation = (AppCompatTextView) findViewById(R.id.tv_order_detail_location);
+        tvUrgent = (AppCompatTextView) findViewById(R.id.tv_order_detail_urgent);
+        btnClose = (AppCompatButton) findViewById(R.id.btn_order_detail_close);
+
+        lvOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+                GLOBAL_PANNE = mPannes.get(position);
+                loadDetails();
+            }
+        });
+
+        spOrdersTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
+                mTypeId = mStates.get(position).getId();
+                if (mTypeId == 1) {
+                    btnClose.setVisibility(View.VISIBLE);
+                } else {
+                    btnClose.setVisibility(View.GONE);
+                }
+                if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
+                    try {
+                        loadOrders(mTypeId);
+                    } catch (Exception e) {
+                        showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
+                    }
+                } else {
+                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_invalid_date));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startClaimClosingDialog();
+            }
+        });
+
+    }
+
     private void startDatePickerDialog(final AppCompatEditText et) {
         Calendar currentTime = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -369,6 +483,29 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         }, currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+
+    }
+
+    private void loadDetails() {
+
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+            if (GLOBAL_PANNE.getUrgent()) {
+                tvUrgent.setVisibility(View.VISIBLE);
+            } else {
+                tvUrgent.setVisibility(View.GONE);
+            }
+
+            tvLocation.setText(GLOBAL_PANNE.getLieu());
+            tvType.setText(GLOBAL_PANNE.getType());
+            tvDate.setText(Html.fromHtml(dateColored(GLOBAL_PANNE.getDate(), "#616161", "#1ab394", "dd/MM/yyyy hh:mm", true)));
+            tvTime.setText(dateFormater(GLOBAL_PANNE.getDate(), "dd/MM/yyyy hh:mm", "HH:mm"));
+            tvTreatTime.setText(GLOBAL_PANNE.getDuree());
+            tvDeclaredBy.setText(GLOBAL_PANNE.getPrenom() + " " + GLOBAL_PANNE.getNom());
+            tvRepairedBy.setText(GLOBAL_PANNE.getTechnicien());
+            tvDescription.setText(GLOBAL_PANNE.getDescription());
+        }
 
     }
 
@@ -414,9 +551,11 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String comment = etComment.getText().toString().trim();
+
                 if (techId != -1) {
                     try {
-                        closeOrder(String.valueOf(orderId), mMySession.getLogin().trim(), etComment.getText().toString().trim(), String.valueOf(techId));
+                        closeOrder(String.valueOf(GLOBAL_PANNE.getId()), mMySession.getLogin(), comment, String.valueOf(techId));
                         dialog.dismiss();
                     } catch (Exception e) {
                         dialog.dismiss();
@@ -451,7 +590,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         Call<PannesData> userCall = service.getListPannesClotureQuery(id, pic, startDate, endDate);
 
         llLoadingView.setVisibility(View.VISIBLE);
-        //rlOrdersContainer.setVisibility(View.GONE);
+        lvOrdersList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
 
         userCall.enqueue(new Callback<PannesData>() {
@@ -459,18 +598,24 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             public void onResponse(Call<PannesData> call, Response<PannesData> response) {
 
                 llLoadingView.setVisibility(View.GONE);
-                //rlOrdersContainer.setVisibility(View.VISIBLE);
+                lvOrdersList.setVisibility(View.VISIBLE);
                 rlEmptyView.setVisibility(View.GONE);
 
                 if (response.raw().code() == 200) {
                     PannesData mData = response.body();
                     if (!(mData.getData() == null)) {
                         mPannes = mData.getData();
+                        GLOBAL_PANNE = new Panne();
+                        if (mPannes.size() > 0) {
+                            GLOBAL_PANNE = mPannes.get(0);
+                        }
+                        loadDetails();
                         mListAdapter = new OrderAdapter(mPannes, getApplicationContext());
                         lvOrdersList.setAdapter(mListAdapter);
                         tvEmptyViewText.setText(R.string.message_no_maintenance_orders_to_show);
                         imgEmptyViewIcon.setImageResource(R.drawable.ic_sms_failed_white_48dp);
                         lvOrdersList.setEmptyView(rlEmptyView);
+
                     }
 
                 } else {
@@ -481,6 +626,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<PannesData> call, Throwable t) {
                 llLoadingView.setVisibility(View.GONE);
+                lvOrdersList.setVisibility(View.GONE);
                 rlEmptyView.setVisibility(View.VISIBLE);
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);
@@ -494,7 +640,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
         Call<ResponseBody> userCall = service.cloturePanneQuery(id, login, comment, tecId);
-
         final ProgressDialog progressDialog = new ProgressDialog(MaintenanceOrdersActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.all_loading));

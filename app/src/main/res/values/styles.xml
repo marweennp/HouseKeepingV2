@@ -40,7 +40,7 @@
 
     <!--ProgressBar style-->
     <style name="MyProgressBarStyle" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/indigo_500</item>
+        <item name="colorAccent">@color/colorSecondaryDark</item>
     </style>
 
 

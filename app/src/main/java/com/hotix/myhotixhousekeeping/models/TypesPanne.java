@@ -12,6 +12,11 @@ public class TypesPanne {
     @Expose
     private String name;
 
+    public TypesPanne(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }

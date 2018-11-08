@@ -1,8 +1,8 @@
 package com.hotix.myhotixhousekeeping.activites;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -28,6 +27,7 @@ import com.hotix.myhotixhousekeeping.helpers.InputValidation;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.helpers.UpdateChecker;
+import com.hotix.myhotixhousekeeping.models.HotelSettings;
 import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
@@ -49,11 +49,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConnectionChecher.checkNetwork;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.NWE_VERSION;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.SETTINGS_RESULT;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -75,6 +78,10 @@ public class LoginActivity extends AppCompatActivity {
     AppCompatTextView tvVersion;
     @BindView(R.id.ibtn_login_setting)
     AppCompatImageButton btnSetting;
+
+    private TextInputLayout ilHotelCode;
+    private AppCompatEditText etHotelCode;
+
     //MySettings
     private MySettings mMySettings;
     //MySession
@@ -100,19 +107,16 @@ public class LoginActivity extends AppCompatActivity {
         }
         mInputValidation = new InputValidation(this);
         mChecker = new UpdateChecker(this, true);
-        firstStartInit();
-        setBaseUrl(this);
-        //Checking MySettings
-        if (!mMySettings.getConfigured()) {
-            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(i);
-        }
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (mMySettings.getFirstStart()) {
+            startDownloadSettingsDialog();
+        }
+        setBaseUrl(this);
         init();
         if (NWE_VERSION) {
             if (!permissionGranted) {
@@ -184,7 +188,7 @@ public class LoginActivity extends AppCompatActivity {
         mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
         mKenBurns.setImageResource(R.drawable.hotel);
 
-        Picasso.get().load(mMySettings.getLocalIp() + "Android/pics_house_keeping/hotel.jpg").into(new Target() {
+        Picasso.get().load(BASE_URL + "Android/pics_house_keeping/hotel.jpg").into(new Target() {
 
             @Override
             public void onPrepareLoad(Drawable arg0) {
@@ -210,16 +214,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //This method import old settings at first start.
-    private void firstStartInit() {
+    /***********************************************************************************************
+     * Old firstStartInit()
+     * This method import old settings at first start.
+     private void firstStartInit() {
 
-        if (mMySettings.getFirstStart()) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            mMySettings.setLocalIp(sp.getString("serveur", "http://0.0.0.0/"));
-            mMySettings.setShowPicture(sp.getBoolean("image", false));
-            mMySettings.setFirstStart(false);
-        }
-    }
+     if (mMySettings.getFirstStart()) {
+     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+     if (sp.contains("serveur")) {
+     mMySettings.setLocalIp(sp.getString("serveur", "0.0.0.0"));
+     mMySettings.setLocalIpEnabled(true);
+     mMySettings.setShowPicture(sp.getBoolean("image", false));
+     setBaseUrl(this);
+     } else {
+     Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+     startActivity(i);
+     }
+     mMySettings.setFirstStart(false);
+     }
+     }
+     ***********************************************************************************************/
 
     //This method check for permissions -> download APK -> install.
     private void updateApp() {
@@ -230,7 +244,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onPermissionGranted(PermissionGrantedResponse response) {
                         // permission is granted
                         try {
-                            mChecker.downloadAndInstall(mMySettings.getLocalIp() + "Android/appHouseKeeping.apk");
+                            mChecker.downloadAndInstall(BASE_URL + "Android/appHouseKeeping.apk");
                         } catch (Exception e) {
                             showSnackbar(findViewById(android.R.id.content), e.toString());
                         }
@@ -339,6 +353,79 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //This method show Download Hotel Settings dialog.
+    private void startDownloadSettingsDialog() {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+
+        View mView = getLayoutInflater().inflate(R.layout.dialog_hotel_settings, null);
+        AppCompatButton btnDownload = (AppCompatButton) mView.findViewById(R.id.btn_dialog_hotel_settings_download);
+        AppCompatButton btnCancel = (AppCompatButton) mView.findViewById(R.id.btn_dialog_hotel_settings_cancel);
+        ilHotelCode = (TextInputLayout) mView.findViewById(R.id.il_dialog_hotel_settings_code);
+        etHotelCode = (AppCompatEditText) mView.findViewById(R.id.et_dialog_hotel_settings_code);
+
+        mBuilder.setView(mView);
+        mBuilder.setCancelable(false);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (mInputValidation.isInputEditTextFilled(etHotelCode, ilHotelCode, getString(R.string.error_message_field_required))) {
+                    try {
+                        lodeHotelInfos(etHotelCode.getText().toString());
+                    } catch (Exception e) {
+                        showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_something_wrong));
+                    }
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    //This method show Contact Support dialog.
+    private void startContactSupportDialog() {
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+
+        View mView = getLayoutInflater().inflate(R.layout.dialog_contact_support, null);
+        AppCompatButton btnOk = (AppCompatButton) mView.findViewById(R.id.btn_dialog_contact_support_ok);
+        AppCompatButton btnRtery = (AppCompatButton) mView.findViewById(R.id.btn_dialog_contact_support_retry);
+
+        mBuilder.setView(mView);
+        mBuilder.setCancelable(false);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                dialog.dismiss();
+            }
+        });
+
+        btnRtery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDownloadSettingsDialog();
+                dialog.dismiss();
+            }
+        });
+
+    }
+
     /*************************************(  Login Logic  )****************************************/
     public void login() {
 
@@ -347,11 +434,10 @@ public class LoginActivity extends AppCompatActivity {
         mMySession.clearSessionDetails();
         mMySession.setLogin(sLogin);
 
-        RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
-        Call<Login> userCall = service.loginQuery(sLogin, sPassword);
-
         pbLogin.setVisibility(View.VISIBLE);
 
+        RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
+        Call<Login> userCall = service.loginQuery(sLogin, sPassword);
         userCall.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
@@ -417,4 +503,78 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**********************************************************************************************/
+
+    public void lodeHotelInfos(String code) {
+
+        RetrofitInterface service = RetrofitClient.getHotixSupportApi().create(RetrofitInterface.class);
+        Call<HotelSettings> userCall = service.getInfosQuery(code, FINAL_APP_ID);
+
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(getString(R.string.all_downloading));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        userCall.enqueue(new Callback<HotelSettings>() {
+            @Override
+            public void onResponse(Call<HotelSettings> call, Response<HotelSettings> response) {
+
+                progressDialog.dismiss();
+
+                if (response.raw().code() == 200) {
+                    HotelSettings hotelSettings = response.body();
+                    //Check if hotel id > 0
+                    if (!(hotelSettings.getId() > 0)) {
+                        //Hotel do not exist
+                        startContactSupportDialog();
+                    } else {
+
+                        //Get Public IP
+                        if (!stringEmptyOrNull(hotelSettings.getIPPublic())) {
+                            mMySettings.setPublicIp(hotelSettings.getIPPublic());
+                            mMySettings.setPublicIpEnabled(true);
+                        } else {
+                            mMySettings.setPublicIp("0.0.0.0");
+                            mMySettings.setPublicIpEnabled(false);
+                        }
+
+                        //Get Local IP
+                        if (!stringEmptyOrNull(hotelSettings.getIPLocal())) {
+                            mMySettings.setLocalIp(hotelSettings.getIPLocal());
+                            mMySettings.setLocalIpEnabled(true);
+                        } else {
+                            mMySettings.setLocalIp("0.0.0.0");
+                            mMySettings.setLocalIpEnabled(false);
+                        }
+
+                        //Get Hotel ID
+                        if (!stringEmptyOrNull(hotelSettings.getCode())) {
+                            mMySettings.setHotelCode(hotelSettings.getCode());
+                        } else {
+                            mMySettings.setHotelCode("0000");
+                        }
+
+                        mMySettings.setFirstStart(false);
+                        mMySettings.setConfigured(true);
+                        mMySettings.setSettingsUpdated(true);
+
+                        showSnackbar(findViewById(android.R.id.content), getString(R.string.message_settings_updated));
+                    }
+
+                } else {
+                    startDownloadSettingsDialog();
+                    showSnackbar(findViewById(android.R.id.content), response.message());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<HotelSettings> call, Throwable t) {
+                progressDialog.dismiss();
+                startDownloadSettingsDialog();
+                showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_server_down));
+            }
+        });
+
+    }
 }

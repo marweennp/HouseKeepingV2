@@ -36,6 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 
 public class UsersSettingsActivity extends AppCompatActivity {
@@ -118,6 +119,7 @@ public class UsersSettingsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        setBaseUrl(this);
         try {
             loadUsers();
         } catch (Exception e) {
@@ -135,6 +137,8 @@ public class UsersSettingsActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.setings_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_synic);
+        item.setVisible(false);
         return true;
     }
 
