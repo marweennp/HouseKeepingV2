@@ -38,6 +38,16 @@
             android:orientation="vertical"
             android:padding="8dp">
 
+            <!-- Login ProgressBar -->
+            <ProgressBar
+                android:id="@+id/pb_login"
+                android:theme="@style/MyProgressBarStyle"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminate="true"/>
+
             <!-- Login -->
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/il_login_login"
@@ -83,7 +93,6 @@
                 android:textSize="24sp" />
 
         </android.support.v7.widget.LinearLayoutCompat>
-
 
     </android.support.v7.widget.LinearLayoutCompat>
 

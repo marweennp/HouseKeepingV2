@@ -11,9 +11,10 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.adapters.TechniciansSpinnerAdapter;
@@ -46,8 +47,6 @@ public class ShowOrderActivity extends AppCompatActivity {
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.btn_order_details_close)
-    AppCompatButton btnClose;
     @BindView(R.id.tv_order_details_urgent)
     AppCompatTextView tvUrgent;
     @BindView(R.id.tv_order_details_location)
@@ -107,11 +106,29 @@ public class ShowOrderActivity extends AppCompatActivity {
         return true;
     }
 
-    /**********************************************************************************************/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.show_orders_menu, menu);
+        if (!mBtnClose) {
+            MenuItem item = menu.findItem(R.id.action_close);
+            item.setVisible(false);
+        }
+        return true;
+    }
 
-    @OnClick(R.id.btn_order_details_close)
-    public void closeOrder() {
-        startClaimClosingDialog();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+
+            case R.id.action_close:
+                startClaimClosingDialog();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**********************************************************************************************/
@@ -127,12 +144,6 @@ public class ShowOrderActivity extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (mBtnClose) {
-            btnClose.setVisibility(View.VISIBLE);
-        } else {
-            btnClose.setVisibility(View.GONE);
-        }
 
         if (GLOBAL_PANNE.getUrgent()) {
             tvUrgent.setVisibility(View.VISIBLE);
@@ -240,7 +251,8 @@ public class ShowOrderActivity extends AppCompatActivity {
 
                 if (response.raw().code() == 200) {
                     showSnackbar(findViewById(android.R.id.content), getString(R.string.text_successfully_closed));
-                    btnClose.setVisibility(View.GONE);
+                    mBtnClose = false;
+                    invalidateOptionsMenu();
                 } else {
                     showSnackbar(findViewById(android.R.id.content), response.message());
                 }

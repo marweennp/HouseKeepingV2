@@ -22,6 +22,7 @@
     <string name="menu_item_logout">Logout</string>
     <string name="menu_item_refresh">Refresh</string>
     <string name="menu_item_add">Add</string>
+    <string name="menu_item_close">Close</string>
     <string name="menu_item_send">Send</string>
     <!-- Splash Screen Activity-->
     <string name="splash_screen_footer">www.MyHotixHouseKeeping.com</string>
@@ -72,6 +73,7 @@
     <string name="text_order_row_location">"Location : "</string>
     <string name="text_order_urgent">URGENT</string>
     <string name="text_successfully_closed">Successfully Closed</string>
+    <string name="text_successfully_updated">Successfully Updated</string>
     <!-- Show Orders Activity -->
     <string name="text_order_details">Order Details</string>
     <string name="text_order_details_close_btn">Close</string>
@@ -98,22 +100,34 @@
     <string name="text_select_type">Select a Type</string>
     <string name="text_new_order_hours">Hour(s)</string>
     <string name="text_successfully_added">Successfully added</string>
-    <!-- GuestArrivalsActivity -->
+    <!-- Guest Arrivals Activity -->
     <string name="text_guest_arrivals">Guest Arrivals</string>
     <string name="text_scheduled_arrivals">" Scheduled Arrivals"</string>
     <string name="text_total_scheduled_arrival">Total scheduled arrival</string>
-    <!-- LostAndFoundActivity -->
+    <!-- Lost And Found Activity -->
     <string name="text_found_obj_details">Found Object Details</string>
     <string name="text_lost_and_found_details">Lost And Found Details</string>
     <string name="text_show_lost_and_found_found_by">Found by</string>
     <string name="text_show_lost_and_found_belong_to">Belong to</string>
     <string name="text_show_lost_and_found_comment">Comment</string>
+    <!-- New Found Object Activity -->
+    <string name="text_new_lost_object">New Lost Object</string>
+    <!-- Maintenance Team Activity -->
+    <string name="text_housekeepers_list">Housekeepers</string>
+    <string name="text_unassigned_rooms">Unassigned Rooms</string>
+    <!-- Room Assignment Activity -->
+    <string name="text_room_assign_unassigned">Unassigned Rooms</string>
+    <string name="text_room_assign_assigned">Rooms Assigned To </string>
+    <string name="text_room_assign_remove_all">Remove All</string>
+    <string name="text_room_assign_add_all">Add All</string>
+    <string name="text_rooms_assignment">Rooms Assignment</string>
     <!-- Messages  -->
     <string name="message_settings_updated">Settings successfully Updated</string>
     <string name="message_successfully_updated">User Permission Successfully Updated</string>
     <string name="message_no_maintenance_orders_to_show">No Maintenance Orders To Show!  Good Job.</string>
     <string name="message_no_lost_object_to_show">No Lost and Found object To Show!</string>
     <string name="message_no_scheduled_arrivals_to_show">No Scheduled Arrivals To Show!</string>
+    <string name="message_no_housekeepers_to_show">Ther Is No HouseKeepers To Show!</string>
     <!-- Errors Messages  -->
     <string name="error_message_login_is_empty">Enter your Login!</string>
     <string name="error_message_password_empty">Enter Your Password!</string>
@@ -155,7 +169,6 @@
     <string name="dialog_contact_support_text">You have entered an invalid Hotel Code! \nPlease contact your administrator.</string>
     <string name="dialog_lost_and_found_title">Close Lost Object</string>
     <string name="dialog_lost_and_found_text">Are you sure you want to close this claim?</string>
-    <string name="text_new_lost_object">New Lost Object</string>
     <!-- END STRINGS -->
 
 

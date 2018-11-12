@@ -27,7 +27,6 @@ import retrofit2.Response;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.NWE_VERSION;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
-import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -67,7 +66,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         }
         if (mMySettings.getConfigured()) {
             UpdateHotelInfos(mMySettings.getHotelCode());
-        }else {startDelay();}
+        } else {
+            startDelay();
+        }
 
     }
 
@@ -113,7 +114,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     //Get Public IP
                     if (!stringEmptyOrNull(hotelSettings.getIPPublic())) {
                         mMySettings.setPublicIp(hotelSettings.getIPPublic());
-                        mMySettings.setPublicBaseUrl("http://"+hotelSettings.getIPPublic()+"/");
+                        mMySettings.setPublicBaseUrl("http://" + hotelSettings.getIPPublic() + "/");
                         mMySettings.setPublicIpEnabled(true);
                     } else {
                         mMySettings.setPublicIp("0.0.0.0");
@@ -124,7 +125,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     //Get Local IP
                     if (!stringEmptyOrNull(hotelSettings.getIPLocal())) {
                         mMySettings.setLocalIp(hotelSettings.getIPLocal());
-                        mMySettings.setLocalBaseUrl("http://"+hotelSettings.getIPLocal()+"/");
+                        mMySettings.setLocalBaseUrl("http://" + hotelSettings.getIPLocal() + "/");
                         mMySettings.setLocalIpEnabled(true);
                     } else {
                         mMySettings.setLocalIp("0.0.0.0");
@@ -143,7 +144,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
                 } else {
-                    mMySettings.setSettingsUpdated(true);
+                    mMySettings.setSettingsUpdated(false);
                 }
 
                 startDelay();
@@ -151,7 +152,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HotelSettings> call, Throwable t) {
-
+                mMySettings.setSettingsUpdated(false);
+                startDelay();
             }
         });
 

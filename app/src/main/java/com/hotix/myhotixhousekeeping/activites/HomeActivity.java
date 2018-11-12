@@ -3,7 +3,6 @@ package com.hotix.myhotixhousekeeping.activites;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -12,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
@@ -22,7 +22,6 @@ import butterknife.OnClick;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
-import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class HomeActivity extends AppCompatActivity {
@@ -34,6 +33,18 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatTextView tvLostFound;
     @BindView(R.id.tv_home_maintenance_team)
     AppCompatTextView tvMintenanceTeam;
+    @BindView(R.id.rl_home_rack_room)
+    RelativeLayout rlHomeRackRoom;
+    @BindView(R.id.rl_home_maintenance_orders)
+    RelativeLayout rlHomeMaintenanceOrders;
+    @BindView(R.id.rl_home_forecast)
+    RelativeLayout rlHomeForecast;
+    @BindView(R.id.rl_home_check_in)
+    RelativeLayout rlHomeCheckIn;
+    @BindView(R.id.rl_home_lost_and_found)
+    RelativeLayout rlHomeLostAndFound;
+    @BindView(R.id.rl_home_maintenance_team)
+    RelativeLayout rlHomeMaintenanceTeam;
 
     private MySettings mMySettings;
 
@@ -99,19 +110,29 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.rl_home_rack_room)
     public void roomRack() {
-        showSnackbar(findViewById(android.R.id.content), "Room Rack");
+
+        //Start the RoomRackActivity
+        Intent i = new Intent(this, RoomRackActivity.class);
+        startActivity(i);
+
     }
 
     @OnClick(R.id.rl_home_maintenance_orders)
     public void maintenanceOrders() {
+
         //Start the MaintenanceOrdersActivity
         Intent i = new Intent(this, MaintenanceOrdersActivity.class);
         startActivity(i);
+
     }
 
     @OnClick(R.id.rl_home_forecast)
     public void forecast() {
-        showSnackbar(findViewById(android.R.id.content), "forecast");
+
+        //Start the ForecastActivity
+        Intent i = new Intent(this, ForecastActivity.class);
+        startActivity(i);
+
     }
 
     @OnClick(R.id.rl_home_check_in)
@@ -124,24 +145,18 @@ public class HomeActivity extends AppCompatActivity {
     @OnClick(R.id.rl_home_lost_and_found)
     public void lostFound() {
 
-        if (GLOBAL_LOGIN_DATA.getProfileId() == 16) {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        } else {
-            //Start the LostAndFoundActivity
-            Intent i = new Intent(this, LostAndFoundActivity.class);
-            startActivity(i);
-        }
+        //Start the LostAndFoundActivity
+        Intent i = new Intent(this, LostAndFoundActivity.class);
+        startActivity(i);
 
     }
 
     @OnClick(R.id.rl_home_maintenance_team)
     public void maintenanceTeam() {
 
-        if (GLOBAL_LOGIN_DATA.getProfileId() == 16) {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        } else {
-            showSnackbar(findViewById(android.R.id.content), "Maintenance Team");
-        }
+        //Start the MaintenanceTeamActivity
+        Intent i = new Intent(this, MaintenanceTeamActivity.class);
+        startActivity(i);
 
     }
 
@@ -163,12 +178,24 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setSubtitle("");
         }
 
-        if (GLOBAL_LOGIN_DATA.getProfileId() == 16) {
-            tvLostFound.setTextColor(ContextCompat.getColor(this, R.color.grey_500));
-            tvMintenanceTeam.setTextColor(ContextCompat.getColor(this, R.color.grey_500));
-        } else {
-            tvLostFound.setTextColor(ContextCompat.getColor(this, R.color.light_bg_dark_secondary_text));
-            tvMintenanceTeam.setTextColor(ContextCompat.getColor(this, R.color.light_bg_dark_secondary_text));
+        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasFM())) {
+            rlHomeMaintenanceTeam.setVisibility(View.GONE);
+        }
+
+        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasAddObjet())) {
+            rlHomeLostAndFound.setVisibility(View.GONE);
+        }
+
+        if (!GLOBAL_LOGIN_DATA.getHasAddPanne()) {
+            rlHomeMaintenanceOrders.setVisibility(View.GONE);
+        }
+
+        if (!GLOBAL_LOGIN_DATA.getHasViewClient()) {
+            rlHomeCheckIn.setVisibility(View.GONE);
+        }
+
+        if (!GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
+            rlHomeRackRoom.setVisibility(View.GONE);
         }
 
 

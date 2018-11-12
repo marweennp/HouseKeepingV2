@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -72,7 +75,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     //landscap
-    private AppCompatButton btnClose;
     private AppCompatTextView tvUrgent;
     private AppCompatTextView tvLocation;
     private AppCompatTextView tvType;
@@ -105,6 +107,8 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     private ArrayList<Technicien> mTechs;
     private int mTypeId = 1;
     private int techId = -1;
+    private boolean btnClose = true;
+    private Drawable mIconOne, mIconTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,15 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         //Force portrait on phones
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        //Check android vertion
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            mIconOne = getResources().getDrawable(R.drawable.ic_visibility_white_36dp, this.getTheme());
+            mIconTwo = getResources().getDrawable(R.drawable.ic_check_white_36dp, this.getTheme());
+        } else {
+            mIconOne = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_visibility_white_36dp, this.getTheme());
+            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_white_36dp, this.getTheme());
         }
 
         init();
@@ -159,6 +172,14 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             MenuItem item = menu.findItem(R.id.action_add);
             item.setVisible(false);
         }
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            MenuItem item = menu.findItem(R.id.action_close);
+            item.setVisible(false);
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE && !btnClose) {
+            MenuItem item = menu.findItem(R.id.action_close);
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -184,6 +205,10 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
                 //Start the NewOrderActivity
                 Intent i = new Intent(this, NewOrderActivity.class);
                 startActivity(i);
+                return true;
+
+            case R.id.action_close:
+                startClaimClosingDialog();
                 return true;
 
             default:
@@ -319,14 +344,14 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
                 SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
                 checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
                 checkedItem.setWidth(180);
-                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                checkedItem.setIcon(mIconOne);
                 menu.addMenuItem(checkedItem);
 
                 // create "show" item
                 SwipeMenuItem showItem = new SwipeMenuItem(getApplicationContext());
                 showItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondary)));
                 showItem.setWidth(180);
-                showItem.setIcon(R.drawable.ic_check_white_36dp);
+                showItem.setIcon(mIconTwo);
                 menu.addMenuItem(showItem);
             }
         };
@@ -340,7 +365,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
                 SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
                 checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
                 checkedItem.setWidth(180);
-                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                checkedItem.setIcon(mIconOne);
                 menu.addMenuItem(checkedItem);
             }
         };
@@ -425,7 +450,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         tvType = (AppCompatTextView) findViewById(R.id.tv_order_detail_type);
         tvLocation = (AppCompatTextView) findViewById(R.id.tv_order_detail_location);
         tvUrgent = (AppCompatTextView) findViewById(R.id.tv_order_detail_urgent);
-        btnClose = (AppCompatButton) findViewById(R.id.btn_order_detail_close);
 
         lvOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -440,10 +464,11 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
                 mTypeId = mStates.get(position).getId();
                 if (mTypeId == 1) {
-                    btnClose.setVisibility(View.VISIBLE);
+                    btnClose = true;
                 } else {
-                    btnClose.setVisibility(View.GONE);
+                    btnClose = false;
                 }
+                invalidateOptionsMenu();
                 if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
                     try {
                         loadOrders(mTypeId);
@@ -457,14 +482,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startClaimClosingDialog();
             }
         });
 

@@ -1,9 +1,9 @@
 package com.hotix.myhotixhousekeeping.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class LoginData {
 
@@ -100,7 +100,7 @@ public class LoginData {
         this.dateFront = dateFront;
     }
 
-    public List<Etage> getEtages() {
+    public ArrayList<Etage> getEtages() {
         return etages;
     }
 

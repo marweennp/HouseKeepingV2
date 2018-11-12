@@ -30,6 +30,14 @@
         <activity android:name=".activites.MaintenanceOrdersActivity" />
         <activity android:name=".activites.NewOrderActivity" />
         <activity android:name=".activites.ShowOrderActivity" />
+        <activity android:name=".activites.GuestArrivalsActivity" />
+        <activity android:name=".activites.LostAndFoundActivity" />
+        <activity android:name=".activites.NewFoundObjectActivity" />
+        <activity android:name=".activites.ShowFoundObjectActivity" />
+        <activity android:name=".activites.MaintenanceTeamActivity" />
+        <activity android:name=".activites.RoomAssignmentActivity" />
+        <activity android:name=".activites.RoomRackActivity" />
+        <activity android:name=".activites.ForecastActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -41,10 +49,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activites.GuestArrivalsActivity" />
-        <activity android:name=".activites.LostAndFoundActivity" />
-        <activity android:name=".activites.NewFoundObjectActivity" />
-        <activity android:name=".activites.ShowFoundObjectActivity"></activity>
     </application>
 
 </manifest>

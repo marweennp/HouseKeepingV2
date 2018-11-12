@@ -17,258 +17,195 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!-- Sittings Container -->
-    <LinearLayout
+    <!-- Main Container -->
+    <com.hotix.myhotixhousekeeping.views.DashboardLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar"
-        android:layout_marginStart="@dimen/dashboard_margin"
-        android:layout_marginTop="@dimen/dashboard_margin"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:layout_below="@id/appbar"
+        android:padding="2dp"
+        android:background="@color/colorSecondaryDark">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/dashboard_margin"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="2">
+        <!-- Dashbord item Room Rack -->
+        <RelativeLayout
+            android:id="@+id/rl_home_rack_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_room_rack"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
 
-            <!-- Dashbord item Room Rack -->
             <RelativeLayout
-                android:id="@+id/rl_home_rack_room"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_rack_room"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_room_rack" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_rack_room"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_room_rack"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_rack_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_room_rack"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-            <!-- Dashbord item Maintenance Orders -->
+        </RelativeLayout>
+
+        <!-- Dashbord item Maintenance Orders -->
+        <RelativeLayout
+            android:id="@+id/rl_home_maintenance_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_maintenance_orders"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
+
+
             <RelativeLayout
-                android:id="@+id/rl_home_maintenance_orders"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_maintenance_orders"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_maintenance_orders" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_maintenance_orders"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_maintenance_orders"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_maintenance_orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_maintenance_orders"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/dashboard_margin"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="2">
+        <!-- Dashbord item Forecast  -->
+        <RelativeLayout
+            android:id="@+id/rl_home_forecast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_statistics"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
 
-
-            <!-- Dashbord item Forecast  -->
             <RelativeLayout
-                android:id="@+id/rl_home_forecast"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_forecast"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_statistics" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_forecast"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_forecast"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_forecast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_forecast"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-            <!-- Dashbord item Check In -->
+        </RelativeLayout>
+
+        <!-- Dashbord item Check In -->
+        <RelativeLayout
+            android:id="@+id/rl_home_check_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_check_in"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
+
             <RelativeLayout
-                android:id="@+id/rl_home_check_in"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_check_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_check_in" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_check_in"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_check_in"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_check_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_check_in"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/dashboard_margin"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="2">
+        <!-- Dashbord item Lost and Found -->
+        <RelativeLayout
+            android:id="@+id/rl_home_lost_and_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_lost_and_found"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
 
-
-            <!-- Dashbord item Lost and Found -->
             <RelativeLayout
-                android:id="@+id/rl_home_lost_and_found"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_lost_and_found"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_lost_and_found" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_lost_and_found"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_lost_and_found"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_lost_and_found"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_lost_and_found"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-            <!-- Dashbord item Maintenance Team -->
+        </RelativeLayout>
+
+        <!-- Dashbord item Maintenance Team -->
+        <RelativeLayout
+            android:id="@+id/rl_home_maintenance_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_maintenance_oteam"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="1dp">
+
             <RelativeLayout
-                android:id="@+id/rl_home_maintenance_team"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dashboard_margin"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:background="@color/colorBackGround">
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentTop="true"
+                android:background="#FFFFFF">
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/img_home_maintenance_team"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_maintenance_oteam" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="36dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="#FFFFFF">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_home_maintenance_team"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/text_maintenance_team"
-                        android:textColor="@color/light_bg_dark_secondary_text"
-                        android:textStyle="bold" />
-
-                </RelativeLayout>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_home_maintenance_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/text_maintenance_team"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </LinearLayout>
+    </com.hotix.myhotixhousekeeping.views.DashboardLayout>
 
 </RelativeLayout>

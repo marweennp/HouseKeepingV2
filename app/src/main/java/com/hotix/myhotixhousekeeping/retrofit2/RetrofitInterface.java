@@ -1,5 +1,6 @@
 package com.hotix.myhotixhousekeeping.retrofit2;
 
+import com.hotix.myhotixhousekeeping.models.AffectedRoomData;
 import com.hotix.myhotixhousekeeping.models.ArrivalData;
 import com.hotix.myhotixhousekeeping.models.FoundObjData;
 import com.hotix.myhotixhousekeeping.models.HotelSettings;
@@ -88,20 +89,29 @@ public interface RetrofitInterface {
     //Declarer Objet Trouves service call
     @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/DeclarerObjetTrouves?")
     Call<ResponseBody> declarerObjetTrouvesQuery(@Query("prodNum") String prodNum,
-                                         @Query("objTrouveDesc") String objTrouveDesc,
-                                         @Query("objTrouveNom") String objTrouveNom,
-                                         @Query("objTrouvePrenom") String objTrouvePrenom,
-                                         @Query("objTrouveLieu") String objTrouveLieu,
-                                         @Query("objTrouveRenduNom") String objTrouveRenduNom,
-                                         @Query("objTrouveRenduPrenom") String objTrouveRenduPrenom,
-                                         @Query("login") String login,
-                                         @Query("comment") String comment,
-                                         @Query("ImageByteArray") String ImageByteArray);
+                                                 @Query("objTrouveDesc") String objTrouveDesc,
+                                                 @Query("objTrouveNom") String objTrouveNom,
+                                                 @Query("objTrouvePrenom") String objTrouvePrenom,
+                                                 @Query("objTrouveLieu") String objTrouveLieu,
+                                                 @Query("objTrouveRenduNom") String objTrouveRenduNom,
+                                                 @Query("objTrouveRenduPrenom") String objTrouveRenduPrenom,
+                                                 @Query("login") String login,
+                                                 @Query("comment") String comment,
+                                                 @Query("ImageByteArray") String ImageByteArray);
 
     //Get Arrivees Prevues service call
     @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetArriveesPrevues?")
     Call<ArrivalData> getArriveesPrevuesQuery(@Query("dateDeb") String dateDeb,
                                               @Query("dateFin") String dateFin);
+
+    //Get List Affection FM service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetListAffectionFM?")
+    Call<AffectedRoomData> getListAffectionFMQuery(@Query("EmployeId") String EmployeId);
+
+    //Affectation Femme Menage service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/AffectationFemmeMenage?")
+    Call<ResponseBody> affectationFemmeMenageQuery(@Query("EmployeId") String EmployeId,
+                                                   @Query("chaine_affectation") String chaine_affectation);
 
 
 /***

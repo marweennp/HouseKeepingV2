@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -70,7 +73,6 @@ public class LostAndFoundActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     //landscap
-    private AppCompatButton btnClose;
     private AppCompatTextView tvLocation;
     private AppCompatTextView tvDate;
     private AppCompatTextView tvTime;
@@ -95,6 +97,8 @@ public class LostAndFoundActivity extends AppCompatActivity {
     private OrdersTypesSpinnerAdapter mSpinnerAdapter;
     private FoundObjAdapter mListAdapter;
     private int mTypeId = 1;
+    private boolean btnClose = true;
+    private Drawable mIconOne, mIconTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,15 @@ public class LostAndFoundActivity extends AppCompatActivity {
         //Force portrait on phones
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        //Check android vertion
+        if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            mIconOne = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_visibility_white_36dp);
+            mIconTwo = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_white_36dp);
+        } else {
+            mIconOne = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_visibility_white_36dp, this.getTheme());
+            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_white_36dp, this.getTheme());
         }
 
         init();
@@ -148,6 +161,14 @@ public class LostAndFoundActivity extends AppCompatActivity {
             MenuItem item = menu.findItem(R.id.action_add);
             item.setVisible(false);
         }
+        int orientation = this.getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            MenuItem item = menu.findItem(R.id.action_close);
+            item.setVisible(false);
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE && !btnClose) {
+            MenuItem item = menu.findItem(R.id.action_close);
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -173,6 +194,10 @@ public class LostAndFoundActivity extends AppCompatActivity {
                 //Start the NewOrderActivity
                 Intent i = new Intent(this, NewFoundObjectActivity.class);
                 startActivity(i);
+                return true;
+
+            case R.id.action_close:
+                startClaimClosingDialog();
                 return true;
 
             default:
@@ -307,14 +332,14 @@ public class LostAndFoundActivity extends AppCompatActivity {
                 SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
                 checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
                 checkedItem.setWidth(180);
-                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                checkedItem.setIcon(mIconOne);
                 menu.addMenuItem(checkedItem);
 
                 // create "show" item
                 SwipeMenuItem showItem = new SwipeMenuItem(getApplicationContext());
                 showItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondary)));
                 showItem.setWidth(180);
-                showItem.setIcon(R.drawable.ic_check_white_36dp);
+                showItem.setIcon(mIconTwo);
                 menu.addMenuItem(showItem);
             }
         };
@@ -328,7 +353,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
                 SwipeMenuItem checkedItem = new SwipeMenuItem(getApplicationContext());
                 checkedItem.setBackground(new ColorDrawable(ContextCompat.getColor(getApplicationContext(), R.color.colorSecondaryDark)));
                 checkedItem.setWidth(180);
-                checkedItem.setIcon(R.drawable.ic_visibility_white_36dp);
+                checkedItem.setIcon(mIconOne);
                 menu.addMenuItem(checkedItem);
             }
         };
@@ -411,7 +436,6 @@ public class LostAndFoundActivity extends AppCompatActivity {
         tvFoundBy = (AppCompatTextView) findViewById(R.id.tv_lost_and_found_details_found_by);
         tvBelongTo = (AppCompatTextView) findViewById(R.id.tv_lost_and_found_details_belong_to);
         tvComment = (AppCompatTextView) findViewById(R.id.tv_lost_and_found_details_comment);
-        btnClose = (AppCompatButton) findViewById(R.id.btn_lost_and_found_details_close);
 
 
         lvFoundObjList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -427,10 +451,11 @@ public class LostAndFoundActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
                 mTypeId = mStates.get(position).getId();
                 if (mTypeId == 1) {
-                    btnClose.setVisibility(View.VISIBLE);
+                    btnClose = true;
                 } else {
-                    btnClose.setVisibility(View.GONE);
+                    btnClose = false;
                 }
+                invalidateOptionsMenu();
                 if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
                     try {
                         loadFoundObjs(mTypeId);
@@ -444,14 +469,6 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-
-        btnClose.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startClaimClosingDialog();
             }
         });
 

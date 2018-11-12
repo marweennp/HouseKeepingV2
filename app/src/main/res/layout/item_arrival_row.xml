@@ -100,9 +100,9 @@
     <View
         android:id="@+id/bottom_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorPrimaryDark" />
 
 
 </RelativeLayout>
