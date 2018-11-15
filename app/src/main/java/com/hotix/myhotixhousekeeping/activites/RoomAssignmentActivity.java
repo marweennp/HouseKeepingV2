@@ -101,7 +101,7 @@ public class RoomAssignmentActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_save:
-                //Reload Orders List
+                /////////////////
                 try {
                     updateAffectedRooms();
                 } catch (Exception e) {
@@ -119,8 +119,8 @@ public class RoomAssignmentActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_rooms_assignment);
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -233,12 +233,15 @@ public class RoomAssignmentActivity extends AppCompatActivity {
 
     private String buildRoomAssignment(ArrayList<AffectedRoom> rooms) {
         String str = "";
-        for (AffectedRoom ar : rooms) {
-            str = str + String.valueOf(ar.getTypeHebId())
-                    + "," + String.valueOf(ar.getTypeProd())
-                    + "," + String.valueOf(ar.getProdId()) + ";";
+        if (rooms.size() > 0) {
+            for (AffectedRoom ar : rooms) {
+                str = str + String.valueOf(ar.getTypeHebId())
+                        + "," + String.valueOf(ar.getTypeProd())
+                        + "," + String.valueOf(ar.getProdId()) + ";";
+            }
+            return str.substring(0, str.length() - 1);
         }
-        return str.substring(0, str.length() - 1);
+        return str;
     }
 
     /**********************************************************************************************/

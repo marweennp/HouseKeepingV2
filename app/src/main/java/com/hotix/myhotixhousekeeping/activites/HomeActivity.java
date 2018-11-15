@@ -172,8 +172,8 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(R.string.text_toolbar_dashbord);
         }
 
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }

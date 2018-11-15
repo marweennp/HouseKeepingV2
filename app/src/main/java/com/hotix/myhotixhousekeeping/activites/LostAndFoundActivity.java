@@ -238,8 +238,8 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_lost_and_found);
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }

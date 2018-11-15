@@ -4,9 +4,11 @@ import com.hotix.myhotixhousekeeping.models.AffectedRoomData;
 import com.hotix.myhotixhousekeeping.models.ArrivalData;
 import com.hotix.myhotixhousekeeping.models.FoundObjData;
 import com.hotix.myhotixhousekeeping.models.HotelSettings;
+import com.hotix.myhotixhousekeeping.models.InformerData;
 import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.models.PannesData;
 import com.hotix.myhotixhousekeeping.models.PermissionsData;
+import com.hotix.myhotixhousekeeping.models.RoomRackData;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -112,6 +114,35 @@ public interface RetrofitInterface {
     @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/AffectationFemmeMenage?")
     Call<ResponseBody> affectationFemmeMenageQuery(@Query("EmployeId") String EmployeId,
                                                    @Query("chaine_affectation") String chaine_affectation);
+
+    //Get Etat Rack Room service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetEtatRackRoom?")
+    Call<RoomRackData> getEtatRackRoomQuery(@Query("etage") String etage,
+                                            @Query("bloc") String bloc);
+
+    //Changer Produit Staut service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/ChangerProduitStaut?")
+    Call<ResponseBody> changerProduitStautQuery(@Query("user") String user,
+                                                @Query("prodId") String prodId,
+                                                @Query("typeHebId") String typeHebId,
+                                                @Query("typeProdId") String typeProdId,
+                                                @Query("statut") String statut,
+                                                @Query("oldStatut") String oldStatut,
+                                                @Query("comment") String comment);
+
+    //Update Etat Lieu service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/UpdateEtatLieu?")
+    Call<ResponseBody> updateEtatLieuQuery(@Query("prodId") String prodId,
+                                           @Query("etatTv") String etatTv,
+                                           @Query("etatBar") String etatBar,
+                                           @Query("etatSer") String etatSer);
+
+    //Get Mouchard Rack Room service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetMouchardRackRoom?")
+    Call<InformerData> getMouchardRackRoomQuery(@Query("etage") String etage,
+                                                @Query("bloc") String bloc,
+                                                @Query("dateDeb") String dateDeb,
+                                                @Query("dateFin") String dateFin);
 
 
 /***

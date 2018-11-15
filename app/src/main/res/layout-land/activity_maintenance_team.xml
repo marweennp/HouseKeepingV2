@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activites.MaintenanceTeamActivity">
 
     <!-- ToolBar -->
@@ -20,70 +21,243 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_below="@id/appbar"
         android:weightSum="5">
 
-    </android.support.v7.widget.LinearLayoutCompat>
-
-    <!-- Progress View -->
-    <include layout="@layout/include_loading_view" />
-
-    <!-- Container -->
-    <android.support.v7.widget.LinearLayoutCompat
-        android:id="@+id/ll_main_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/appbar">
-
-        <!-- Unassigned Rooms -->
+        <!-- List Container -->
         <RelativeLayout
+            android:id="@+id/rl_list_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
 
-            android:id="@+id/rl_unassigned_rooms"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_alignParentTop="true">
+            <!-- Progress View -->
+            <include layout="@layout/include_loading_view" />
 
-            <!-- Total Unassigned Rooms Text -->
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_unassigned_rooms_total_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:text="0"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <!-- Container -->
+            <android.support.v7.widget.LinearLayoutCompat
+                android:id="@+id/ll_main_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <!-- Text -->
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_unassigned_rooms_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/tv_unassigned_rooms_total_text"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="6dp"
-                android:text="@string/text_unassigned_rooms"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
+                <!-- Unassigned Rooms -->
+                <RelativeLayout
+
+                    android:id="@+id/rl_unassigned_rooms"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_alignParentTop="true">
+
+                    <!-- Total Unassigned Rooms Text -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_unassigned_rooms_total_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!-- Text -->
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_unassigned_rooms_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@id/tv_unassigned_rooms_total_text"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="6dp"
+                        android:text="@string/text_unassigned_rooms"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                </RelativeLayout>
+
+                <!-- Housekeeprs List -->
+                <ListView
+                    android:id="@+id/lv_housekeeprs_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/colorPrimaryDark"
+                    android:layout_below="@id/appbar"
+                    android:dividerHeight="2px"
+                    android:drawSelectorOnTop="true" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <!-- Empty View -->
+            <include layout="@layout/include_empty_view" />
 
         </RelativeLayout>
 
-        <!-- Housekeeprs List -->
-        <ListView
-            android:id="@+id/lv_housekeeprs_list"
-            android:layout_width="match_parent"
+        <!-- Details Container -->
+        <RelativeLayout
+            android:id="@+id/rl_orders_details_container"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:divider="@color/colorPrimaryDark"
-            android:layout_below="@id/appbar"
-            android:dividerHeight="2px"
-            android:drawSelectorOnTop="true" />
+            android:layout_weight="3">
+            <!-- V Divider -->
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:background="@color/colorAccent" />
+
+
+            <!-- Top -->
+            <RelativeLayout
+                android:id="@+id/rl_room_assign_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_room_assign_center">
+
+                <RelativeLayout
+                    android:id="@+id/rl_room_assign_top_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/colorPrimaryDark">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_room_assign_top_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_room_assign_unassigned"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <GridView
+                    android:id="@+id/gv_room_assign_unassigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/rl_room_assign_top_head"
+                    android:layout_above="@id/bottom_divider"
+                    android:numColumns="5"/>
+
+                <!-- Bottom Divider -->
+                <View
+                    android:id="@+id/bottom_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorPrimaryDark" />
+
+            </RelativeLayout>
+
+            <!-- Center -->
+            <RelativeLayout
+                android:id="@+id/rl_room_assign_center"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true">
+
+                <!-- Add All icon -->
+                <android.support.v7.widget.AppCompatImageButton
+                    android:id="@+id/imgb_room_assign_add_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/colorSecondaryDark"
+                    app:srcCompat="@drawable/ic_add_all_down" />
+
+                <!-- Add All text -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_room_assign_add_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@id/imgb_room_assign_add_all"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/text_room_assign_add_all"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <!-- Remove All icon -->
+                <android.support.v7.widget.AppCompatImageButton
+                    android:id="@+id/imgb_room_assign_remove_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/colorSecondaryDark"
+                    app:srcCompat="@drawable/ic_add_all_up" />
+
+                <!-- Remove All text -->
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_room_assign_remove_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toStartOf="@id/imgb_room_assign_remove_all"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/text_room_assign_remove_all"
+                    android:textColor="@color/colorSecondaryDark"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+            <!-- Bottom -->
+            <RelativeLayout
+                android:id="@+id/rl_room_assign_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rl_room_assign_center">
+
+                <RelativeLayout
+                    android:id="@+id/rl_room_assign_bottom_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/colorPrimaryDark">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_room_assign_bottom_head"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/text_room_assign_assigned"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <GridView
+                    android:id="@+id/gv_room_assign_assigned"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/rl_room_assign_bottom_head"
+                    android:numColumns="5"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
 
     </android.support.v7.widget.LinearLayoutCompat>
-
-    <!-- Empty View -->
-    <include layout="@layout/include_empty_view" />
 
 </RelativeLayout>

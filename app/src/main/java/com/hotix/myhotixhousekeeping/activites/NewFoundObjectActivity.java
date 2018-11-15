@@ -140,13 +140,16 @@ public class NewFoundObjectActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_new_lost_object);
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        etFFirstName.setText(GLOBAL_LOGIN_DATA.getPrenom());
+        etFLastName.setText(GLOBAL_LOGIN_DATA.getNom());
 
     }
 

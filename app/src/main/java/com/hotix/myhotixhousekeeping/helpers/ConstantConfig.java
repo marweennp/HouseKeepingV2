@@ -3,8 +3,9 @@ package com.hotix.myhotixhousekeeping.helpers;
 import com.hotix.myhotixhousekeeping.models.AffectedRoom;
 import com.hotix.myhotixhousekeeping.models.FemmesMenage;
 import com.hotix.myhotixhousekeeping.models.FoundObj;
-import com.hotix.myhotixhousekeeping.models.LoginData;
+import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.models.Panne;
+import com.hotix.myhotixhousekeeping.models.RoomRack;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class ConstantConfig {
     public static String BASE_URL = "";
 
     //Global Login data
-    public static LoginData GLOBAL_LOGIN_DATA = new LoginData();
+    public static Login GLOBAL_LOGIN_DATA = new Login(0,0,"x", "x",false, false,false,false,false,false,false,false,false,false,"");
 
     //Global Panne
     public static Panne GLOBAL_PANNE = new Panne();
@@ -36,6 +37,7 @@ public class ConstantConfig {
     public static ArrayList<AffectedRoom> GLOBAL_ROOMS = new ArrayList<AffectedRoom>();
     public static ArrayList<AffectedRoom> GLOBAL_UNASSIGNED_ROOMS = new ArrayList<AffectedRoom>();
     public static ArrayList<AffectedRoom> GLOBAL_ASSIGNED_ROOMS = new ArrayList<AffectedRoom>();
+    public static RoomRack GLOBAL_ROOM_RACK = new RoomRack();
 
     //Global Found Obj
     public static FoundObj GLOBAL_FOUND_OBJ = new FoundObj();

@@ -3,31 +3,14 @@ package com.hotix.myhotixhousekeeping.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Etage {
+public class Guest {
 
-    @SerializedName("BlocId")
-    @Expose
-    private Integer blocId;
     @SerializedName("Id")
     @Expose
     private Integer id;
     @SerializedName("Name")
     @Expose
     private String name;
-
-    public Etage(Integer blocId, Integer id, String name) {
-        this.blocId = blocId;
-        this.id = id;
-        this.name = name;
-    }
-
-    public Integer getBlocId() {
-        return blocId;
-    }
-
-    public void setBlocId(Integer blocId) {
-        this.blocId = blocId;
-    }
 
     public Integer getId() {
         return id;

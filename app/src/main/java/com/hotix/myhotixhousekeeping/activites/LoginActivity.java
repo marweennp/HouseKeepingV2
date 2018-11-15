@@ -447,11 +447,11 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (response.raw().code() == 200) {
                     Login login = response.body();
-                    GLOBAL_LOGIN_DATA = login.getData();
+                    GLOBAL_LOGIN_DATA = response.body();
 
-                    if (!(login.getData().getError() == -1)) {
+                    if (!(login.getError() == -1)) {
 
-                        switch (login.getData().getError()) {
+                        switch (login.getError()) {
 
                             case 0: // this User is not Authorised To Login
                                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_user_not_authorised));

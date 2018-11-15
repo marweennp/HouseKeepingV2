@@ -7,24 +7,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.adapters.ArrivalAdapter;
+import com.hotix.myhotixhousekeeping.adapters.FloorsSpinnerAdapter;
+import com.hotix.myhotixhousekeeping.adapters.InformerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.Arrival;
-import com.hotix.myhotixhousekeeping.models.ArrivalData;
+import com.hotix.myhotixhousekeeping.models.Etage;
+import com.hotix.myhotixhousekeeping.models.Informer;
+import com.hotix.myhotixhousekeeping.models.InformerData;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -46,7 +51,7 @@ import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.validDates;
 
-public class GuestArrivalsActivity extends AppCompatActivity {
+public class MouchardRoomRackActivity extends AppCompatActivity {
 
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
@@ -60,19 +65,23 @@ public class GuestArrivalsActivity extends AppCompatActivity {
     private AppCompatButton btnEmptyViewRefresh;
     private AppCompatEditText etEndDate;
     private AppCompatEditText etStartDate;
-    private ListView lvGuestList;
-    private AppCompatTextView tvTotalArrival;
-
-    private ArrivalAdapter mListAdapter;
-    private ArrayList<Arrival> mArrivals;
-
+    private AppCompatSpinner spFloors;
+    private ListView lvMoucharList;
     private MySettings mMySettings;
     private MySession mMySession;
+
+    private InformerAdapter mListAdapter;
+    private ArrayList<Informer> mInformers;
+
+    private ArrayList<Etage> mFloors;
+    private FloorsSpinnerAdapter mSpinnerAdapter;
+    private int mFloorId = -1;
+    private int mBlockId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guest_arrivals);
+        setContentView(R.layout.activity_mouchard_room_rack);
         ButterKnife.bind(this);
         //settings
         mMySettings = new MySettings(getApplicationContext());
@@ -81,6 +90,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
         init();
     }
 
@@ -90,14 +100,13 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         setBaseUrl(this);
         if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
             try {
-                loadeGuests();
+                loadeMouchard();
             } catch (Exception e) {
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
             }
         } else {
             showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_invalid_date));
         }
-
     }
 
     @Override
@@ -109,7 +118,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.guest_menu, menu);
+        getMenuInflater().inflate(R.menu.room_mochar_menu, menu);
         return true;
     }
 
@@ -119,10 +128,9 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_refresh:
-                //Reload Orders List
                 if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
                     try {
-                        loadeGuests();
+                        loadeMouchard();
                     } catch (Exception e) {
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
                     }
@@ -138,12 +146,12 @@ public class GuestArrivalsActivity extends AppCompatActivity {
 
     /**********************************************************************************************/
 
-    @OnClick(R.id.et_guests_arrival_start_date)
+    @OnClick(R.id.et_mouchar_start_date)
     public void getStartDate() {
         startDatePickerDialog(etStartDate);
     }
 
-    @OnClick(R.id.et_guests_arrival_end_date)
+    @OnClick(R.id.et_mouchar_end_date)
     public void getEndDate() {
         startDatePickerDialog(etEndDate);
     }
@@ -153,7 +161,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
 
         if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
             try {
-                loadeGuests();
+                loadeMouchard();
             } catch (Exception e) {
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
             }
@@ -168,20 +176,20 @@ public class GuestArrivalsActivity extends AppCompatActivity {
     private void init() {
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.text_guest_arrivals);
+        getSupportActionBar().setTitle(R.string.text_mouchard);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvTotalArrival = (AppCompatTextView) findViewById(R.id.tv_geust_arrival_total_text);
+        spFloors = (AppCompatSpinner) findViewById(R.id.sp_mouchar_floor);
 
-        etStartDate = (AppCompatEditText) findViewById(R.id.et_guests_arrival_start_date);
-        etEndDate = (AppCompatEditText) findViewById(R.id.et_guests_arrival_end_date);
-        lvGuestList = (ListView) findViewById(R.id.lv_guests_arrival_list);
+        etStartDate = (AppCompatEditText) findViewById(R.id.et_mouchar_start_date);
+        etEndDate = (AppCompatEditText) findViewById(R.id.et_mouchar_end_date);
+        lvMoucharList = (ListView) findViewById(R.id.lv_mouchar_list);
 
         // Loading View & Empty ListView
         llLoadingView = (LinearLayout) findViewById(R.id.ll_loading_view);
@@ -193,6 +201,36 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         etStartDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
         etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
 
+        mFloors = new ArrayList<Etage>();
+        mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all)));
+        mFloors.addAll(GLOBAL_LOGIN_DATA.getEtages());
+
+        mSpinnerAdapter = new FloorsSpinnerAdapter(getApplicationContext(), mFloors);
+        spFloors.setAdapter(mSpinnerAdapter);
+
+        spFloors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
+                mFloorId = mFloors.get(position).getId();
+                mBlockId = mFloors.get(position).getBlocId();
+
+                if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
+                    try {
+                        loadeMouchard();
+                    } catch (Exception e) {
+                        showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
+                    }
+                } else {
+                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_invalid_date));
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
         etStartDate.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -200,7 +238,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
                 // When user changed the Text
                 if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
                     try {
-                        loadeGuests();
+                        loadeMouchard();
                     } catch (Exception e) {
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
                     }
@@ -211,7 +249,6 @@ public class GuestArrivalsActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
             }
 
             @Override
@@ -226,7 +263,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
                 // When user changed the Text
                 if (validDates(etStartDate.getText().toString().trim(), etEndDate.getText().toString().trim())) {
                     try {
-                        loadeGuests();
+                        loadeMouchard();
                     } catch (Exception e) {
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
                     }
@@ -237,13 +274,13 @@ public class GuestArrivalsActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
             }
 
             @Override
             public void afterTextChanged(Editable arg0) {
             }
         });
+
 
     }
 
@@ -265,38 +302,38 @@ public class GuestArrivalsActivity extends AppCompatActivity {
 
     /**********************************************************************************************/
 
-    private void loadeGuests() {
+    private void loadeMouchard() {
 
-        String startDate = dateFormater(etStartDate.getText().toString(), "dd/MM/yyyy", "dd/MM/yyyy");
-        String endDate = dateFormater(etEndDate.getText().toString(), "dd/MM/yyyy", "dd/MM/yyyy");
+        String startDate = dateFormater(etStartDate.getText().toString(), "dd/MM/yyyy", "yyyyMMdd");
+        String endDate = dateFormater(etEndDate.getText().toString(), "dd/MM/yyyy", "yyyyMMdd");
+
+        String fId = String.valueOf(mFloorId);
+        String bId = String.valueOf(mBlockId);
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
-        Call<ArrivalData> userCall = service.getArriveesPrevuesQuery(startDate, endDate);
+        Call<InformerData> userCall = service.getMouchardRackRoomQuery(fId, bId, startDate, endDate);
 
         llLoadingView.setVisibility(View.VISIBLE);
-        lvGuestList.setVisibility(View.GONE);
+        lvMoucharList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
-        tvTotalArrival.setText(String.valueOf(0));
 
-        userCall.enqueue(new Callback<ArrivalData>() {
+        userCall.enqueue(new Callback<InformerData>() {
             @Override
-            public void onResponse(Call<ArrivalData> call, Response<ArrivalData> response) {
+            public void onResponse(Call<InformerData> call, Response<InformerData> response) {
 
                 llLoadingView.setVisibility(View.GONE);
-                lvGuestList.setVisibility(View.VISIBLE);
+                lvMoucharList.setVisibility(View.VISIBLE);
                 rlEmptyView.setVisibility(View.GONE);
 
                 if (response.raw().code() == 200) {
-                    ArrivalData mData = response.body();
+                    InformerData mData = response.body();
                     if (!(mData.getData() == null)) {
-                        mArrivals = mData.getData();
-                        mListAdapter = new ArrivalAdapter(mArrivals, getApplicationContext());
-                        lvGuestList.setAdapter(mListAdapter);
-                        tvTotalArrival.setText(String.valueOf(mArrivals.size()));
-                        tvEmptyViewText.setText(R.string.message_no_scheduled_arrivals_to_show);
-                        imgEmptyViewIcon.setImageResource(R.drawable.ic_people_white_24dp);
-                        lvGuestList.setEmptyView(rlEmptyView);
-
+                        mInformers = mData.getData();
+                        mListAdapter = new InformerAdapter(mInformers, getApplicationContext());
+                        lvMoucharList.setAdapter(mListAdapter);
+                        tvEmptyViewText.setText(R.string.message_no_activity_to_show);
+                        imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);
+                        lvMoucharList.setEmptyView(rlEmptyView);
                     }
 
                 } else {
@@ -305,11 +342,10 @@ public class GuestArrivalsActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrivalData> call, Throwable t) {
+            public void onFailure(Call<InformerData> call, Throwable t) {
                 llLoadingView.setVisibility(View.GONE);
-                lvGuestList.setVisibility(View.GONE);
+                lvMoucharList.setVisibility(View.GONE);
                 rlEmptyView.setVisibility(View.VISIBLE);
-                tvTotalArrival.setText(String.valueOf(0));
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_server_unreachable));

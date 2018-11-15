@@ -38,6 +38,7 @@
         <activity android:name=".activites.RoomAssignmentActivity" />
         <activity android:name=".activites.RoomRackActivity" />
         <activity android:name=".activites.ForecastActivity" />
+        <activity android:name=".activites.MouchardRoomRackActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

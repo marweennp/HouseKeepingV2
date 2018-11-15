@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.models.AffectedRoom;
+import com.hotix.myhotixhousekeeping.models.RoomRack;
 import com.hotix.myhotixhousekeeping.models.StatusProduit;
 
 import java.util.ArrayList;
@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import static android.graphics.Color.parseColor;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 
-public class RoomsGridAdapter extends BaseAdapter {
+public class RoomRackGridAdapter extends BaseAdapter {
 
-    private ArrayList<AffectedRoom> mRoomList;
+    private ArrayList<RoomRack> mRoomList;
     private Context mContext;
 
-    public RoomsGridAdapter(Context context, ArrayList<AffectedRoom> roomList) {
+    public RoomRackGridAdapter(Context context, ArrayList<RoomRack> roomList) {
         mContext = context;
         this.mRoomList = roomList;
     }
@@ -54,6 +54,7 @@ public class RoomsGridAdapter extends BaseAdapter {
         } else {
             grid = (View) convertView;
         }
+
         AppCompatImageView imgStartIcon = (AppCompatImageView) grid.findViewById(R.id.img_room_grid_row_icon_start);
         AppCompatImageView imgEndIcon = (AppCompatImageView) grid.findViewById(R.id.img_room_grid_row_icon_end);
 
@@ -61,13 +62,12 @@ public class RoomsGridAdapter extends BaseAdapter {
 
         AppCompatTextView tvRoomNumberSub = (AppCompatTextView) grid.findViewById(R.id.tv_room_grid_row_sub);
         AppCompatTextView tvRoomNumber = (AppCompatTextView) grid.findViewById(R.id.tv_room_grid_row);
-        tvRoomNumber.setText(String.valueOf(mRoomList.get(position).getProdNum()));
+        tvRoomNumber.setText(String.valueOf(mRoomList.get(position).getNumChb()));
 
         imgStartIcon.setImageResource(R.drawable.guests);
         imgEndIcon.setImageResource(R.drawable.trash);
 
-
-        if (mRoomList.get(position).getAttributed()) {
+        if (mRoomList.get(position).getIsAttributed()) {
 
             for (StatusProduit sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
                 if (sp.getId() == 8) {

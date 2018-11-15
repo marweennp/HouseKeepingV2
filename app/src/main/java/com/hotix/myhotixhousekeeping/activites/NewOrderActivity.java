@@ -1,6 +1,7 @@
 package com.hotix.myhotixhousekeeping.activites;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -34,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_ROOM_RACK;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
@@ -79,6 +81,8 @@ public class NewOrderActivity extends AppCompatActivity {
     private MySettings mMySettings;
     private MySession mMySession;
     private int mTypeId = -1;
+    private int mProdId = -1;
+    private boolean mRoom = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,15 @@ public class NewOrderActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("Room")) {
+            Bundle extras = getIntent().getExtras();
+            mRoom = extras.getBoolean("Room");
+        } else {
+            mRoom = false;
+        }
+
         init();
     }
 
@@ -142,13 +155,22 @@ public class NewOrderActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_new_order);
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        etFirstName.setText(GLOBAL_LOGIN_DATA.getPrenom());
+        etLastName.setText(GLOBAL_LOGIN_DATA.getNom());
+
+        if (mRoom) {
+            etLocation.setText(GLOBAL_ROOM_RACK.getNumChb());
+            etLocation.setEnabled(false);
+            mProdId = GLOBAL_ROOM_RACK.getProdId();
+        }
 
         mTypesPannes = new ArrayList<>();
         mTypesPannes.add(new TypesPanne(-1, getString(R.string.text_select_type)));
@@ -202,7 +224,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
     private void addNewOrder() {
 
-        String prodId = "-1";
+        String prodId = String.valueOf(mProdId);
         String typePanneId = String.valueOf(mTypeId);
         String urgent = String.valueOf(chbPriority.isChecked());
         String duree = etTime.getText().toString().trim();

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- Buttons -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimaryDark">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_dialog_room_change_state_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/dialog_room_rack_options_title"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <!-- Error MSG -->
+    <RelativeLayout
+        android:id="@+id/rl_dialog_room_change_state_error"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:visibility="gone">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_dialog_room_change_state_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/error_message_state_change"
+            android:textColor="@color/red_500"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_room_change_state_vac_clean"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_legend_vac_clean"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryDark" />
+    <View
+        android:id="@+id/v_dialog_room_change_state_vac_clean"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha=".5"
+        android:background="@color/colorSecondary" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_room_change_state_vac_dirty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_legend_vac_dirty"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryDark" />
+    <View
+        android:id="@+id/v_dialog_room_change_state_vac_dirty"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha=".5"
+        android:background="@color/colorSecondary" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_room_change_state_occ_clean"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_legend_occ_clean"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryDark" />
+    <View
+        android:id="@+id/v_dialog_room_change_state_occ_dirty"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:alpha=".5"
+        android:background="@color/colorSecondary" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_room_change_state_occ_dirty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_legend_occ_dirty"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryDark" />
+    <View
+        android:id="@+id/v_dialog_room_change_state_occ_clean"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="true"
+        android:alpha=".5"
+        android:background="@color/colorSecondary" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_dialog_room_change_state_out_of_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="@string/dialog_legend_out_of_order"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryDark" />
+    <View
+        android:id="@+id/v_dialog_room_change_state_out_of_order"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="true"
+        android:alpha=".5"
+        android:background="@color/colorSecondary" />
+
+
+    <!-- Buttons -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_dialog_room_change_state_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:text="@string/all_cancel"
+            android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,12 +1,15 @@
 <resources>
     <!-- START STRINGS -->
     <!-- App All -->
+    <string name="all_all">All</string>
     <string name="app_name">House Keeping v2</string>
     <string name="all_retry">RETRY</string>
+    <string name="all_room">Room</string>
     <string name="all_ok">OK</string>
     <string name="all_cancel">Cancel</string>
     <string name="all_refresh">Refresh</string>
     <string name="all_download">Download</string>
+    <string name="all_update">Update</string>
     <string name="all_yes">Yes</string>
     <string name="all_settings">Settings</string>
     <string name="all_downloading">Downloading...</string>
@@ -14,6 +17,9 @@
     <string name="all_please_wait">Please wait...</string>
     <string name="all_off">OFF</string>
     <string name="all_on">ON</string>
+    <string name="all_valid">VALID</string>
+    <string name="all_invalid">INVALID</string>
+    <string name="all_save">Save</string>
     <string name="all_select_technician">Select a Technician</string>
     <!-- Menu Items  -->
     <string name="menu_item_save">Save</string>
@@ -22,6 +28,8 @@
     <string name="menu_item_logout">Logout</string>
     <string name="menu_item_refresh">Refresh</string>
     <string name="menu_item_add">Add</string>
+    <string name="menu_item_info">Info</string>
+    <string name="menu_item_histo">Histo</string>
     <string name="menu_item_close">Close</string>
     <string name="menu_item_send">Send</string>
     <!-- Splash Screen Activity-->
@@ -121,12 +129,19 @@
     <string name="text_room_assign_remove_all">Remove All</string>
     <string name="text_room_assign_add_all">Add All</string>
     <string name="text_rooms_assignment">Rooms Assignment</string>
+    <!-- Room Rack Activity -->
+
+    <!-- Mouchard Room Rack Activity -->
+    <string name="text_mouchard">Informer</string>
     <!-- Messages  -->
     <string name="message_settings_updated">Settings successfully Updated</string>
     <string name="message_successfully_updated">User Permission Successfully Updated</string>
+    <string name="message_room_successfully_updated">Room Successfully Updated</string>
     <string name="message_no_maintenance_orders_to_show">No Maintenance Orders To Show!  Good Job.</string>
+    <string name="message_no_maintenance_rooms_to_show">No Rooms To Show!</string>
     <string name="message_no_lost_object_to_show">No Lost and Found object To Show!</string>
     <string name="message_no_scheduled_arrivals_to_show">No Scheduled Arrivals To Show!</string>
+    <string name="message_no_activity_to_show">No Activity To Show!</string>
     <string name="message_no_housekeepers_to_show">Ther Is No HouseKeepers To Show!</string>
     <!-- Errors Messages  -->
     <string name="error_message_login_is_empty">Enter your Login!</string>
@@ -150,6 +165,7 @@
     <string name="error_message_hotel_not_active">Something went wrong.\nContact the administrator!</string>
     <string name="error_message_app_not_active">You dont have permission to use this application!</string>
     <string name="error_message_select_type">you need to select a type</string>
+    <string name="error_message_state_change">Unauthorized state change!</string>
     <!-- Dialogs  -->
     <string name="dialog_update_title">Version Update</string>
     <string name="dialog_update_text">Your application is outdate.\nClic UPDATE to download and install the last version</string>
@@ -169,6 +185,23 @@
     <string name="dialog_contact_support_text">You have entered an invalid Hotel Code! \nPlease contact your administrator.</string>
     <string name="dialog_lost_and_found_title">Close Lost Object</string>
     <string name="dialog_lost_and_found_text">Are you sure you want to close this claim?</string>
+    <string name="dialog_legende_title">Legende</string>
+    <string name="dialog_legend_vac_clean">Vacant Clean</string>
+    <string name="dialog_legend_vac_dirty">Vacant Dirty</string>
+    <string name="dialog_legend_occ_clean">Occupied Clean</string>
+    <string name="dialog_legend_occ_dirty">Occupied Dirty</string>
+    <string name="dialog_legend_attributed">Attributed</string>
+    <string name="dialog_legend_day_use">Day Use</string>
+    <string name="dialog_legend_expect_dep">Expected Departure</string>
+    <string name="dialog_legend_out_of_order">Out of Service</string>
+    <string name="dialog_room_rack_options_title">"Room "</string>
+    <string name="dialog_room_rack_options_check_guests">Check Guests</string>
+    <string name="dialog_room_rack_options_change_room_state">Change Room State</string>
+    <string name="dialog_room_rack_options_claim_maintenance_order">Claim Maintenance Order</string>
+    <string name="dialog_room_rack_options_check_room_state">Check Room State</string>
+    <string name="dialog_room_check_state_tv_title">TV</string>
+    <string name="dialog_room_check_state_mini_bar_title">Mini-Bar</string>
+    <string name="dialog_room_check_state_towels_title">Towels</string>
     <!-- END STRINGS -->
 
 

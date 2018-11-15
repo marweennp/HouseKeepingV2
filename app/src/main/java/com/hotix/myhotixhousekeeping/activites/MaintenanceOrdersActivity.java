@@ -249,8 +249,8 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_maintenance);
-        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getFullName())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getFullName());
+        if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -657,6 +657,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
         Call<ResponseBody> userCall = service.cloturePanneQuery(id, login, comment, tecId);
+
         final ProgressDialog progressDialog = new ProgressDialog(MaintenanceOrdersActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.all_loading));
