@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.models.Technicien;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
@@ -18,10 +18,10 @@ import static android.support.v4.content.ContextCompat.getColor;
 public class TechniciansSpinnerAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Technicien> mData;
+    ArrayList<Generic> mData;
     LayoutInflater inflter;
 
-    public TechniciansSpinnerAdapter(Context applicationContext, ArrayList<Technicien> mData) {
+    public TechniciansSpinnerAdapter(Context applicationContext, ArrayList<Generic> mData) {
         this.context = applicationContext;
         this.mData = mData;
         inflter = (LayoutInflater.from(applicationContext));

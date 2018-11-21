@@ -21,7 +21,7 @@ import com.hotix.myhotixhousekeeping.adapters.TypesPannesSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.InputValidation;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.TypesPanne;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -39,7 +39,6 @@ import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_ROOM_R
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
-import static com.hotix.myhotixhousekeeping.helpers.Utils.validDates;
 
 public class NewOrderActivity extends AppCompatActivity {
 
@@ -76,7 +75,7 @@ public class NewOrderActivity extends AppCompatActivity {
 
 
     private InputValidation mInputValidation;
-    private ArrayList<TypesPanne> mTypesPannes;
+    private ArrayList<Generic> mTypesPannes;
     private TypesPannesSpinnerAdapter mSpinnerAdapter;
     private MySettings mMySettings;
     private MySession mMySession;
@@ -156,7 +155,7 @@ public class NewOrderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_new_order);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -173,7 +172,7 @@ public class NewOrderActivity extends AppCompatActivity {
         }
 
         mTypesPannes = new ArrayList<>();
-        mTypesPannes.add(new TypesPanne(-1, getString(R.string.text_select_type)));
+        mTypesPannes.add(new Generic(-1, getString(R.string.text_select_type)));
         mTypesPannes.addAll(GLOBAL_LOGIN_DATA.getTypesPanne());
         mSpinnerAdapter = new TypesPannesSpinnerAdapter(getApplicationContext(), mTypesPannes);
         spServiceTypes.setAdapter(mSpinnerAdapter);
@@ -229,14 +228,14 @@ public class NewOrderActivity extends AppCompatActivity {
         String urgent = String.valueOf(chbPriority.isChecked());
         String duree = etTime.getText().toString().trim();
         String lieu = etLocation.getText().toString().trim();
-        String nom =  etFirstName.getText().toString().trim();
-        String prenom =  etLastName.getText().toString().trim();
+        String nom = etFirstName.getText().toString().trim();
+        String prenom = etLastName.getText().toString().trim();
         String user_login = mMySession.getLogin();
-        String comment =  etDescription.getText().toString().trim();
+        String comment = etDescription.getText().toString().trim();
         String ImageByteArray = "";
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
-        Call<ResponseBody> userCall = service.reclamePanneQuery(prodId, typePanneId, urgent, duree, lieu, nom, prenom, user_login, comment, ImageByteArray );
+        Call<ResponseBody> userCall = service.reclamePanneQuery(prodId, typePanneId, urgent, duree, lieu, nom, prenom, user_login, comment, ImageByteArray);
 
         final ProgressDialog progressDialog = new ProgressDialog(NewOrderActivity.this);
         progressDialog.setIndeterminate(true);

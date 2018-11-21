@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbar">
 
-        <!-- Type Spinner -->
+        <!-- Floor Spinner -->
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/sp_mouchar_floor"
             android:layout_width="match_parent"

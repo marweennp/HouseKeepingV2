@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondaryDark"
+    tools:context=".activites.HomeActivity">
+
+    <!-- ToolBar -->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <include layout="@layout/include_toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Sittings Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar"
+        android:layout_marginStart="@dimen/dashboard_margin"
+        android:layout_marginTop="@dimen/dashboard_margin"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dashboard_margin"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- Dashbord item Room Rack -->
+            <RelativeLayout
+                android:id="@+id/rl_home_rack_room"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_rack_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_room_rack" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_rack_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_room_rack"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- Dashbord item Maintenance Orders -->
+            <RelativeLayout
+                android:id="@+id/rl_home_maintenance_orders"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_maintenance_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_maintenance_orders" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_maintenance_orders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_maintenance_orders"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- Dashbord item Forecast  -->
+            <RelativeLayout
+                android:id="@+id/rl_home_forecast"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_forecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_statistics" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_forecast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_forecast"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dashboard_margin"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- Dashbord item Check In -->
+            <RelativeLayout
+                android:id="@+id/rl_home_check_in"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_check_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_check_in" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_check_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_check_in"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- Dashbord item Lost and Found -->
+            <RelativeLayout
+                android:id="@+id/rl_home_lost_and_found"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_lost_and_found"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_lost_and_found" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_lost_and_found"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_lost_and_found"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <!-- Dashbord item Maintenance Team -->
+            <RelativeLayout
+                android:id="@+id/rl_home_maintenance_team"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dashboard_margin"
+                android:layout_weight="1"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:background="@color/colorBackGround">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/img_home_maintenance_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_maintenance_oteam" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFFFFF">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_home_maintenance_team"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/text_maintenance_team"
+                        android:textColor="@color/light_bg_dark_secondary_text"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

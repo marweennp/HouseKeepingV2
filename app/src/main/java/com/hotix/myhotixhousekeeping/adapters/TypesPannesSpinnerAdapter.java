@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.models.TypesPanne;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
@@ -18,10 +18,10 @@ import static android.support.v4.content.ContextCompat.getColor;
 public class TypesPannesSpinnerAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<TypesPanne> mData;
+    ArrayList<Generic> mData;
     LayoutInflater inflter;
 
-    public TypesPannesSpinnerAdapter(Context applicationContext, ArrayList<TypesPanne> mData) {
+    public TypesPannesSpinnerAdapter(Context applicationContext, ArrayList<Generic> mData) {
         this.context = applicationContext;
         this.mData = mData;
         inflter = (LayoutInflater.from(applicationContext));

@@ -69,7 +69,6 @@ public class MouchardRoomRackActivity extends AppCompatActivity {
     private ListView lvMoucharList;
     private MySettings mMySettings;
     private MySession mMySession;
-
     private InformerAdapter mListAdapter;
     private ArrayList<Informer> mInformers;
 
@@ -202,7 +201,7 @@ public class MouchardRoomRackActivity extends AppCompatActivity {
         etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
 
         mFloors = new ArrayList<Etage>();
-        mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all)));
+        mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all_floors)));
         mFloors.addAll(GLOBAL_LOGIN_DATA.getEtages());
 
         mSpinnerAdapter = new FloorsSpinnerAdapter(getApplicationContext(), mFloors);

@@ -20,8 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGEDIN;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class HomeActivity extends AppCompatActivity {
@@ -58,6 +60,13 @@ public class HomeActivity extends AppCompatActivity {
         //Force portrait on phones
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+        if (!GLOBAL_LOGEDIN) {
+            //Start the LoginActivity
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+            finish();
         }
 
         init();
@@ -110,19 +119,26 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.rl_home_rack_room)
     public void roomRack() {
-
-        //Start the RoomRackActivity
-        Intent i = new Intent(this, RoomRackActivity.class);
-        startActivity(i);
+        if (GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
+            //Start the RoomRackActivity
+            Intent i = new Intent(this, RoomRackActivity.class);
+            startActivity(i);
+        } else {
+            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
+        }
 
     }
 
     @OnClick(R.id.rl_home_maintenance_orders)
     public void maintenanceOrders() {
 
-        //Start the MaintenanceOrdersActivity
-        Intent i = new Intent(this, MaintenanceOrdersActivity.class);
-        startActivity(i);
+        if (GLOBAL_LOGIN_DATA.getHasAddPanne()) {
+            //Start the MaintenanceOrdersActivity
+            Intent i = new Intent(this, MaintenanceOrdersActivity.class);
+            startActivity(i);
+        } else {
+            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
+        }
 
     }
 
@@ -137,26 +153,40 @@ public class HomeActivity extends AppCompatActivity {
 
     @OnClick(R.id.rl_home_check_in)
     public void checkIn() {
-        //Start the GuestArrivalsActivity
-        Intent i = new Intent(this, GuestArrivalsActivity.class);
-        startActivity(i);
+
+        if (GLOBAL_LOGIN_DATA.getHasViewClient()) {
+            //Start the GuestArrivalsActivity
+            Intent i = new Intent(this, GuestArrivalsActivity.class);
+            startActivity(i);
+        } else {
+            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
+        }
+
     }
 
     @OnClick(R.id.rl_home_lost_and_found)
     public void lostFound() {
 
-        //Start the LostAndFoundActivity
-        Intent i = new Intent(this, LostAndFoundActivity.class);
-        startActivity(i);
+        if (GLOBAL_LOGIN_DATA.getHasAddObjet()) {
+            //Start the LostAndFoundActivity
+            Intent i = new Intent(this, LostAndFoundActivity.class);
+            startActivity(i);
+        } else {
+            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
+        }
 
     }
 
     @OnClick(R.id.rl_home_maintenance_team)
     public void maintenanceTeam() {
 
-        //Start the MaintenanceTeamActivity
-        Intent i = new Intent(this, MaintenanceTeamActivity.class);
-        startActivity(i);
+        if (GLOBAL_LOGIN_DATA.getHasFM()) {
+            //Start the MaintenanceTeamActivity
+            Intent i = new Intent(this, MaintenanceTeamActivity.class);
+            startActivity(i);
+        } else {
+            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
+        }
 
     }
 
@@ -173,30 +203,30 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
 
-        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasFM())) {
-            rlHomeMaintenanceTeam.setVisibility(View.GONE);
-        }
-
-        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasAddObjet())) {
-            rlHomeLostAndFound.setVisibility(View.GONE);
-        }
-
-        if (!GLOBAL_LOGIN_DATA.getHasAddPanne()) {
-            rlHomeMaintenanceOrders.setVisibility(View.GONE);
-        }
-
-        if (!GLOBAL_LOGIN_DATA.getHasViewClient()) {
-            rlHomeCheckIn.setVisibility(View.GONE);
-        }
-
-        if (!GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
-            rlHomeRackRoom.setVisibility(View.GONE);
-        }
+//        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasFM())) {
+//            rlHomeMaintenanceTeam.setVisibility(View.GONE);
+//        }
+//
+//        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasAddObjet())) {
+//            rlHomeLostAndFound.setVisibility(View.GONE);
+//        }
+//
+//        if (!GLOBAL_LOGIN_DATA.getHasAddPanne()) {
+//            rlHomeMaintenanceOrders.setVisibility(View.GONE);
+//        }
+//
+//        if (!GLOBAL_LOGIN_DATA.getHasViewClient()) {
+//            rlHomeCheckIn.setVisibility(View.GONE);
+//        }
+//
+//        if (!GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
+//            rlHomeRackRoom.setVisibility(View.GONE);
+//        }
 
 
     }

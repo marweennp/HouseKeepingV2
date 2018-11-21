@@ -117,8 +117,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                         mMySettings.setPublicBaseUrl("http://" + hotelSettings.getIPPublic() + "/");
                         mMySettings.setPublicIpEnabled(true);
                     } else {
-                        mMySettings.setPublicIp("0.0.0.0");
-                        mMySettings.setPublicBaseUrl("http://0.0.0.0/");
+                        mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
+                        mMySettings.setPublicBaseUrl("http://xxx.xxx.xxx.xxx/");
                         mMySettings.setPublicIpEnabled(false);
                     }
 
@@ -128,8 +128,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                         mMySettings.setLocalBaseUrl("http://" + hotelSettings.getIPLocal() + "/");
                         mMySettings.setLocalIpEnabled(true);
                     } else {
-                        mMySettings.setLocalIp("0.0.0.0");
-                        mMySettings.setLocalBaseUrl("http://0.0.0.0/");
+                        mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
+                        mMySettings.setLocalBaseUrl("http://xxx.xxx.xxx.xxx/");
                         mMySettings.setLocalIpEnabled(false);
                     }
 

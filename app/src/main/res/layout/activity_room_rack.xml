@@ -23,11 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/appbar">
 
-        <!-- Type Spinner -->
+        <!-- Floor Spinner -->
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/sp_hotel_floors"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="32dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:backgroundTint="@color/colorPrimary"
@@ -41,14 +41,35 @@
             android:id="@+id/v_top_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/sp_hotel_floors"
+            android:layout_below="@id/sp_hotel_floors"
+            android:background="@color/colorAccent" />
+
+        <!-- Status Spinner -->
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/sp_room_status"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/v_top_divider"
+            android:backgroundTint="@color/colorPrimary"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:popupBackground="@color/white"
+            android:spinnerMode="dropdown" />
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/v_top_divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/sp_room_status"
             android:background="@color/colorAccent" />
 
         <RelativeLayout
             android:id="@+id/rl_rooms_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/v_top_divider">
+            android:layout_below="@id/v_top_divider_2">
 
             <!-- Progress View -->
             <include layout="@layout/include_loading_view" />

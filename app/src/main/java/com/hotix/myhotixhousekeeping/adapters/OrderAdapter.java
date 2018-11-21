@@ -51,18 +51,21 @@ public class OrderAdapter extends ArrayAdapter<Panne> {
             viewHolder.order_location = (TextView) convertView.findViewById(R.id.tv_order_row_location);
             viewHolder.order_desc = (TextView) convertView.findViewById(R.id.tv_order_row_desc);
             viewHolder.order_priority = (TextView) convertView.findViewById(R.id.tv_order_row_priority);
-            //img
-            viewHolder.order_image = (ImageView) convertView.findViewById(R.id.img_order_row_photo);
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (OrderAdapter.ViewHolder) convertView.getTag();
         }
 
-        viewHolder.order_location.setText(mContext.getString(R.string.text_order_row_location) + dataModel.getLieu());
-        viewHolder.order_desc.setText(dataModel.getDescription());
+        viewHolder.order_location.setText(dataModel.getLieu());
         viewHolder.order_date.setText(Html.fromHtml(dateColored(dataModel.getDate(), "#616161", "#1ab394", "dd/MM/yyyy hh:mm", true)));
         viewHolder.order_time.setText(dateFormater(dataModel.getDate(), "dd/MM/yyyy hh:mm", "HH:mm"));
+
+        if (stringEmptyOrNull(dataModel.getDescription()) || dataModel.getDescription().equals("NULL")) {
+            viewHolder.order_desc.setText("");
+        } else {
+            viewHolder.order_desc.setText(dataModel.getDescription());
+        }
 
         if (dataModel.getUrgent()) {
             viewHolder.order_priority.setText(R.string.text_order_urgent);
@@ -70,13 +73,6 @@ public class OrderAdapter extends ArrayAdapter<Panne> {
         } else {
             viewHolder.order_priority.setText("");
             viewHolder.order_priority.setVisibility(View.GONE);
-        }
-
-        if (stringEmptyOrNull(dataModel.getImage())) {
-            viewHolder.order_image.setVisibility(View.GONE);
-        } else {
-            Picasso.get().load(dataModel.getImage()).fit().into(viewHolder.order_image);
-            viewHolder.order_image.setVisibility(View.VISIBLE);
         }
 
         // Return the completed view to render on screen
@@ -90,7 +86,6 @@ public class OrderAdapter extends ArrayAdapter<Panne> {
         TextView order_location;
         TextView order_desc;
         TextView order_priority;
-        ImageView order_image;
     }
 
 }

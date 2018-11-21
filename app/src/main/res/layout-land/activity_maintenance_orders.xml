@@ -134,8 +134,8 @@
                     android:id="@+id/lv_orders_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@color/colorPrimary"
-                    android:dividerHeight="0px"
+                    android:divider="@color/colorPrimaryDark"
+                    android:dividerHeight="2dp"
                     android:drawSelectorOnTop="true"
                     android:visibility="gone" />
 

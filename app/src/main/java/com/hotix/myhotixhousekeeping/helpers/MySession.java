@@ -8,6 +8,7 @@ public class MySession {
     // All Shared Preferences Keys
     //MySession
     public static final String KEY_LOGIN = "Login";
+    public static final String KEY_LOGEDIN = "Logedin";
 
 
     // Sharedpref file name
@@ -36,6 +37,15 @@ public class MySession {
 
     public void setLogin(String login) {
         editor.putString(KEY_LOGIN, login);
+        editor.commit();
+    }
+    // boolean
+    public boolean getLogedin() {
+        return pref.getBoolean(KEY_LOGEDIN, false);
+    }
+
+    public void setLogedin(boolean logedin) {
+        editor.putBoolean(KEY_LOGEDIN, logedin);
         editor.commit();
     }
 

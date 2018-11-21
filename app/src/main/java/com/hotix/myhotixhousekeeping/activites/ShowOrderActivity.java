@@ -20,7 +20,7 @@ import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.adapters.TechniciansSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.Technicien;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +68,7 @@ public class ShowOrderActivity extends AppCompatActivity {
     private AppCompatTextView etError;
     private AppCompatEditText etComment;
 
-    private ArrayList<Technicien> mTechs;
+    private ArrayList<Generic> mTechs;
     private TechniciansSpinnerAdapter mTecSpinnerAdapter;
     private int techId = -1;
     private MySettings mMySettings;
@@ -85,9 +84,8 @@ public class ShowOrderActivity extends AppCompatActivity {
         mMySettings = new MySettings(getApplicationContext());
         mMySession = new MySession(getApplicationContext());
         //Force portrait on phones
-        if (getResources().getBoolean(R.bool.portrait_only)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         mBtnClose = getIntent().getExtras().getBoolean("btnClose");
 
@@ -138,7 +136,7 @@ public class ShowOrderActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_maintenance);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -175,7 +173,7 @@ public class ShowOrderActivity extends AppCompatActivity {
         AppCompatButton btnOk = (AppCompatButton) mView.findViewById(R.id.btn_dialog_claim_closing_ok);
         AppCompatButton btnCancel = (AppCompatButton) mView.findViewById(R.id.btn_dialog_claim_closing_cancel);
 
-        Technicien tec = new Technicien(-1, getString(R.string.all_select_technician));
+        Generic tec = new Generic(-1, getString(R.string.all_select_technician));
         mTechs = new ArrayList<>();
         mTechs.add(tec);
         mTechs.addAll(GLOBAL_LOGIN_DATA.getTechniciens());

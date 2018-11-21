@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activites.GuestArrivalsActivity">
 
     <!-- ToolBar -->
@@ -31,30 +32,125 @@
             android:background="@color/colorPrimaryDark"
             android:layout_alignParentTop="true">
 
-            <!-- Total Arrival Text -->
+            <!-- Text -->
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_geust_arrival_total_text"
+                android:id="@+id/tv_geust_arrival_room_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
+                android:text="@string/text_rooms"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+            <!-- Total Arrival Text -->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_geust_arrival_total_room_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/tv_geust_arrival_room_text"
                 android:text="0"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <!-- Text -->
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_geust_arrival_text"
+            <LinearLayout
+                android:id="@+id/ll_arrival_pax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/tv_geust_arrival_total_text"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="6dp"
-                android:text="@string/text_total_scheduled_arrival"
-                android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_adult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_adult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_person_white_24dp"
+                        app:tint="@color/white" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_adult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_adult"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_kid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_kid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_child_care_white_24dp"
+                        app:tint="@color/white" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_kid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_kid"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_bb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_child_friendly_white_24dp"
+                        app:tint="@color/white" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_bb"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -140,8 +236,8 @@
                 android:id="@+id/lv_guests_arrival_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="@color/colorPrimary"
-                android:dividerHeight="0px"
+                android:divider="@color/colorPrimaryDark"
+                android:dividerHeight="2dp"
                 android:drawSelectorOnTop="true" />
 
             <!-- Empty View -->

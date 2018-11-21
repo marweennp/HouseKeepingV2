@@ -36,7 +36,7 @@ public class RoomRack {
     private Boolean isAttributed;
     @SerializedName("Guests")
     @Expose
-    private ArrayList<Guest> guests = null;
+    private ArrayList<Generic> guests = null;
     @SerializedName("EtatTV")
     @Expose
     private Boolean etatTV;
@@ -119,11 +119,11 @@ public class RoomRack {
         this.isAttributed = isAttributed;
     }
 
-    public ArrayList<Guest> getGuests() {
+    public ArrayList<Generic> getGuests() {
         return guests;
     }
 
-    public void setGuests(ArrayList<Guest> guests) {
+    public void setGuests(ArrayList<Generic> guests) {
         this.guests = guests;
     }
 

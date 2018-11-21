@@ -1,6 +1,7 @@
 package com.hotix.myhotixhousekeeping.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ public class InformerAdapter extends ArrayAdapter<Informer> {
             viewHolder.informer_date = (TextView) convertView.findViewById(R.id.tv_informer_row_date);
             viewHolder.informer_time = (TextView) convertView.findViewById(R.id.tv_informer_row_time);
             viewHolder.informer_login = (TextView) convertView.findViewById(R.id.tv_informer_row_login);
+            viewHolder.informer_app_icon = (AppCompatImageView) convertView.findViewById(R.id.img_informer_row_app_icon);
 
             convertView.setTag(viewHolder);
         } else {
@@ -56,7 +58,13 @@ public class InformerAdapter extends ArrayAdapter<Informer> {
         viewHolder.informer_desc.setText(dataModel.getOperation());
         viewHolder.informer_date.setText(Html.fromHtml( dateColored(dataModel.getDate(), "#616161", "#1ab394", "dd/MM/yyyy HH:mm:ss", true)));
         viewHolder.informer_time.setText(dateFormater(dataModel.getDate(),"dd/MM/yyyy HH:mm:ss","HH:mm"));
-        viewHolder.informer_login.setText(dataModel.getUser()+":"+dataModel.getPoste());
+        viewHolder.informer_login.setText(dataModel.getUser());
+
+        if (dataModel.getPoste().equals("HNG FRONT")) {
+            viewHolder.informer_app_icon.setImageResource(R.drawable.mouchard_front);
+        }else{
+            viewHolder.informer_app_icon.setImageResource(R.drawable.mouchard_myhotix);
+        }
 
         // Return the completed view to render on screen
         return convertView;
@@ -69,6 +77,7 @@ public class InformerAdapter extends ArrayAdapter<Informer> {
         TextView informer_date;
         TextView informer_time;
         TextView informer_login;
+        AppCompatImageView informer_app_icon;
     }
 
 }

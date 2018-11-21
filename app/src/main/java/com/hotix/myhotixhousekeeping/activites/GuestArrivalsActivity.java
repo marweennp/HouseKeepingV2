@@ -62,6 +62,14 @@ public class GuestArrivalsActivity extends AppCompatActivity {
     private AppCompatEditText etStartDate;
     private ListView lvGuestList;
     private AppCompatTextView tvTotalArrival;
+    private AppCompatTextView tvTotalArrivalRooms;
+
+    private RelativeLayout rlArrivalAdult;
+    private AppCompatTextView tvArrivalAdult;
+    private RelativeLayout rlArrivalKid;
+    private AppCompatTextView tvArrivalKid;
+    private RelativeLayout rlArrivalBb;
+    private AppCompatTextView tvArrivalBb;
 
     private ArrivalAdapter mListAdapter;
     private ArrayList<Arrival> mArrivals;
@@ -170,14 +178,22 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_guest_arrivals);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        tvTotalArrival = (AppCompatTextView) findViewById(R.id.tv_geust_arrival_total_text);
+
+        tvTotalArrivalRooms = (AppCompatTextView) findViewById(R.id.tv_geust_arrival_total_room_text);
+
+        rlArrivalAdult = (RelativeLayout) findViewById(R.id.rl_arrival_adult);
+        tvArrivalAdult = (AppCompatTextView) findViewById(R.id.tv_arrival_adult);
+        rlArrivalKid = (RelativeLayout) findViewById(R.id.rl_arrival_kid);
+        tvArrivalKid = (AppCompatTextView) findViewById(R.id.tv_arrival_kid);
+        rlArrivalBb = (RelativeLayout) findViewById(R.id.rl_arrival_bb);
+        tvArrivalBb = (AppCompatTextView) findViewById(R.id.tv_arrival_bb);
 
         etStartDate = (AppCompatEditText) findViewById(R.id.et_guests_arrival_start_date);
         etEndDate = (AppCompatEditText) findViewById(R.id.et_guests_arrival_end_date);
@@ -191,7 +207,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         btnEmptyViewRefresh = (AppCompatButton) findViewById(R.id.btn_empty_view_refresh);
 
         etStartDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
-        etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
+        etEndDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
 
         etStartDate.addTextChangedListener(new TextWatcher() {
 
@@ -276,7 +292,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
         llLoadingView.setVisibility(View.VISIBLE);
         lvGuestList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
-        tvTotalArrival.setText(String.valueOf(0));
+        tvTotalArrivalRooms.setText(String.valueOf(0));
 
         userCall.enqueue(new Callback<ArrivalData>() {
             @Override
@@ -292,7 +308,43 @@ public class GuestArrivalsActivity extends AppCompatActivity {
                         mArrivals = mData.getData();
                         mListAdapter = new ArrivalAdapter(mArrivals, getApplicationContext());
                         lvGuestList.setAdapter(mListAdapter);
-                        tvTotalArrival.setText(String.valueOf(mArrivals.size()));
+
+                        int mRooms = 0;
+                        int mPaxA = 0;
+                        int mPaxK = 0;
+                        int mPaxB = 0;
+                        for (Arrival ar : mArrivals) {
+                            mPaxA += ar.getA();
+                            mPaxK += ar.getE();
+                            mPaxB += ar.getB();
+                            mRooms += ar.getRoomCount();
+                        }
+
+                        if (mPaxA > 0) {
+                            rlArrivalAdult.setVisibility(View.VISIBLE);
+                            tvArrivalAdult.setText(String.valueOf(mPaxA));
+                        } else {
+                            rlArrivalAdult.setVisibility(View.GONE);
+                            tvArrivalAdult.setText("");
+                        }
+
+                        if (mPaxK > 0) {
+                            rlArrivalKid.setVisibility(View.VISIBLE);
+                            tvArrivalKid.setText(String.valueOf(mPaxK));
+                        } else {
+                            rlArrivalKid.setVisibility(View.GONE);
+                            tvArrivalKid.setText("");
+                        }
+
+                        if (mPaxB > 0) {
+                            rlArrivalBb.setVisibility(View.VISIBLE);
+                            tvArrivalBb.setText(String.valueOf(mPaxB));
+                        } else {
+                            rlArrivalBb.setVisibility(View.GONE);
+                            tvArrivalBb.setText("");
+                        }
+
+                        tvTotalArrivalRooms.setText(String.valueOf(mRooms));
                         tvEmptyViewText.setText(R.string.message_no_scheduled_arrivals_to_show);
                         imgEmptyViewIcon.setImageResource(R.drawable.ic_people_white_24dp);
                         lvGuestList.setEmptyView(rlEmptyView);
@@ -309,7 +361,7 @@ public class GuestArrivalsActivity extends AppCompatActivity {
                 llLoadingView.setVisibility(View.GONE);
                 lvGuestList.setVisibility(View.GONE);
                 rlEmptyView.setVisibility(View.VISIBLE);
-                tvTotalArrival.setText(String.valueOf(0));
+                tvTotalArrivalRooms.setText(String.valueOf(0));
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_server_unreachable));

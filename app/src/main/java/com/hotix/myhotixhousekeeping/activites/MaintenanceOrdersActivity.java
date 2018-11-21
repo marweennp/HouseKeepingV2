@@ -40,10 +40,9 @@ import com.hotix.myhotixhousekeeping.adapters.OrdersTypesSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.adapters.TechniciansSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.models.Panne;
 import com.hotix.myhotixhousekeeping.models.PannesData;
-import com.hotix.myhotixhousekeeping.models.State;
-import com.hotix.myhotixhousekeeping.models.Technicien;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -99,12 +98,12 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     private AppCompatEditText etComment;
     private MySettings mMySettings;
     private MySession mMySession;
-    private ArrayList<State> mStates;
+    private ArrayList<Generic> mStates;
     private ArrayList<Panne> mPannes;
     private OrdersTypesSpinnerAdapter mSpinnerAdapter;
     private TechniciansSpinnerAdapter mTecSpinnerAdapter;
     private OrderAdapter mListAdapter;
-    private ArrayList<Technicien> mTechs;
+    private ArrayList<Generic> mTechs;
     private int mTypeId = 1;
     private int techId = -1;
     private boolean btnClose = true;
@@ -126,10 +125,10 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         //Check android vertion
         if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             mIconOne = getResources().getDrawable(R.drawable.ic_visibility_white_36dp, this.getTheme());
-            mIconTwo = getResources().getDrawable(R.drawable.ic_check_white_36dp, this.getTheme());
+            mIconTwo = getResources().getDrawable(R.drawable.ic_check_circle_white_36dp, this.getTheme());
         } else {
             mIconOne = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_visibility_white_36dp, this.getTheme());
-            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_white_36dp, this.getTheme());
+            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_circle_white_36dp, this.getTheme());
         }
 
         init();
@@ -250,7 +249,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_maintenance);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -272,9 +271,9 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         etStartDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
         etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
 
-        mStates = new ArrayList<State>();
-        mStates.add(new State(1, getString(R.string.text_state_outstanding)));
-        mStates.add(new State(2, getString(R.string.text_state_fenced)));
+        mStates = new ArrayList<Generic>();
+        mStates.add(new Generic(1, getString(R.string.text_state_outstanding)));
+        mStates.add(new Generic(2, getString(R.string.text_state_fenced)));
 
         mSpinnerAdapter = new OrdersTypesSpinnerAdapter(getApplicationContext(), mStates);
         spOrdersTypes.setAdapter(mSpinnerAdapter);
@@ -539,7 +538,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         AppCompatButton btnOk = (AppCompatButton) mView.findViewById(R.id.btn_dialog_claim_closing_ok);
         AppCompatButton btnCancel = (AppCompatButton) mView.findViewById(R.id.btn_dialog_claim_closing_cancel);
 
-        Technicien tec = new Technicien(-1, getString(R.string.all_select_technician));
+        Generic tec = new Generic(-1, getString(R.string.all_select_technician));
         mTechs = new ArrayList<>();
         mTechs.add(tec);
         mTechs.addAll(GLOBAL_LOGIN_DATA.getTechniciens());

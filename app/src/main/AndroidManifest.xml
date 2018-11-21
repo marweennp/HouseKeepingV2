@@ -24,7 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activites.SettingsActivity" />
-        <activity android:name=".activites.LoginActivity" />
+        <activity
+            android:name=".activites.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".activites.HomeActivity" />
         <activity android:name=".activites.UsersSettingsActivity" />
         <activity android:name=".activites.MaintenanceOrdersActivity" />
@@ -39,6 +41,7 @@
         <activity android:name=".activites.RoomRackActivity" />
         <activity android:name=".activites.ForecastActivity" />
         <activity android:name=".activites.MouchardRoomRackActivity" />
+        <activity android:name=".activites.TableChartActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

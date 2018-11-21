@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_forcast_row_date"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_forcast_row_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Date"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bchart_forcast_row"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/rl_forcast_row_date" />
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/bchart_forcast_row"
+        android:background="@color/colorAccent" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pchart_forcast_row"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/divider" />
+
+
+</RelativeLayout>

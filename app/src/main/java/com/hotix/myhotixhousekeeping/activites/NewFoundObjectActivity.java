@@ -2,29 +2,20 @@ package com.hotix.myhotixhousekeeping.activites;
 
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.adapters.TypesPannesSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.InputValidation;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.TypesPanne;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -141,7 +132,7 @@ public class NewFoundObjectActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_new_lost_object);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -178,7 +169,7 @@ public class NewFoundObjectActivity extends AppCompatActivity {
             return false;
         }
 
-       //Return true if all the inputs are valid
+        //Return true if all the inputs are valid
         return true;
 
     }
@@ -192,14 +183,14 @@ public class NewFoundObjectActivity extends AppCompatActivity {
         String objTrouveNom = etFLastName.getText().toString().trim();
         String objTrouvePrenom = etFFirstName.getText().toString().trim();
         String objTrouveLieu = etLocation.getText().toString().trim();
-        String objTrouveRenduNom =  etBLastName.getText().toString().trim();
-        String objTrouveRenduPrenom =  etBFirstName.getText().toString().trim();
+        String objTrouveRenduNom = etBLastName.getText().toString().trim();
+        String objTrouveRenduPrenom = etBFirstName.getText().toString().trim();
         String login = mMySession.getLogin();
-        String comment =  etComment.getText().toString().trim();
+        String comment = etComment.getText().toString().trim();
         String ImageByteArray = "";
 
         RetrofitInterface service = RetrofitClient.getClientHngApi().create(RetrofitInterface.class);
-        Call<ResponseBody> userCall = service.declarerObjetTrouvesQuery(prodNum, objTrouveDesc, objTrouveNom, objTrouvePrenom, objTrouveLieu, objTrouveRenduNom, objTrouveRenduPrenom, login, comment, ImageByteArray );
+        Call<ResponseBody> userCall = service.declarerObjetTrouvesQuery(prodNum, objTrouveDesc, objTrouveNom, objTrouvePrenom, objTrouveLieu, objTrouveRenduNom, objTrouveRenduPrenom, login, comment, ImageByteArray);
 
         final ProgressDialog progressDialog = new ProgressDialog(NewFoundObjectActivity.this);
         progressDialog.setIndeterminate(true);

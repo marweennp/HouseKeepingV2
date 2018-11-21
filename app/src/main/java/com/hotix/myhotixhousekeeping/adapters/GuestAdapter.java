@@ -8,16 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.models.Guest;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
-public class GuestAdapter extends ArrayAdapter<Guest> {
+public class GuestAdapter extends ArrayAdapter<Generic> {
 
     Context mContext;
-    private ArrayList<Guest> dataSet;
+    private ArrayList<Generic> dataSet;
 
-    public GuestAdapter(ArrayList<Guest> data, Context context) {
+    public GuestAdapter(ArrayList<Generic> data, Context context) {
         super(context, R.layout.item_housekeeper_row, data);
         this.dataSet = data;
         this.mContext = context;
@@ -26,7 +26,7 @@ public class GuestAdapter extends ArrayAdapter<Guest> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Guest dataModel = getItem(position);
+        Generic dataModel = getItem(position);
 
         GuestAdapter.ViewHolder viewHolder;
 

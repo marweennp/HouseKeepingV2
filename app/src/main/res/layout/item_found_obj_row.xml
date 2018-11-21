@@ -5,34 +5,49 @@
     android:layout_height="100dp"
     android:background="@color/white">
 
+    <RelativeLayout
+        android:id="@+id/rl_order_row_start"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_found_obj_row_location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            app:srcCompat="@drawable/ic_vpn_key_white_24dp"
+            app:tint="@color/colorAccent" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_found_obj_row_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="500"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
     <!-- Found obj Row -->
     <RelativeLayout
         android:id="@+id/rl_found_obj_row"
         android:layout_width="match_parent"
+        android:layout_toEndOf="@id/rl_order_row_start"
         android:layout_height="100dp">
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_found_obj_row_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="6dp"
-            android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="@color/colorSecondaryDark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_found_obj_row_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_found_obj_row_location"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
             android:layout_alignParentStart="true"
             android:ellipsize="end"
             android:maxLines="2"
@@ -95,14 +110,5 @@
 
 
     </RelativeLayout>
-
-    <!-- Bottom Divider -->
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark" />
-
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.hotix.myhotixhousekeeping.retrofit2;
 
 import com.hotix.myhotixhousekeeping.models.AffectedRoomData;
 import com.hotix.myhotixhousekeeping.models.ArrivalData;
+import com.hotix.myhotixhousekeeping.models.ForecastData;
 import com.hotix.myhotixhousekeeping.models.FoundObjData;
 import com.hotix.myhotixhousekeeping.models.HotelSettings;
 import com.hotix.myhotixhousekeeping.models.InformerData;
@@ -143,6 +144,11 @@ public interface RetrofitInterface {
                                                 @Query("bloc") String bloc,
                                                 @Query("dateDeb") String dateDeb,
                                                 @Query("dateFin") String dateFin);
+
+    //Get Prevision service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetPrevision?")
+    Call<ForecastData> getPrevisionQuery(@Query("dateDeb") String dateDeb,
+                                         @Query("dateFin") String dateFin);
 
 
 /***

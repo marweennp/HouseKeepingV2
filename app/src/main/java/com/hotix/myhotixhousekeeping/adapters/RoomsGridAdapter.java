@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.models.AffectedRoom;
-import com.hotix.myhotixhousekeeping.models.StatusProduit;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
@@ -69,7 +69,7 @@ public class RoomsGridAdapter extends BaseAdapter {
 
         if (mRoomList.get(position).getAttributed()) {
 
-            for (StatusProduit sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
+            for (Generic sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
                 if (sp.getId() == 8) {
                     cvRoomBg.setCardBackgroundColor(parseColor(sp.getName()));
                 }
@@ -89,19 +89,19 @@ public class RoomsGridAdapter extends BaseAdapter {
                 case 5:
                     imgStartIcon.setVisibility(View.VISIBLE);
                     imgEndIcon.setVisibility(View.GONE);
-                    tvRoomNumberSub.setText("(DA)");
+                    tvRoomNumberSub.setText(R.string.text_da);
                     break;
                 case 6:
                     imgStartIcon.setVisibility(View.VISIBLE);
                     imgEndIcon.setVisibility(View.GONE);
-                    tvRoomNumberSub.setText("(DU)");
+                    tvRoomNumberSub.setText(R.string.text_du);
                     break;
             }
 
         } else {
 
             //Set BG
-            for (StatusProduit sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
+            for (Generic sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
                 if (sp.getId() == mRoomList.get(position).getStatutId()) {
                     cvRoomBg.setCardBackgroundColor(parseColor(sp.getName()));
                 }

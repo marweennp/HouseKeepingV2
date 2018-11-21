@@ -51,6 +51,7 @@ import retrofit2.Response;
 import static com.hotix.myhotixhousekeeping.helpers.ConnectionChecher.checkNetwork;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGEDIN;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.NWE_VERSION;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.SETTINGS_RESULT;
@@ -107,8 +108,10 @@ public class LoginActivity extends AppCompatActivity {
         }
         mInputValidation = new InputValidation(this);
         mChecker = new UpdateChecker(this, true);
+        init();
 
     }
+
 
     @Override
     protected void onResume() {
@@ -117,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
             startDownloadSettingsDialog();
         }
         setBaseUrl(this);
-        init();
+        loadeImage();
         if (NWE_VERSION) {
             if (!permissionGranted) {
                 startPermissionDialog();
@@ -188,6 +191,18 @@ public class LoginActivity extends AppCompatActivity {
         mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
         mKenBurns.setImageResource(R.drawable.hotel);
 
+        loadeImage();
+
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            tvVersion.setText(getString(R.string.text_vertion) + pInfo.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadeImage() {
+
         Picasso.get().load(BASE_URL + "Android/pics_house_keeping/hotel.jpg").into(new Target() {
 
             @Override
@@ -205,13 +220,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-
-        try {
-            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
-            tvVersion.setText(getString(R.string.text_vertion) + pInfo.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     /***********************************************************************************************
@@ -482,6 +490,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //Start the HomeActivity
                         Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                        GLOBAL_LOGEDIN = true;
                         startActivity(i);
                         finish();
                     }
@@ -534,7 +543,7 @@ public class LoginActivity extends AppCompatActivity {
                             mMySettings.setPublicIp(hotelSettings.getIPPublic());
                             mMySettings.setPublicIpEnabled(true);
                         } else {
-                            mMySettings.setPublicIp("0.0.0.0");
+                            mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
                             mMySettings.setPublicIpEnabled(false);
                         }
 
@@ -543,7 +552,7 @@ public class LoginActivity extends AppCompatActivity {
                             mMySettings.setLocalIp(hotelSettings.getIPLocal());
                             mMySettings.setLocalIpEnabled(true);
                         } else {
-                            mMySettings.setLocalIp("0.0.0.0");
+                            mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
                             mMySettings.setLocalIpEnabled(false);
                         }
 
@@ -559,6 +568,7 @@ public class LoginActivity extends AppCompatActivity {
                         mMySettings.setSettingsUpdated(true);
 
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.message_settings_updated));
+                        setBaseUrl(getApplicationContext());
                     }
 
                 } else {

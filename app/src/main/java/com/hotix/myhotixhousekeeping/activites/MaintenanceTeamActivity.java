@@ -28,7 +28,7 @@ import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.models.AffectedRoom;
 import com.hotix.myhotixhousekeeping.models.AffectedRoomData;
-import com.hotix.myhotixhousekeeping.models.FemmesMenage;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -82,7 +82,7 @@ public class MaintenanceTeamActivity extends AppCompatActivity {
     private AffectedRoom mRoom;
 
     private HousekeeperAdapter mListAdapter;
-    private ArrayList<FemmesMenage> mHousekeepers;
+    private ArrayList<Generic> mHousekeepers;
 
     private MySettings mMySettings;
     private MySession mMySession;

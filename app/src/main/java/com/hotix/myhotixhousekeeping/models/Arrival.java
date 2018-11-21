@@ -26,6 +26,18 @@ public class Arrival {
     @SerializedName("Comment")
     @Expose
     private String comment;
+    @SerializedName("A")
+    @Expose
+    private Integer a;
+    @SerializedName("E")
+    @Expose
+    private Integer e;
+    @SerializedName("B")
+    @Expose
+    private Integer b;
+    @SerializedName("RoomCount")
+    @Expose
+    private Integer roomCount;
 
     public Integer getSocId() {
         return socId;
@@ -81,6 +93,38 @@ public class Arrival {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Integer getA() {
+        return a;
+    }
+
+    public void setA(Integer a) {
+        this.a = a;
+    }
+
+    public Integer getE() {
+        return e;
+    }
+
+    public void setE(Integer e) {
+        this.e = e;
+    }
+
+    public Integer getB() {
+        return b;
+    }
+
+    public void setB(Integer b) {
+        this.b = b;
+    }
+
+    public Integer getRoomCount() {
+        return roomCount;
+    }
+
+    public void setRoomCount(Integer roomCount) {
+        this.roomCount = roomCount;
     }
 
 }

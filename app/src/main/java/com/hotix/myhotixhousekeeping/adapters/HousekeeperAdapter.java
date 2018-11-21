@@ -9,17 +9,17 @@ import android.widget.TextView;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.models.AffectedRoom;
-import com.hotix.myhotixhousekeeping.models.FemmesMenage;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
-public class HousekeeperAdapter extends ArrayAdapter<FemmesMenage> {
+public class HousekeeperAdapter extends ArrayAdapter<Generic> {
 
     Context mContext;
-    private ArrayList<FemmesMenage> dataSet;
+    private ArrayList<Generic> dataSet;
     private ArrayList<AffectedRoom> roomsSet;
 
-    public HousekeeperAdapter(ArrayList<FemmesMenage> data, ArrayList<AffectedRoom> rooms, Context context) {
+    public HousekeeperAdapter(ArrayList<Generic> data, ArrayList<AffectedRoom> rooms, Context context) {
         super(context, R.layout.item_housekeeper_row, data);
         this.dataSet = data;
         this.roomsSet = rooms;
@@ -30,7 +30,7 @@ public class HousekeeperAdapter extends ArrayAdapter<FemmesMenage> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        FemmesMenage dataModel = getItem(position);
+        Generic dataModel = getItem(position);
 
         HousekeeperAdapter.ViewHolder viewHolder;
 

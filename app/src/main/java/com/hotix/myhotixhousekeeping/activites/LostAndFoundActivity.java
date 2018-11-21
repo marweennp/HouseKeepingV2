@@ -41,7 +41,7 @@ import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.models.FoundObj;
 import com.hotix.myhotixhousekeeping.models.FoundObjData;
-import com.hotix.myhotixhousekeeping.models.State;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -92,7 +92,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
     private AppCompatEditText etStartDate;
     private MySettings mMySettings;
     private MySession mMySession;
-    private ArrayList<State> mStates;
+    private ArrayList<Generic> mStates;
     private ArrayList<FoundObj> mFoundObjs;
     private OrdersTypesSpinnerAdapter mSpinnerAdapter;
     private FoundObjAdapter mListAdapter;
@@ -116,10 +116,10 @@ public class LostAndFoundActivity extends AppCompatActivity {
         //Check android vertion
         if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             mIconOne = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_visibility_white_36dp);
-            mIconTwo = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_white_36dp);
+            mIconTwo = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_circle_white_36dp);
         } else {
             mIconOne = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_visibility_white_36dp, this.getTheme());
-            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_white_36dp, this.getTheme());
+            mIconTwo = VectorDrawableCompat.create(this.getResources(), R.drawable.ic_check_circle_white_36dp, this.getTheme());
         }
 
         init();
@@ -239,7 +239,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_lost_and_found);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }
@@ -260,9 +260,9 @@ public class LostAndFoundActivity extends AppCompatActivity {
         etStartDate.setText(dateFormater(GLOBAL_LOGIN_DATA.getDateFront(), "dd/MM/yyyy", "dd/MM/yyyy"));
         etEndDate.setText(dateFormater(null, "dd/MM/yyyy", "dd/MM/yyyy"));
 
-        mStates = new ArrayList<State>();
-        mStates.add(new State(1, getString(R.string.text_state_outstanding)));
-        mStates.add(new State(2, getString(R.string.text_state_fenced)));
+        mStates = new ArrayList<Generic>();
+        mStates.add(new Generic(1, getString(R.string.text_state_outstanding)));
+        mStates.add(new Generic(2, getString(R.string.text_state_fenced)));
 
         mSpinnerAdapter = new OrdersTypesSpinnerAdapter(getApplicationContext(), mStates);
         spOrdersTypes.setAdapter(mSpinnerAdapter);

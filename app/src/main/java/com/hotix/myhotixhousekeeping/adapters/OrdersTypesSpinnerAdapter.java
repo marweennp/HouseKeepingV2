@@ -9,17 +9,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.models.State;
+import com.hotix.myhotixhousekeeping.models.Generic;
 
 import java.util.ArrayList;
 
 public class OrdersTypesSpinnerAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<State> mData;
+    ArrayList<Generic> mData;
     LayoutInflater inflter;
 
-    public OrdersTypesSpinnerAdapter(Context applicationContext, ArrayList<State> mData) {
+    public OrdersTypesSpinnerAdapter(Context applicationContext, ArrayList<Generic> mData) {
         this.context = applicationContext;
         this.mData = mData;
         inflter = (LayoutInflater.from(applicationContext));

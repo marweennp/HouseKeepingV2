@@ -34,7 +34,7 @@
             <RelativeLayout
                 android:id="@+id/rl_room_assign_top_head"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorPrimaryDark">
 
@@ -46,7 +46,9 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/text_room_assign_unassigned"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"/>
 
             </RelativeLayout>
 
@@ -145,7 +147,7 @@
             <RelativeLayout
                 android:id="@+id/rl_room_assign_bottom_head"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorPrimaryDark">
 
@@ -157,7 +159,9 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/text_room_assign_assigned"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"/>
 
             </RelativeLayout>
 

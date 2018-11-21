@@ -111,7 +111,7 @@ public class MySettings {
 
     // Strings
     public String getPublicIp() {
-        return pref.getString(KEY_PUBLIC_IP, "0.0.0.0");
+        return pref.getString(KEY_PUBLIC_IP, "xxx.xxx.xxx.xxx");
     }
 
     public void setPublicIp(String publicIp) {
@@ -120,7 +120,7 @@ public class MySettings {
     }
 
     public String getLocalIp() {
-        return pref.getString(KEY_LOCAL_IP, "0.0.0.0");
+        return pref.getString(KEY_LOCAL_IP, "xxx.xxx.xxx.xxx");
     }
 
     public void setLocalIp(String localIp) {
@@ -129,7 +129,7 @@ public class MySettings {
     }
 
     public String getPublicBaseUrl() {
-        return pref.getString(KEY_PUBLIC_BASE_URL, "http://0.0.0.0/");
+        return pref.getString(KEY_PUBLIC_BASE_URL, "http://xxx.xxx.xxx.xxx/");
     }
 
     public void setPublicBaseUrl(String publicBaseUrl) {
@@ -138,7 +138,7 @@ public class MySettings {
     }
 
     public String getLocalBaseUrl() {
-        return pref.getString(KEY_LOCAL_BASE_URL, "http://0.0.0.0/");
+        return pref.getString(KEY_LOCAL_BASE_URL, "http://xxx.xxx.xxx.xxx/");
     }
 
     public void setLocalBaseUrl(String localBaseUrl) {

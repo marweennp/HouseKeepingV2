@@ -3,7 +3,7 @@ package com.hotix.myhotixhousekeeping.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StatusProduit {
+public class Generic {
 
     @SerializedName("Id")
     @Expose
@@ -11,6 +11,16 @@ public class StatusProduit {
     @SerializedName("Name")
     @Expose
     private String name;
+
+    public Generic() {
+        this.id = -1;
+        this.name = "";
+    }
+
+    public Generic(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

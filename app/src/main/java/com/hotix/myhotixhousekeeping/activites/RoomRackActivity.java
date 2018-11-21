@@ -34,10 +34,9 @@ import com.hotix.myhotixhousekeeping.helpers.InputValidation;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
 import com.hotix.myhotixhousekeeping.models.Etage;
-import com.hotix.myhotixhousekeeping.models.Guest;
+import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.models.RoomRack;
 import com.hotix.myhotixhousekeeping.models.RoomRackData;
-import com.hotix.myhotixhousekeeping.models.StatusProduit;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
@@ -53,6 +52,7 @@ import retrofit2.Response;
 
 import static android.graphics.Color.parseColor;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_RACK;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_ROOM_RACK;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
@@ -71,14 +71,18 @@ public class RoomRackActivity extends AppCompatActivity {
     private AppCompatImageView imgEmptyViewIcon;
     private AppCompatButton btnEmptyViewRefresh;
     private AppCompatSpinner spHotelFloors;
+    private AppCompatSpinner spRoomStatus;
     private GridView gvRoomRack;
     private RoomRack mRoom;
     private ArrayList<RoomRack> mRoomRack;
     private RoomRackGridAdapter mGridAdapter;
     private ArrayList<Etage> mFloors;
+    private ArrayList<Etage> mStatus;
     private FloorsSpinnerAdapter mSpinnerAdapter;
+    private FloorsSpinnerAdapter mRoomSpinnerAdapter;
     private int mFloorId = -1;
     private int mBlockId = -1;
+    private int mStatusId = -1;
     private InputValidation mInputValidation;
     //-----------------------------------------
     private MySettings mMySettings;
@@ -189,7 +193,10 @@ public class RoomRackActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         spHotelFloors = (AppCompatSpinner) findViewById(R.id.sp_hotel_floors);
+        spRoomStatus = (AppCompatSpinner) findViewById(R.id.sp_room_status);
         gvRoomRack = (GridView) findViewById(R.id.gv_rooms_rack);
+
+        mRoomRack = new ArrayList<RoomRack>();
 
         if (getResources().getBoolean(R.bool.portrait_only)) {
             gvRoomRack.setNumColumns(3);
@@ -210,11 +217,25 @@ public class RoomRackActivity extends AppCompatActivity {
         btnEmptyViewRefresh = (AppCompatButton) findViewById(R.id.btn_empty_view_refresh);
 
         mFloors = new ArrayList<Etage>();
-        mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all)));
+        mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all_floors)));
         mFloors.addAll(GLOBAL_LOGIN_DATA.getEtages());
 
         mSpinnerAdapter = new FloorsSpinnerAdapter(getApplicationContext(), mFloors);
         spHotelFloors.setAdapter(mSpinnerAdapter);
+
+        mStatus = new ArrayList<Etage>();
+        mStatus.add(new Etage(-1, -1, getResources().getString(R.string.all_all_status)));
+        mStatus.add(new Etage(1, 1, getResources().getString(R.string.dialog_legend_vac_clean)));
+        mStatus.add(new Etage(2, 2, getResources().getString(R.string.dialog_legend_vac_dirty)));
+        mStatus.add(new Etage(3, 3, getResources().getString(R.string.dialog_legend_occ_clean)));
+        mStatus.add(new Etage(4, 4, getResources().getString(R.string.dialog_legend_occ_dirty)));
+        mStatus.add(new Etage(5, 5, getResources().getString(R.string.dialog_legend_expect_dep)));
+        mStatus.add(new Etage(6, 6, getResources().getString(R.string.dialog_legend_day_use)));
+        mStatus.add(new Etage(7, 7, getResources().getString(R.string.dialog_legend_out_of_order)));
+        mStatus.add(new Etage(8, 8, getResources().getString(R.string.dialog_legend_attributed)));
+
+        mRoomSpinnerAdapter = new FloorsSpinnerAdapter(getApplicationContext(), mStatus);
+        spRoomStatus.setAdapter(mRoomSpinnerAdapter);
 
         spHotelFloors.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -226,6 +247,18 @@ public class RoomRackActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        spRoomStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View container, int position, long id) {
+                mStatusId = mStatus.get(position).getId();
+                sortGrid();
             }
 
             @Override
@@ -261,7 +294,7 @@ public class RoomRackActivity extends AppCompatActivity {
         CardView cv7 = (CardView) mView.findViewById(R.id.cv_out_of_order);
         CardView cv8 = (CardView) mView.findViewById(R.id.cv_attributed);
 
-        for (StatusProduit sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
+        for (Generic sp : GLOBAL_LOGIN_DATA.getStatusProduit()) {
             switch (sp.getId()) {
                 case 1:
                     cv1.setCardBackgroundColor(parseColor(sp.getName()));
@@ -314,7 +347,7 @@ public class RoomRackActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_room_rack_options, null);
 
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_rack_options_title);
-        title.setText(GLOBAL_ROOM_RACK.getTypeProduit()+ " " + GLOBAL_ROOM_RACK.getNumChb());
+        title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
 
         AppCompatButton btnCheckGuest = (AppCompatButton) mView.findViewById(R.id.btn_dialog_room_rack_options_view_guest);
@@ -356,10 +389,10 @@ public class RoomRackActivity extends AppCompatActivity {
             vChangeState.setVisibility(View.GONE);
         }
 
-        if (GLOBAL_ROOM_RACK.getIsAttributed()) {
-            btnChangeState.setVisibility(View.GONE);
-            vChangeState.setVisibility(View.GONE);
-        }
+//        if (GLOBAL_ROOM_RACK.getIsAttributed()) {
+//            btnChangeState.setVisibility(View.GONE);
+//            vChangeState.setVisibility(View.GONE);
+//        }
 
         if ((GLOBAL_ROOM_RACK.getStatutId() == 1) || (GLOBAL_ROOM_RACK.getStatutId() == 2) || (GLOBAL_ROOM_RACK.getStatutId() == 7) || (GLOBAL_ROOM_RACK.getStatutId() == 8)) {
             btnCheckState.setVisibility(View.GONE);
@@ -433,7 +466,7 @@ public class RoomRackActivity extends AppCompatActivity {
         AppCompatTextView tvError = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_change_state_error);
 
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_change_state_title);
-        title.setText(GLOBAL_ROOM_RACK.getTypeProduit()+ " " + GLOBAL_ROOM_RACK.getNumChb());
+        title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
 
         AppCompatButton btnVacClean = (AppCompatButton) mView.findViewById(R.id.btn_dialog_room_change_state_vac_clean);
@@ -663,7 +696,7 @@ public class RoomRackActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_room_rack_check_state, null);
 
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_check_state_title);
-        title.setText(GLOBAL_ROOM_RACK.getTypeProduit()+ " " + GLOBAL_ROOM_RACK.getNumChb());
+        title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
 
         final SwitchCompat swTv = (SwitchCompat) mView.findViewById(R.id.sw_dialog_room_check_state_tv);
@@ -756,10 +789,10 @@ public class RoomRackActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_room_rack_check_guests, null);
 
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_check_guest_title);
-        title.setText(GLOBAL_ROOM_RACK.getTypeProduit()+ " " + GLOBAL_ROOM_RACK.getNumChb());
+        title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
         ListView guestList = (ListView) mView.findViewById(R.id.lv_dialog_room_check_guest_list);
-        ArrayList<Guest> guests = new ArrayList<Guest>();
+        ArrayList<Generic> guests = new ArrayList<Generic>();
         guests.addAll(GLOBAL_ROOM_RACK.getGuests());
         GuestAdapter listAdapter = new GuestAdapter(guests, getApplicationContext());
         guestList.setAdapter(listAdapter);
@@ -789,7 +822,7 @@ public class RoomRackActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_room_rack_comment, null);
 
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_rack_comment_title);
-        title.setText(GLOBAL_ROOM_RACK.getTypeProduit()+ " " + GLOBAL_ROOM_RACK.getNumChb());
+        title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
         final TextInputLayout ilComment = (TextInputLayout) mView.findViewById(R.id.il_dialog_room_rack_comment);
         final AppCompatEditText etComment = (AppCompatEditText) mView.findViewById(R.id.et_dialog_room_rack_comment);
@@ -842,6 +875,46 @@ public class RoomRackActivity extends AppCompatActivity {
 
     }
 
+    private void sortGrid() {
+
+        mRoomRack.clear();
+        rlEmptyView.setVisibility(View.GONE);
+
+        if (mStatusId == -1) {
+            mRoomRack = GLOBAL_RACK;
+        } else if (mStatusId == 8) {
+            for (RoomRack rr : GLOBAL_RACK) {
+                if (rr.getIsAttributed()) {
+                    mRoomRack.add(rr);
+                }
+            }
+        } else {
+            for (RoomRack rr : GLOBAL_RACK) {
+                if (rr.getStatutId() == mStatusId && !(rr.getIsAttributed())) {
+                    mRoomRack.add(rr);
+                }
+            }
+        }
+
+        if (mRoomRack.size() > 0) {
+
+            gvRoomRack.setVisibility(View.VISIBLE);
+            rlEmptyView.setVisibility(View.GONE);
+            mGridAdapter = new RoomRackGridAdapter(getApplicationContext(), mRoomRack);
+            gvRoomRack.setAdapter(mGridAdapter);
+
+        } else {
+
+            gvRoomRack.setVisibility(View.GONE);
+            rlEmptyView.setVisibility(View.VISIBLE);
+            tvEmptyViewText.setText(R.string.message_no_maintenance_rooms_to_show);
+            imgEmptyViewIcon.setImageResource(R.drawable.ic_priority_high_white_48dp);
+
+        }
+
+
+    }
+
     /**********************************************************************************************/
 
     private void loadRooms(int floor, int block) {
@@ -868,6 +941,26 @@ public class RoomRackActivity extends AppCompatActivity {
                     RoomRackData mData = response.body();
                     if (!(mData.getData() == null)) {
                         mRoomRack = mData.getData();
+                        GLOBAL_RACK.clear();
+                        GLOBAL_RACK.addAll(mRoomRack);
+
+                        if (!(mStatusId == -1)) {
+                            mRoomRack.clear();
+                            if (mStatusId == 8) {
+                                for (RoomRack rr : GLOBAL_RACK) {
+                                    if (rr.getIsAttributed()) {
+                                        mRoomRack.add(rr);
+                                    }
+                                }
+                            } else {
+                                for (RoomRack rr : GLOBAL_RACK) {
+                                    if (rr.getStatutId() == mStatusId && !(rr.getIsAttributed())) {
+                                        mRoomRack.add(rr);
+                                    }
+                                }
+                            }
+                        }
+
                         if (mRoomRack.size() > 0) {
                             mGridAdapter = new RoomRackGridAdapter(getApplicationContext(), mRoomRack);
                             gvRoomRack.setAdapter(mGridAdapter);

@@ -27,16 +27,16 @@ public class Login {
     private ArrayList<Etage> etages = null;
     @SerializedName("Techniciens")
     @Expose
-    private ArrayList<Technicien> techniciens = null;
+    private ArrayList<Generic> techniciens = null;
     @SerializedName("TypesPanne")
     @Expose
-    private ArrayList<TypesPanne> typesPanne = null;
+    private ArrayList<Generic> typesPanne = null;
     @SerializedName("FemmesMenage")
     @Expose
-    private ArrayList<FemmesMenage> femmesMenage = null;
+    private ArrayList<Generic> femmesMenage = null;
     @SerializedName("StatusProduit")
     @Expose
-    private ArrayList<StatusProduit> statusProduit = null;
+    private ArrayList<Generic> statusProduit = null;
     @SerializedName("Error")
     @Expose
     private Integer error;
@@ -74,23 +74,6 @@ public class Login {
     @Expose
     private String hotel;
 
-    public Login(Integer id, Integer profileId, String nom, String prenom, Boolean hasConfig, Boolean hasAddPanne, Boolean hasAddObjet, Boolean hasClosePanne, Boolean hasCloseObjet, Boolean hasMouchard, Boolean hasChangeStatut, Boolean hasEtatLieu, Boolean hasViewClient, Boolean hasFM, String hotel) {
-        this.id = id;
-        this.profileId = profileId;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.hasConfig = hasConfig;
-        this.hasAddPanne = hasAddPanne;
-        this.hasAddObjet = hasAddObjet;
-        this.hasClosePanne = hasClosePanne;
-        this.hasCloseObjet = hasCloseObjet;
-        this.hasMouchard = hasMouchard;
-        this.hasChangeStatut = hasChangeStatut;
-        this.hasEtatLieu = hasEtatLieu;
-        this.hasViewClient = hasViewClient;
-        this.hasFM = hasFM;
-        this.hotel = hotel;
-    }
 
     public Integer getId() {
         return id;
@@ -140,35 +123,35 @@ public class Login {
         this.etages = etages;
     }
 
-    public ArrayList<Technicien> getTechniciens() {
+    public ArrayList<Generic> getTechniciens() {
         return techniciens;
     }
 
-    public void setTechniciens(ArrayList<Technicien> techniciens) {
+    public void setTechniciens(ArrayList<Generic> techniciens) {
         this.techniciens = techniciens;
     }
 
-    public ArrayList<TypesPanne> getTypesPanne() {
+    public ArrayList<Generic> getTypesPanne() {
         return typesPanne;
     }
 
-    public void setTypesPanne(ArrayList<TypesPanne> typesPanne) {
+    public void setTypesPanne(ArrayList<Generic> typesPanne) {
         this.typesPanne = typesPanne;
     }
 
-    public ArrayList<FemmesMenage> getFemmesMenage() {
+    public ArrayList<Generic> getFemmesMenage() {
         return femmesMenage;
     }
 
-    public void setFemmesMenage(ArrayList<FemmesMenage> femmesMenage) {
+    public void setFemmesMenage(ArrayList<Generic> femmesMenage) {
         this.femmesMenage = femmesMenage;
     }
 
-    public ArrayList<StatusProduit> getStatusProduit() {
+    public ArrayList<Generic> getStatusProduit() {
         return statusProduit;
     }
 
-    public void setStatusProduit(ArrayList<StatusProduit> statusProduit) {
+    public void setStatusProduit(ArrayList<Generic> statusProduit) {
         this.statusProduit = statusProduit;
     }
 

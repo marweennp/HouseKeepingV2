@@ -70,9 +70,8 @@ public class RoomAssignmentActivity extends AppCompatActivity {
         mMySettings = new MySettings(getApplicationContext());
         mMySession = new MySession(getApplicationContext());
         //Force portrait on phones
-        if (getResources().getBoolean(R.bool.portrait_only)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         init();
     }
 
@@ -92,6 +91,8 @@ public class RoomAssignmentActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.housekeeprs_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_refresh);
+        item.setVisible(false);
         return true;
     }
 
@@ -120,7 +121,7 @@ public class RoomAssignmentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_rooms_assignment);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }

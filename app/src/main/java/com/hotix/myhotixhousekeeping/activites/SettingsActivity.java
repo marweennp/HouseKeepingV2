@@ -195,8 +195,8 @@ public class SettingsActivity extends AppCompatActivity {
                     mMySettings.setPublicIp(etPublicIp.getText().toString().trim());
                 } else {
                     etApiPublicUrl.setText("http://" + etPublicIp.getText().toString().trim() + "/");
-                    mMySettings.setPublicIp("0.0.0.0");
-                    mMySettings.setPublicBaseUrl("http://0.0.0.0/");
+                    mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
+                    mMySettings.setPublicBaseUrl("http://xxx.xxx.xxx.xxx/");
                 }
             }
 
@@ -226,8 +226,8 @@ public class SettingsActivity extends AppCompatActivity {
                     mMySettings.setLocalIp(etLocalIp.getText().toString().trim());
                 } else {
                     etApiLocalUrl.setText("http://" + etLocalIp.getText().toString().trim() + "/");
-                    mMySettings.setLocalIp("0.0.0.0");
-                    mMySettings.setLocalBaseUrl("http://0.0.0.0/");
+                    mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
+                    mMySettings.setLocalBaseUrl("http://xxx.xxx.xxx.xxx/");
                 }
             }
 
@@ -301,25 +301,25 @@ public class SettingsActivity extends AppCompatActivity {
         if (!stringEmptyOrNull(etPublicIp.getText().toString().trim())) {
             mMySettings.setPublicIp(etPublicIp.getText().toString().trim());
         } else {
-            mMySettings.setPublicIp("0.0.0.0");
+            mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
         }
 
         if (!stringEmptyOrNull(etLocalIp.getText().toString().trim())) {
             mMySettings.setLocalIp(etLocalIp.getText().toString().trim());
         } else {
-            mMySettings.setLocalIp("0.0.0.0");
+            mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
         }
 
         if (!stringEmptyOrNull(etApiPublicUrl.getText().toString().trim())) {
             mMySettings.setPublicBaseUrl(etApiPublicUrl.getText().toString().trim());
         } else {
-            mMySettings.setPublicBaseUrl("http://0.0.0.0/");
+            mMySettings.setPublicBaseUrl("http://xxx.xxx.xxx.xxx/");
         }
 
         if (!stringEmptyOrNull(etApiLocalUrl.getText().toString().trim())) {
             mMySettings.setLocalBaseUrl(etApiLocalUrl.getText().toString().trim());
         } else {
-            mMySettings.setLocalBaseUrl("http://0.0.0.0/");
+            mMySettings.setLocalBaseUrl("http://xxx.xxx.xxx.xxx/");
         }
 
         mMySettings.setPublicIpEnabled(chbPublicIp.isChecked());
@@ -376,7 +376,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 mMySettings.setPublicIp(hotelSettings.getIPPublic());
                                 mMySettings.setPublicIpEnabled(true);
                             } else {
-                                mMySettings.setPublicIp("0.0.0.0");
+                                mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
                                 mMySettings.setPublicIpEnabled(false);
                             }
 
@@ -385,7 +385,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 mMySettings.setLocalIp(hotelSettings.getIPLocal());
                                 mMySettings.setLocalIpEnabled(true);
                             } else {
-                                mMySettings.setLocalIp("0.0.0.0");
+                                mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
                                 mMySettings.setLocalIpEnabled(false);
                             }
 

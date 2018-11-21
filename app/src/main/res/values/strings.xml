@@ -2,7 +2,9 @@
     <!-- START STRINGS -->
     <!-- App All -->
     <string name="all_all">All</string>
-    <string name="app_name">House Keeping v2</string>
+    <string name="all_all_floors">All Floors</string>
+    <string name="all_all_status">All Status</string>
+    <string name="app_name">House Keeping</string>
     <string name="all_retry">RETRY</string>
     <string name="all_room">Room</string>
     <string name="all_ok">OK</string>
@@ -32,6 +34,7 @@
     <string name="menu_item_histo">Histo</string>
     <string name="menu_item_close">Close</string>
     <string name="menu_item_send">Send</string>
+    <string name="menu_item_chart">Chart</string>
     <!-- Splash Screen Activity-->
     <string name="splash_screen_footer">www.MyHotixHouseKeeping.com</string>
     <!-- Login Activity -->
@@ -41,7 +44,7 @@
     <string name="text_vertion">"Version "</string>
     <!-- MySettings Activity -->
     <string name="text_settings">Settings</string>
-    <string name="text_serveur_config">Serveur Config</string>
+    <string name="text_serveur_config">Server Settings</string>
     <string name="text_SSL">SSL</string>
     <string name="hint_public_ip">Public IP</string>
     <string name="hint_local_ip">Local IP</string>
@@ -59,7 +62,7 @@
     <string name="text_forecast">Forecast</string>
     <string name="text_check_in">Expected Check In</string>
     <string name="text_lost_and_found">Lost and Found</string>
-    <string name="text_maintenance_team">Maintenance Team</string>
+    <string name="text_maintenance_team">Housekeepers</string>
     <!-- Users Settings Activity -->
     <string name="text_user_settings">User Settings</string>
     <string name="text_configuration">Configuration</string>
@@ -68,15 +71,15 @@
     <string name="text_close_maintenance_orders">Close Maintenance Orders</string>
     <string name="text_declare_object_found">Declare Object found</string>
     <string name="text_close_object_found">Close Object found</string>
-    <string name="text_view_room_status">View room status Trace</string>
-    <string name="text_change_room_state">Change Room State</string>
+    <string name="text_view_room_status">View Room Status</string>
+    <string name="text_change_room_state">Change Room Status</string>
     <string name="text_change_location_state">Change Location State</string>
     <string name="text_view_guests">View Guests</string>
     <!-- Maintenance Orders Activity -->
     <string name="text_maintenance">Maintenance</string>
     <string name="text_state_outstanding">Outstanding</string>
     <string name="text_state_fenced">Fenced</string>
-    <string name="text_from_date">"From : "</string>
+    <string name="text_from_date">From :</string>
     <string name="text_to_date">"To : "</string>
     <string name="text_order_row_location">"Location : "</string>
     <string name="text_order_urgent">URGENT</string>
@@ -109,14 +112,15 @@
     <string name="text_new_order_hours">Hour(s)</string>
     <string name="text_successfully_added">Successfully added</string>
     <!-- Guest Arrivals Activity -->
-    <string name="text_guest_arrivals">Guest Arrivals</string>
+    <string name="text_guest_arrivals">Expected Arrivals</string>
     <string name="text_scheduled_arrivals">" Scheduled Arrivals"</string>
     <string name="text_total_scheduled_arrival">Total scheduled arrival</string>
+    <string name="text_rooms">Rooms</string>
     <!-- Lost And Found Activity -->
     <string name="text_found_obj_details">Found Object Details</string>
     <string name="text_lost_and_found_details">Lost And Found Details</string>
     <string name="text_show_lost_and_found_found_by">Found by</string>
-    <string name="text_show_lost_and_found_belong_to">Belong to</string>
+    <string name="text_show_lost_and_found_belong_to">Returned to</string>
     <string name="text_show_lost_and_found_comment">Comment</string>
     <!-- New Found Object Activity -->
     <string name="text_new_lost_object">New Lost Object</string>
@@ -130,19 +134,35 @@
     <string name="text_room_assign_add_all">Add All</string>
     <string name="text_rooms_assignment">Rooms Assignment</string>
     <!-- Room Rack Activity -->
-
+    <string name="text_da">(ED)</string>
+    <string name="text_du">(DU)</string>
     <!-- Mouchard Room Rack Activity -->
     <string name="text_mouchard">Informer</string>
+    <!-- Forecast Activity -->
+    <string name="text_arrivals">Arrivals</string>
+    <string name="text_departures">Departures</string>
+    <string name="text_recouche">Stay-Over</string>
+    <string name="text_taux">Rate Occupancy per room</string>
+    <string name="text_reste">Rest</string>
+    <!-- TableChart Activity -->
+    <string name="text_occupation_rate">Occupation Rate</string>
+    <string name="text_date">Date</string>
+    <string name="text_capacity">Capacity</string>
+    <string name="text_total">Total</string>
+    <string name="text_room">Room</string>
+    <string name="text_pax">Pax</string>
+    <string name="text_bed">Bed</string>
     <!-- Messages  -->
     <string name="message_settings_updated">Settings successfully Updated</string>
     <string name="message_successfully_updated">User Permission Successfully Updated</string>
     <string name="message_room_successfully_updated">Room Successfully Updated</string>
     <string name="message_no_maintenance_orders_to_show">No Maintenance Orders To Show!  Good Job.</string>
     <string name="message_no_maintenance_rooms_to_show">No Rooms To Show!</string>
-    <string name="message_no_lost_object_to_show">No Lost and Found object To Show!</string>
+    <string name="message_no_lost_object_to_show">No objects lost and found to show!</string>
     <string name="message_no_scheduled_arrivals_to_show">No Scheduled Arrivals To Show!</string>
     <string name="message_no_activity_to_show">No Activity To Show!</string>
-    <string name="message_no_housekeepers_to_show">Ther Is No HouseKeepers To Show!</string>
+    <string name="message_no_data_to_show">No Data To Show!</string>
+    <string name="message_no_housekeepers_to_show">No HouseKeepers To Show!</string>
     <!-- Errors Messages  -->
     <string name="error_message_login_is_empty">Enter your Login!</string>
     <string name="error_message_password_empty">Enter Your Password!</string>
@@ -161,10 +181,10 @@
     <string name="error_message_unknow_user">This User does not Exist!</string>
     <string name="error_message_not_authorized">You are not authorized</string>
     <string name="error_message_invalid_date">Invalid date range!</string>
-    <string name="error_message_select_technician">you need to select a technician</string>
+    <string name="error_message_select_technician">You need to select a technician</string>
     <string name="error_message_hotel_not_active">Something went wrong.\nContact the administrator!</string>
-    <string name="error_message_app_not_active">You dont have permission to use this application!</string>
-    <string name="error_message_select_type">you need to select a type</string>
+    <string name="error_message_app_not_active">You don\'t have permission to use this application!</string>
+    <string name="error_message_select_type">You need to select a type</string>
     <string name="error_message_state_change">Unauthorized state change!</string>
     <!-- Dialogs  -->
     <string name="dialog_update_title">Version Update</string>
@@ -196,7 +216,7 @@
     <string name="dialog_legend_out_of_order">Out of Service</string>
     <string name="dialog_room_rack_options_title">"Room "</string>
     <string name="dialog_room_rack_options_check_guests">Check Guests</string>
-    <string name="dialog_room_rack_options_change_room_state">Change Room State</string>
+    <string name="dialog_room_rack_options_change_room_state">Change Room Status</string>
     <string name="dialog_room_rack_options_claim_maintenance_order">Claim Maintenance Order</string>
     <string name="dialog_room_rack_options_check_room_state">Check Room State</string>
     <string name="dialog_room_check_state_tv_title">TV</string>

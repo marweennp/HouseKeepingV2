@@ -11,36 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/img_order_row_photo"
+        <RelativeLayout
+            android:id="@+id/rl_order_row_start"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentStart="true"
-            app:srcCompat="@drawable/hotel" />
+            android:background="@color/colorPrimary">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_order_row_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="6dp"
-            android:layout_toEndOf="@id/img_order_row_photo"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="@color/colorSecondaryDark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_order_row_location"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="4dp"
+                app:srcCompat="@drawable/ic_vpn_key_white_24dp"
+                app:tint="@color/colorAccent" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_order_row_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="500"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_order_row_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_order_row_location"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@id/img_order_row_photo"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/rl_order_row_start"
             android:ellipsize="end"
             android:maxLines="2"
             android:text=""
@@ -51,10 +58,10 @@
             android:id="@+id/tv_order_row_priority"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="16dp"
+            android:layout_above="@id/rl_order_row_date_time"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@id/rl_order_row_start"
             android:text=""
             android:textColor="@color/red_400"
             android:textSize="12sp"
@@ -67,7 +74,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toEndOf="@id/img_order_row_photo">
+            android:layout_toEndOf="@id/rl_order_row_start">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_order_row_date_icon"
@@ -116,14 +123,5 @@
 
 
     </RelativeLayout>
-
-    <!-- Bottom Divider -->
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark" />
-
 
 </RelativeLayout>

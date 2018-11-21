@@ -2,33 +2,25 @@ package com.hotix.myhotixhousekeeping.activites;
 
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.hotix.myhotixhousekeeping.R;
-import com.hotix.myhotixhousekeeping.adapters.TechniciansSpinnerAdapter;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.Technicien;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +28,6 @@ import retrofit2.Response;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_FOUND_OBJ;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
-import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_PANNE;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateColored;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFormater;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
@@ -78,9 +69,7 @@ public class ShowFoundObjectActivity extends AppCompatActivity {
         mMySettings = new MySettings(getApplicationContext());
         mMySession = new MySession(getApplicationContext());
         //Force portrait on phones
-        if (getResources().getBoolean(R.bool.portrait_only)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mBtnClose = getIntent().getExtras().getBoolean("btnClose");
 
@@ -131,7 +120,7 @@ public class ShowFoundObjectActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.text_lost_and_found);
         if (!stringEmptyOrNull(GLOBAL_LOGIN_DATA.getNom())) {
-            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom()+" "+GLOBAL_LOGIN_DATA.getNom());
+            getSupportActionBar().setSubtitle(GLOBAL_LOGIN_DATA.getPrenom() + " " + GLOBAL_LOGIN_DATA.getNom());
         } else {
             getSupportActionBar().setSubtitle("");
         }

@@ -52,7 +52,7 @@ public class FoundObjAdapter extends ArrayAdapter<FoundObj> {
             viewHolder = (FoundObjAdapter.ViewHolder) convertView.getTag();
         }
 
-        viewHolder.found_obj_location.setText(mContext.getString(R.string.text_order_row_location) + dataModel.getLieu());
+        viewHolder.found_obj_location.setText(dataModel.getLieu());
         viewHolder.found_obj_desc.setText(dataModel.getDescription());
         viewHolder.found_obj_date.setText(Html.fromHtml(dateColored(dataModel.getDate(), "#616161", "#1ab394", "dd/MM/yyyy hh:mm", true)));
         viewHolder.found_obj_time.setText(dateFormater(dataModel.getDate(), "dd/MM/yyyy hh:mm", "HH:mm"));

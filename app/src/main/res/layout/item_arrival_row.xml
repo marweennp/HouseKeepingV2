@@ -1,52 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
 
-    <!-- Order Row -->
     <RelativeLayout
-        android:id="@+id/rl_arrival_row"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:id="@+id/rl_arrival_room_row"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/img_arrival_row_room_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_arrival_row_room"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            app:srcCompat="@drawable/ic_vpn_key_white_24dp"
+            app:tint="@color/colorAccent" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_arrival_row_title"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_arrival_row_room"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="6dp"
-            android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="@color/colorSecondaryDark"
-            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:text="500"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_arrival_row_desc"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_arrival_row_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_arrival_row_title"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentStart="true"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="@color/light_bg_dark_secondary_text"
-            android:textSize="14sp" />
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_arrival_row_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Name"
+                android:textColor="@color/colorSecondaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_arrival_row_pax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_row_adult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_row_adult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_person_white_18dp"
+                        app:tint="@color/colorSecondary" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_row_adult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_row_adult"
+                        android:text="0"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_row_kid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_row_kid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_child_care_white_18dp"
+                        app:tint="@color/colorSecondary" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_row_kid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_row_kid"
+                        android:text="0"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_arrival_row_bb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/img_arrival_row_bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        app:srcCompat="@drawable/ic_child_friendly_white_18dp"
+                        app:tint="@color/colorSecondary" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_arrival_row_bb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="3dp"
+                        android:layout_toEndOf="@id/img_arrival_row_bb"
+                        android:text="0"
+                        android:textColor="@color/colorSecondary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_arrival_row_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="6dp"
+                android:text="Desc"
+                android:textColor="@color/light_bg_dark_secondary_text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/rl_arrival_row_date_time_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginStart="8dp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/img_arrival_row_date_icon"
@@ -68,41 +192,16 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/img_arrival_row_room_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/tv_arrival_row_date"
-                app:srcCompat="@drawable/ic_vpn_key_white_24dp"
-                app:tint="@color/colorSecondary" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_arrival_row_room"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="4dp"
-                android:layout_toEndOf="@id/img_arrival_row_room_icon"
-                android:text=""
-                android:textColor="@color/grey_700"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
 
         </RelativeLayout>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="1dp"
+        android:layout_height="100dp">
 
     </RelativeLayout>
 
-    <!-- Bottom Divider -->
-    <View
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark" />
 
-
-</RelativeLayout>
+</LinearLayout>
