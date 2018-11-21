@@ -4,16 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
+
+import com.hotix.myhotixhousekeeping.R;
+import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
+import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.hotix.myhotixhousekeeping.helpers.ConnectionChecher.pingServeur;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
 
 public class Utils {
@@ -44,16 +52,51 @@ public class Utils {
     /*Set BASE_URL*/
     public static void setBaseUrl(Context context) {
         MySettings mySettings = new MySettings(context);
-        if (mySettings.getLocalIpEnabled() && pingServeur(mySettings.getLocalIp())) {
-            BASE_URL = mySettings.getLocalBaseUrl();
-        } else if (mySettings.getPublicIpEnabled() && pingServeur(mySettings.getPublicIp())) {
-            BASE_URL = mySettings.getPublicBaseUrl();
-        }else {
-            //Default value is Local ip
-            BASE_URL = mySettings.getLocalBaseUrl();
+
+        if (mySettings.getLocalIpEnabled() && mySettings.getPublicIpEnabled()){
+
+            BASE_URL = mySettings.getLocalIpDefault() ? mySettings.getLocalBaseUrl() : mySettings.getPublicBaseUrl();
+            try {
+                ping(context);
+            } catch (Exception e) {
+                Log.e("Exception",e.toString());
+            }
+
+        } else {
+            BASE_URL = mySettings.getLocalIpEnabled() ? mySettings.getLocalBaseUrl() : mySettings.getPublicBaseUrl();
+            mySettings.setPublicIpEnabled(mySettings.getLocalIpEnabled() ? true : false);
         }
+
     }
 
+    public static void ping(Context context) {
+        final MySettings mMySettings = new MySettings(context);
+
+        RetrofitInterface service = RetrofitClient.getClientPing().create(RetrofitInterface.class);
+        Call<ResponseBody> userCall = service.isConnectedQuery();
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if (response.raw().code() == 200) {
+                    Log.e("BASE_URL OK 200", BASE_URL);
+
+                } else {
+                    BASE_URL = mMySettings.getLocalIpDefault() ? mMySettings.getPublicBaseUrl() : mMySettings.getLocalBaseUrl();
+                    mMySettings.setLocalIpDefault(!mMySettings.getLocalIpDefault());
+                    Log.e("BASE_URL PublicBaseUrl", BASE_URL);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                BASE_URL = mMySettings.getLocalIpDefault() ? mMySettings.getPublicBaseUrl() : mMySettings.getLocalBaseUrl();
+                mMySettings.setLocalIpDefault(!mMySettings.getLocalIpDefault());
+                Log.e("BASE_URL onFailure", BASE_URL);
+            }
+        });
+
+    }
 
     //validate date range
     public static boolean validDates(String startDate, String endDate) {
@@ -75,11 +118,6 @@ public class Utils {
         return false;
     }
 
-
-    /**
-     ***********************************************************************************************
-     */
-
     /**
      * String Empty Or Null (String)
      * EX stringEmptyOrNull("hello")
@@ -94,6 +132,11 @@ public class Utils {
         }
         return true;
     }
+
+
+    /**
+     ***********************************************************************************************
+     */
 
     /**
      * Date formatter (String, String, String)
@@ -128,7 +171,7 @@ public class Utils {
      * @param date       //the original date to format
      * @param fromFormat //the original date string format EX "yyyy-MM-dd'T'hh:mm:ss"
      * @param toFormat   //the string format to transform to EX "dd MMM yyyy"
-     * @param days   //the nuber of days to add
+     * @param days       //the nuber of days to add
      * @return the String Date
      */
     public static String dateFormater(String date, String fromFormat, String toFormat, int days) {
