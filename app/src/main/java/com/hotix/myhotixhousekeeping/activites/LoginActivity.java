@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -41,9 +43,12 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.IOException;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -511,8 +516,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /**********************************************************************************************/
-
     public void lodeHotelInfos(String code) {
 
         RetrofitInterface service = RetrofitClient.getHotixSupportApi().create(RetrofitInterface.class);
@@ -541,6 +544,7 @@ public class LoginActivity extends AppCompatActivity {
                         //Get Public IP
                         if (!stringEmptyOrNull(hotelSettings.getIPPublic())) {
                             mMySettings.setPublicIp(hotelSettings.getIPPublic());
+                            mMySettings.setPublicBaseUrl("http://" + hotelSettings.getIPPublic() + "/");
                             mMySettings.setPublicIpEnabled(true);
                         } else {
                             mMySettings.setPublicIp("xxx.xxx.xxx.xxx");
@@ -550,6 +554,7 @@ public class LoginActivity extends AppCompatActivity {
                         //Get Local IP
                         if (!stringEmptyOrNull(hotelSettings.getIPLocal())) {
                             mMySettings.setLocalIp(hotelSettings.getIPLocal());
+                            mMySettings.setLocalBaseUrl("http://" + hotelSettings.getIPLocal() + "/");
                             mMySettings.setLocalIpEnabled(true);
                         } else {
                             mMySettings.setLocalIp("xxx.xxx.xxx.xxx");
@@ -587,4 +592,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+    /**********************************************************************************************/
+
 }

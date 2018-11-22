@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
@@ -64,7 +65,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, getString(R.string.error_message_check_settings));
         }
-        if (mMySettings.getConfigured()) {
+        if (mMySettings.getConfigured() && mMySettings.getAutoUpdate()) {
             UpdateHotelInfos(mMySettings.getHotelCode());
         } else {
             startDelay();
@@ -159,8 +160,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-    /**********************************************************************************************/
-
     private class CheckForUpdates extends AsyncTask<String, String, String> {
 
         @Override
@@ -175,4 +174,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             NWE_VERSION = Boolean.valueOf(s);
         }
     }
+
+    /**********************************************************************************************/
+
+
+
+
 }

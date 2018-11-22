@@ -38,6 +38,28 @@ public class RetrofitClient {
         return retrofit;
     }
 
+    public static Retrofit getClientPing() {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .cache(null)
+                .readTimeout(3000, TimeUnit.MILLISECONDS)
+                .connectTimeout(3000, TimeUnit.MILLISECONDS)
+                .build();
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        return retrofit;
+    }
+
     public static Retrofit getHotixSupportApi() {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

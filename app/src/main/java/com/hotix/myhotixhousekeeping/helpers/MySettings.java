@@ -14,6 +14,10 @@ public class MySettings {
     public static final String KEY_SSL = "ssl";
     public static final String KEY_PUBLIC_IP_ENABLED = "publicIpEnabled";
     public static final String KEY_LOCAL_IP_ENABLED = "localIpEnabled";
+    public static final String KEY_AUTO_UPDATE = "autoUpdate";
+    public static final String KEY_LOCAL_IP_DEFAULT = "localIpDefault";
+    public static final String KEY_PUBLIC_IP_REACHABLE = "publicIpReachable";
+    public static final String KEY_LOCAL_IP_REACHABLE = "localIpReachable";
 
     //String
     public static final String KEY_PUBLIC_IP = "publicIp";
@@ -79,6 +83,42 @@ public class MySettings {
 
     public void setSsl(boolean ssl) {
         editor.putBoolean(KEY_SSL, ssl);
+        editor.commit();
+    }
+
+    public boolean getAutoUpdate() {
+        return pref.getBoolean(KEY_AUTO_UPDATE, true);
+    }
+
+    public void setAutoUpdate(boolean autoUpdate) {
+        editor.putBoolean(KEY_AUTO_UPDATE, autoUpdate);
+        editor.commit();
+    }
+
+    public boolean getLocalIpDefault() {
+        return pref.getBoolean(KEY_LOCAL_IP_DEFAULT, true);
+    }
+
+    public void setLocalIpDefault(boolean localIpDefault) {
+        editor.putBoolean(KEY_LOCAL_IP_DEFAULT, localIpDefault);
+        editor.commit();
+    }
+
+    public boolean getPublicIpReachable() {
+        return pref.getBoolean(KEY_PUBLIC_IP_REACHABLE, false);
+    }
+
+    public void setPublicIpReachable(boolean publicIpReachable) {
+        editor.putBoolean(KEY_PUBLIC_IP_REACHABLE, publicIpReachable);
+        editor.commit();
+    }
+
+    public boolean getLocalIpReachable() {
+        return pref.getBoolean(KEY_LOCAL_IP_REACHABLE, false);
+    }
+
+    public void setLocalIpReachable(boolean localIpReachable) {
+        editor.putBoolean(KEY_LOCAL_IP_REACHABLE, localIpReachable);
         editor.commit();
     }
 

@@ -150,6 +150,9 @@ public interface RetrofitInterface {
     Call<ForecastData> getPrevisionQuery(@Query("dateDeb") String dateDeb,
                                          @Query("dateFin") String dateFin);
 
+    //Is Connected service call
+    @GET("/HNGAPI/v0/api/MyHotixguest/isconnected")
+    Call<ResponseBody> isConnectedQuery();
 
 /***
  ** POST ********************************************************************************************

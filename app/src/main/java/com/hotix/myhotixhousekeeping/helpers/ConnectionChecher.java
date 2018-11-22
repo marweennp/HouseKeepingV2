@@ -4,9 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import com.hotix.myhotixhousekeeping.R;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ConnectionChecher {
 
@@ -64,7 +68,12 @@ public class ConnectionChecher {
     public static boolean pingServeur(String ip) {
         try {
             return (Runtime.getRuntime().exec("ping -c 1 -w 2 "+ip).waitFor() == 0);
+
+
+
+
         } catch (Exception e) {
+            Log.e("pingServeur","here"+ip);
             e.printStackTrace();
         }
         return false;

@@ -6,6 +6,8 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -15,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
@@ -24,10 +28,12 @@ import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
@@ -35,6 +41,7 @@ import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private static MySettings mMySettings;
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -56,20 +63,40 @@ public class SettingsActivity extends AppCompatActivity {
     AppCompatEditText etApiPublicUrl;
     @BindView(R.id.et_settings_api_local_url)
     AppCompatEditText etApiLocalUrl;
+    @BindView(R.id.rl_settings_api_public_url)
+    RelativeLayout rlApiPublicUrl;
+    @BindView(R.id.rl_settings_api_local_url)
+    RelativeLayout rlApiLocalUrl;
+    @BindView(R.id.img_settings_public_url_stat)
+    AppCompatImageView imgApiPublicUrl;
+    @BindView(R.id.img_settings_local_url_stat)
+    AppCompatImageView imgApiLocalUrl;
+    @BindView(R.id.pb_settings_public_url_stat)
+    ProgressBar pbApiPublicUrl;
+    @BindView(R.id.pb_settings_local_url_stat)
+    ProgressBar pbApiLocalUrl;
     @BindView(R.id.et_settings_hotel_code)
     AppCompatEditText etHotelCode;
     @BindView(R.id.sw_settings_picture)
     SwitchCompat swPicture;
     @BindView(R.id.sw_settings_ssl)
     SwitchCompat swSsl;
+    @BindView(R.id.sw_settings_auto_update)
+    SwitchCompat swAutoUpdate;
     @BindView(R.id.chb_settings_public_ip)
     AppCompatCheckBox chbPublicIp;
     @BindView(R.id.chb_settings_Local_ip)
     AppCompatCheckBox chbLocalIp;
     @BindView(R.id.pb_settings)
     ProgressBar pbSettings;
+    @BindView(R.id.rGroup_settings_default_api_url)
+    RadioGroup rgDefault;
+    @BindView(R.id.rb_settings_default_local_url)
+    AppCompatRadioButton rbDefaultLocal;
+    @BindView(R.id.rb_settings_default_public_url)
+    AppCompatRadioButton rbDefaultPublic;
 
-    private MySettings mMySettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +156,21 @@ public class SettingsActivity extends AppCompatActivity {
                 }
                 return true;
 
+            case R.id.action_test:
+                try {
+                    BASE_URL = mMySettings.getLocalBaseUrl();
+                    ping(imgApiLocalUrl, pbApiLocalUrl, true);
+                } catch (Exception e) {
+                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
+                }
+                try {
+                    BASE_URL = mMySettings.getPublicBaseUrl();
+                    ping(imgApiPublicUrl, pbApiPublicUrl, false);
+                } catch (Exception e) {
+                    showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
+                }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -143,6 +185,12 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.text_settings);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        imgApiPublicUrl.setVisibility(View.GONE);
+        imgApiLocalUrl.setVisibility(View.GONE);
+
+        pbApiPublicUrl.setVisibility(View.GONE);
+        pbApiLocalUrl.setVisibility(View.GONE);
 
         // Report photos feature
         swPicture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -178,6 +226,22 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Auto Update Config
+        swAutoUpdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+                if (bChecked) {
+                    swAutoUpdate.setText(R.string.all_on);
+                    mMySettings.setAutoUpdate(true);
+
+                } else {
+                    swAutoUpdate.setText(R.string.all_off);
+                    mMySettings.setAutoUpdate(false);
+                }
+            }
+        });
+
 
         //Public IP
         etPublicIp.addTextChangedListener(new TextWatcher() {
@@ -247,11 +311,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 if (bChecked) {
                     etPublicIp.setEnabled(true);
-                    ilApiPublicUrl.setVisibility(View.VISIBLE);
+                    rlApiPublicUrl.setVisibility(View.VISIBLE);
                     mMySettings.setPublicIpEnabled(true);
                 } else {
                     etPublicIp.setEnabled(false);
-                    ilApiPublicUrl.setVisibility(View.GONE);
+                    rlApiPublicUrl.setVisibility(View.GONE);
                     mMySettings.setPublicIpEnabled(false);
                 }
             }
@@ -263,11 +327,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
                 if (bChecked) {
                     etLocalIp.setEnabled(true);
-                    ilApiLocalUrl.setVisibility(View.VISIBLE);
+                    rlApiLocalUrl.setVisibility(View.VISIBLE);
                     mMySettings.setLocalIpEnabled(true);
                 } else {
                     etLocalIp.setEnabled(false);
-                    ilApiLocalUrl.setVisibility(View.GONE);
+                    rlApiLocalUrl.setVisibility(View.GONE);
                     mMySettings.setLocalIpEnabled(false);
                 }
             }
@@ -281,6 +345,10 @@ public class SettingsActivity extends AppCompatActivity {
     private void loadSettings() {
 
         swSsl.setChecked(mMySettings.getSsl());
+        swAutoUpdate.setChecked(mMySettings.getAutoUpdate());
+
+        rbDefaultLocal.setChecked(mMySettings.getLocalIpDefault());
+        rbDefaultPublic.setChecked(!mMySettings.getLocalIpDefault());
 
         chbPublicIp.setChecked(mMySettings.getPublicIpEnabled());
         chbLocalIp.setChecked(mMySettings.getLocalIpEnabled());
@@ -297,6 +365,8 @@ public class SettingsActivity extends AppCompatActivity {
     private void saveSettings() {
 
         mMySettings.setSsl(swSsl.isChecked());
+        mMySettings.setAutoUpdate(swAutoUpdate.isChecked());
+        mMySettings.setLocalIpDefault(rbDefaultLocal.isChecked());
 
         if (!stringEmptyOrNull(etPublicIp.getText().toString().trim())) {
             mMySettings.setPublicIp(etPublicIp.getText().toString().trim());
@@ -395,9 +465,7 @@ public class SettingsActivity extends AppCompatActivity {
                             } else {
                                 mMySettings.setHotelCode("0000");
                             }
-
                         }
-
                     }
                     mMySettings.setSettingsUpdated(true);
                     loadSettings();
@@ -417,4 +485,53 @@ public class SettingsActivity extends AppCompatActivity {
 
     }
 
+    public void ping(final AppCompatImageView img, final ProgressBar pb, final boolean local) {
+
+        RetrofitInterface service = RetrofitClient.getClientPing().create(RetrofitInterface.class);
+        Call<ResponseBody> userCall = service.isConnectedQuery();
+
+        img.setVisibility(View.GONE);
+        pb.setVisibility(View.VISIBLE);
+
+        userCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                if (response.raw().code() == 200) {
+                    img.setVisibility(View.VISIBLE);
+                    img.setImageResource(R.drawable.ic_check_circle_green_500_24dp);
+                    pb.setVisibility(View.GONE);
+                    if (local) {
+                        mMySettings.setLocalIpReachable(true);
+                    } else {
+                        mMySettings.setPublicIpEnabled(true);
+                    }
+
+                } else {
+                    img.setVisibility(View.VISIBLE);
+                    img.setImageResource(R.drawable.ic_cloud_circle_red_500_24dp);
+                    pb.setVisibility(View.GONE);
+                    if (local) {
+                        mMySettings.setLocalIpReachable(false);
+                    } else {
+                        mMySettings.setPublicIpEnabled(false);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                img.setVisibility(View.VISIBLE);
+                img.setImageResource(R.drawable.ic_cloud_circle_red_500_24dp);
+                pb.setVisibility(View.GONE);
+                if (local) {
+                    mMySettings.setLocalIpReachable(false);
+                } else {
+                    mMySettings.setPublicIpEnabled(false);
+                }
+            }
+        });
+
+    }
 }

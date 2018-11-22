@@ -4,7 +4,7 @@
     <string name="all_all">All</string>
     <string name="all_all_floors">All Floors</string>
     <string name="all_all_status">All Status</string>
-    <string name="app_name">House Keeping</string>
+    <string name="app_name">MyHotix HouseKeeping</string>
     <string name="all_retry">RETRY</string>
     <string name="all_room">Room</string>
     <string name="all_ok">OK</string>
@@ -58,7 +58,7 @@
     <!-- Home Activity -->
     <string name="text_toolbar_dashbord">Dashbord</string>
     <string name="text_room_rack">Room Rack</string>
-    <string name="text_maintenance_orders">Maintenance Orders</string>
+    <string name="text_maintenance_orders">"Maintenance "</string>
     <string name="text_forecast">Forecast</string>
     <string name="text_check_in">Expected Check In</string>
     <string name="text_lost_and_found">Lost and Found</string>
@@ -222,6 +222,8 @@
     <string name="dialog_room_check_state_tv_title">TV</string>
     <string name="dialog_room_check_state_mini_bar_title">Mini-Bar</string>
     <string name="dialog_room_check_state_towels_title">Towels</string>
+    <string name="text_auto_update">Auto Update Settings</string>
+    <string name="text_default_url">Default</string>
     <!-- END STRINGS -->
 
 

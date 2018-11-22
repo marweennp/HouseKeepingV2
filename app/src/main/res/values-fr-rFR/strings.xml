@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">House Keeping</string>
+    <string name="app_name">MyHotix HouseKeeping</string>
     <string name="all_all">Tout</string>
     <string name="all_all_status">Tout Les états</string>
     <string name="all_all_floors">Tous Les étages</string>
@@ -50,25 +50,25 @@
     <string name="text_picture">Photo</string>
     <string name="hide">Cacher</string>
     <string name="show">Afficher</string>
-    <string name="text_toolbar_dashbord">Dashbord</string>
+    <string name="text_toolbar_dashbord">Accueil</string>
     <string name="text_room_rack">Room Rack</string>
-    <string name="text_maintenance_orders">Ordres de Maintenance</string>
+    <string name="text_maintenance_orders">Pannes</string>
     <string name="text_forecast">Prévision</string>
-    <string name="text_check_in">Arrivée Prévue</string>
-    <string name="text_lost_and_found">"Objet Trouvé "</string>
+    <string name="text_check_in">Arrivées Prévues</string>
+    <string name="text_lost_and_found">"Objets Trouvés "</string>
     <string name="text_maintenance_team">Femmes de Chambre</string>
     <string name="text_user_settings">"Paramètres utilisateur "</string>
     <string name="text_configuration">Configuration</string>
     <string name="text_see_housekeepers">Voir Les Femmes de Chambre</string>
-    <string name="text_declare_maintenance_orders">"Déclarer des Ordres "</string>
-    <string name="text_close_maintenance_orders">Fermer les Ordres</string>
+    <string name="text_declare_maintenance_orders">Déclarer Panne</string>
+    <string name="text_close_maintenance_orders">Clôturer  Panne</string>
     <string name="text_declare_object_found">"Déclarer l'Objet trouvé "</string>
     <string name="text_close_object_found">"Fermer Objet trouvé "</string>
-    <string name="text_view_room_status">Voir Statu de la Chambre</string>
-    <string name="text_change_room_state">Changer Statu de la Chambre</string>
+    <string name="text_view_room_status">Voir Statut de la Chambre</string>
+    <string name="text_change_room_state">Changer Statut de la Chambre</string>
     <string name="text_change_location_state">Changer l\'état de la Chambre</string>
-    <string name="text_view_guests">Voir les Clients</string>
-    <string name="text_maintenance">"Maintenance "</string>
+    <string name="text_view_guests">Voir les Résidents</string>
+    <string name="text_maintenance">Pannes</string>
     <string name="text_state_outstanding">Encours</string>
     <string name="text_state_fenced">Clôturé</string>
     <string name="text_from_date">À partir de:</string>
@@ -97,7 +97,7 @@
     <string name="hint_new_order_last_name">Nom</string>
     <string name="hint_new_order_description">Description</string>
     <string name="text_new_order_description">Description</string>
-    <string name="text_new_order">Nouvel ordre</string>
+    <string name="text_new_order">Nouvel Panne</string>
     <string name="text_select_type">Sélectionnez un type</string>
     <string name="text_new_order_hours">"Heure(s) "</string>
     <string name="text_successfully_added">"Ajouté avec succès "</string>
@@ -136,7 +136,7 @@
     <string name="message_no_maintenance_orders_to_show">"Aucun ordre de maintenance à afficher! Bon travail. "</string>
     <string name="message_no_maintenance_rooms_to_show">"Aucune pièce à montrer! "</string>
     <string name="message_no_lost_object_to_show">"Aucun objet perdu et trouvé à montrer! "</string>
-    <string name="message_no_scheduled_arrivals_to_show">"Pas d'arrivée prévue pour montrer! "</string>
+    <string name="message_no_scheduled_arrivals_to_show">"Pas d'arrivées prévues pour montrer! "</string>
     <string name="message_no_activity_to_show">"Aucune activité à présenter! "</string>
     <string name="message_no_data_to_show">"Aucune donnée à afficher! "</string>
     <string name="message_no_housekeepers_to_show">Pas gouvernantes Pour afficher!</string>
