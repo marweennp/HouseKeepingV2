@@ -55,6 +55,8 @@
     <string name="text_picture">Picture</string>
     <string name="hide">Hide</string>
     <string name="show">Show</string>
+    <string name="text_auto_update">Auto Update Settings</string>
+    <string name="text_default_url">Default</string>
     <!-- Home Activity -->
     <string name="text_toolbar_dashbord">Dashbord</string>
     <string name="text_room_rack">Room Rack</string>
@@ -63,6 +65,7 @@
     <string name="text_check_in">Expected Check In</string>
     <string name="text_lost_and_found">Lost and Found</string>
     <string name="text_maintenance_team">Housekeepers</string>
+    <string name="text_residents">Residents</string>
     <!-- Users Settings Activity -->
     <string name="text_user_settings">User Settings</string>
     <string name="text_configuration">Configuration</string>
@@ -144,6 +147,10 @@
     <string name="text_recouche">Stay-Over</string>
     <string name="text_taux">Rate Occupancy per room</string>
     <string name="text_reste">Rest</string>
+    <!-- Pensionnaires Activity -->
+    <string name="text_search_filter">Search Filter</string>
+    <string name="text_first">First Service</string>
+    <string name="text_last">Last Service</string>
     <!-- TableChart Activity -->
     <string name="text_occupation_rate">Occupation Rate</string>
     <string name="text_date">Date</string>
@@ -222,8 +229,7 @@
     <string name="dialog_room_check_state_tv_title">TV</string>
     <string name="dialog_room_check_state_mini_bar_title">Mini-Bar</string>
     <string name="dialog_room_check_state_towels_title">Towels</string>
-    <string name="text_auto_update">Auto Update Settings</string>
-    <string name="text_default_url">Default</string>
+    <string name="text_controle_pensionnaire">Controle Pensionnaire</string>
     <!-- END STRINGS -->
 
 

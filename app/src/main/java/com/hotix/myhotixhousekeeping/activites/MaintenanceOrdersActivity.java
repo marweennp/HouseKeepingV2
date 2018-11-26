@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -83,6 +84,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     private AppCompatTextView tvDeclaredBy;
     private AppCompatTextView tvRepairedBy;
     private AppCompatTextView tvDescription;
+    private NestedScrollView nsvDetailsContainer;
 
     // Loading View & Empty ListView
     private LinearLayout llLoadingView;
@@ -107,6 +109,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
     private int mTypeId = 1;
     private int techId = -1;
     private boolean btnClose = true;
+    private boolean land = false;
     private Drawable mIconOne, mIconTwo;
 
     @Override
@@ -135,8 +138,10 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             initPortrait();
+            land = false;
         } else {
             initLandscape();
+            land = true;
         }
 
     }
@@ -450,6 +455,8 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         tvLocation = (AppCompatTextView) findViewById(R.id.tv_order_detail_location);
         tvUrgent = (AppCompatTextView) findViewById(R.id.tv_order_detail_urgent);
 
+        nsvDetailsContainer = (NestedScrollView) findViewById(R.id.nsv_details_container);
+
         lvOrdersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
@@ -606,6 +613,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         Call<PannesData> userCall = service.getListPannesClotureQuery(id, pic, startDate, endDate);
 
         llLoadingView.setVisibility(View.VISIBLE);
+        if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
         lvOrdersList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
 
@@ -615,6 +623,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
                 llLoadingView.setVisibility(View.GONE);
                 lvOrdersList.setVisibility(View.VISIBLE);
+                if (land) { nsvDetailsContainer.setVisibility(View.VISIBLE); }
                 rlEmptyView.setVisibility(View.GONE);
 
                 if (response.raw().code() == 200) {
@@ -643,6 +652,7 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             public void onFailure(Call<PannesData> call, Throwable t) {
                 llLoadingView.setVisibility(View.GONE);
                 lvOrdersList.setVisibility(View.GONE);
+                if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
                 rlEmptyView.setVisibility(View.VISIBLE);
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);

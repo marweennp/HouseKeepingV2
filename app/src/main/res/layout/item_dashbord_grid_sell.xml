@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_room_grid_row"
+        android:layout_width="@dimen/item_grid_cell_width"
+        android:layout_height="@dimen/item_grid_cell_height"
+        card_view:cardBackgroundColor="@color/colorBackGround"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/img_grid_sell_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/rl_grid_sell_title"
+                android:src="@drawable/ic_room_rack" />
+
+            <RelativeLayout
+                android:id="@+id/rl_grid_sell_title"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_alignParentBottom="true"
+                android:background="#FFFFFF">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_grid_sell_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Home"
+                    android:textSize="@dimen/dasbord_title_text_size"
+                    android:textColor="@color/light_bg_dark_secondary_text"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,6 +1,5 @@
 package com.hotix.myhotixhousekeeping.activites;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,11 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +15,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -34,21 +28,12 @@ import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitClient;
 import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 import com.hotix.myhotixhousekeeping.views.kbv.KenBurnsView;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,8 +43,6 @@ import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.BASE_URL;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.FINAL_APP_ID;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGEDIN;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
-import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.NWE_VERSION;
-import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.SETTINGS_RESULT;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
@@ -117,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -126,23 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         setBaseUrl(this);
         loadeImage();
-        if (NWE_VERSION) {
-            if (!permissionGranted) {
-                startPermissionDialog();
-            } else {
-                startUpdateDialog();
-            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        // Check which request we're responding to
-        if (requestCode == SETTINGS_RESULT) {
-            if (NWE_VERSION) {
-                startUpdateDialog();
-            }
-        }
     }
 
     @Override
@@ -200,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
 
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
-            tvVersion.setText(getString(R.string.text_vertion) + pInfo.versionName);
+            tvVersion.setText(getString(R.string.text_vertion) + " " + pInfo.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -225,114 +190,6 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-    }
-
-    /***********************************************************************************************
-     * Old firstStartInit()
-     * This method import old settings at first start.
-     private void firstStartInit() {
-
-     if (mMySettings.getFirstStart()) {
-     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-     if (sp.contains("serveur")) {
-     mMySettings.setLocalIp(sp.getString("serveur", "0.0.0.0"));
-     mMySettings.setLocalIpEnabled(true);
-     mMySettings.setShowPicture(sp.getBoolean("image", false));
-     setBaseUrl(this);
-     } else {
-     Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-     startActivity(i);
-     }
-     mMySettings.setFirstStart(false);
-     }
-     }
-     ***********************************************************************************************/
-
-    //This method check for permissions -> download APK -> install.
-    private void updateApp() {
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        // permission is granted
-                        try {
-                            mChecker.downloadAndInstall(BASE_URL + "Android/appHouseKeeping.apk");
-                        } catch (Exception e) {
-                            showSnackbar(findViewById(android.R.id.content), e.toString());
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        // check for permanent denial of permission
-                        permissionGranted = false;
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
-    }
-
-    //This method show update dialog.
-    private void startUpdateDialog() {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-
-        View mView = getLayoutInflater().inflate(R.layout.dialog_update_app, null);
-        AppCompatButton btnUpdate = (AppCompatButton) mView.findViewById(R.id.btn_dialog_update);
-
-        mBuilder.setView(mView);
-        mBuilder.setCancelable(false);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateApp();
-                dialog.dismiss();
-            }
-        });
-
-    }
-
-    //This method show permission dialog.
-    private void startPermissionDialog() {
-
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-
-        View mView = getLayoutInflater().inflate(R.layout.dialog_permission_needed, null);
-        AppCompatButton btnOk = (AppCompatButton) mView.findViewById(R.id.btn_dialog_permission_ok);
-        AppCompatButton btnSettings = (AppCompatButton) mView.findViewById(R.id.btn_dialog_permission_settings);
-
-        mBuilder.setView(mView);
-        mBuilder.setCancelable(false);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateApp();
-                dialog.dismiss();
-            }
-        });
-
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivityForResult(intent, SETTINGS_RESULT);
-                permissionGranted = true;
-                dialog.dismiss();
-            }
-        });
-
     }
 
     //This method show exit dialog.
@@ -592,7 +449,5 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
-    /**********************************************************************************************/
 
 }

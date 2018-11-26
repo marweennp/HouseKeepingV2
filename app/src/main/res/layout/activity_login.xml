@@ -99,7 +99,7 @@
     <!-- Footer -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/transparent_background">
 
@@ -124,7 +124,7 @@
             android:layout_marginStart="6dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_settings_white_24" />
+            app:srcCompat="@drawable/ic_settings_white_36dp" />
 
 
     </RelativeLayout>

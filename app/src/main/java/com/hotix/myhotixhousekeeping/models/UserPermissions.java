@@ -38,6 +38,9 @@ public class UserPermissions {
     @SerializedName("HasViewClient")
     @Expose
     private Boolean hasViewClient;
+    @SerializedName("HasControlePensionnaire")
+    @Expose
+    private Boolean hasControlePensionnaire;
     @SerializedName("HasFM")
     @Expose
     private Boolean hasFM;
@@ -129,6 +132,10 @@ public class UserPermissions {
     public void setHasViewClient(Boolean hasViewClient) {
         this.hasViewClient = hasViewClient;
     }
+
+    public Boolean getHasControlePensionnaire() { return hasControlePensionnaire; }
+
+    public void setHasControlePensionnaire(Boolean hasControlePensionnaire) { this.hasControlePensionnaire = hasControlePensionnaire; }
 
     public Boolean getHasFM() {
         return hasFM;

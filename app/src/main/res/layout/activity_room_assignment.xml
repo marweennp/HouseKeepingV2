@@ -54,11 +54,19 @@
 
             <GridView
                 android:id="@+id/gv_room_assign_unassigned"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_below="@id/rl_room_assign_top_head"
                 android:layout_above="@id/bottom_divider"
-                android:numColumns="3"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:columnWidth="@dimen/residents_rooms_column_width"
+                android:drawSelectorOnTop="true"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:layout_margin="6dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="spacingWidth"
+                android:verticalSpacing="3dp"/>
 
             <!-- Bottom Divider -->
             <View
@@ -167,10 +175,18 @@
 
             <GridView
                 android:id="@+id/gv_room_assign_assigned"
+                android:layout_below="@id/rl_room_assign_bottom_head"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/rl_room_assign_bottom_head"
-                android:numColumns="3"/>
+                android:layout_gravity="center"
+                android:columnWidth="@dimen/residents_rooms_column_width"
+                android:drawSelectorOnTop="true"
+                android:gravity="center"
+                android:horizontalSpacing="3dp"
+                android:layout_margin="6dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="spacingWidth"
+                android:verticalSpacing="3dp"/>
 
         </RelativeLayout>
 

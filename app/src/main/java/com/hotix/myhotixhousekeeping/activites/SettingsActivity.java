@@ -504,7 +504,7 @@ public class SettingsActivity extends AppCompatActivity {
                     if (local) {
                         mMySettings.setLocalIpReachable(true);
                     } else {
-                        mMySettings.setPublicIpEnabled(true);
+                        mMySettings.setPublicIpReachable(true);
                     }
 
                 } else {

@@ -162,6 +162,7 @@
 
             <!-- Main Container -->
             <android.support.v4.widget.NestedScrollView
+                android:id="@+id/nsv_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp">
@@ -186,7 +187,7 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/text_order_details"
                             android:textColor="@color/colorSecondaryDark"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
 
@@ -206,7 +207,7 @@
                             android:text="@string/text_order_urgent"
                             android:textAllCaps="true"
                             android:textColor="@color/red_800"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sub_title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details location Title -->
@@ -219,7 +220,7 @@
                             android:layout_marginTop="4dp"
                             android:text="@string/text_show_order_location"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details location -->
@@ -235,6 +236,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_location_on_white_24dp" />
 
@@ -245,7 +247,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -267,7 +269,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_type"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details location -->
@@ -281,7 +283,7 @@
                             android:layout_toEndOf="@id/tv_order_details_type_title"
                             android:text=""
                             android:textColor="@color/light_bg_dark_primary_text"
-                            android:textSize="16sp" />
+                            android:textSize="@dimen/title_text" />
 
                     </RelativeLayout>
 
@@ -300,7 +302,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_date_time"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details Date -->
@@ -317,6 +319,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_today_white_24dp" />
 
@@ -327,7 +330,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -345,6 +348,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
@@ -355,7 +359,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/grey_700"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -377,7 +381,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_treatment_time"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details Treatment Time -->
@@ -393,6 +397,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_timer_white_24dp" />
 
@@ -403,7 +408,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -425,7 +430,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_declared_by_time"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details Declared By -->
@@ -441,6 +446,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_person_white_24dp" />
 
@@ -451,7 +457,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -473,7 +479,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_repaired_by"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details Repaired By -->
@@ -489,6 +495,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_person_white_24dp" />
 
@@ -499,7 +506,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -521,7 +528,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_description"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Order Details Treatment Time -->
@@ -542,7 +549,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 

@@ -64,7 +64,7 @@ public class Utils {
 
         } else {
             BASE_URL = mySettings.getLocalIpEnabled() ? mySettings.getLocalBaseUrl() : mySettings.getPublicBaseUrl();
-            mySettings.setPublicIpEnabled(mySettings.getLocalIpEnabled() ? true : false);
+            //mySettings.setPublicIpEnabled(mySettings.getLocalIpEnabled() ? true : false);
         }
 
     }

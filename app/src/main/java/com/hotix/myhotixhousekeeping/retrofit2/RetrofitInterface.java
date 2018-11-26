@@ -9,7 +9,10 @@ import com.hotix.myhotixhousekeeping.models.InformerData;
 import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.models.PannesData;
 import com.hotix.myhotixhousekeeping.models.PermissionsData;
+import com.hotix.myhotixhousekeeping.models.Resident;
 import com.hotix.myhotixhousekeeping.models.RoomRackData;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -49,7 +52,8 @@ public interface RetrofitInterface {
                                                @Query("has_change_statut") String has_change_statut,
                                                @Query("has_etat_lieu") String has_etat_lieu,
                                                @Query("has_view_client") String has_view_client,
-                                               @Query("has_fm") String has_fm);
+                                               @Query("has_fm") String has_fm,
+                                               @Query("has_controle_pensionnaire") String has_controle_pensionnaire);
 
     //Get List Pannes Cloture service call
     @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetListPannesCloture?")
@@ -153,6 +157,10 @@ public interface RetrofitInterface {
     //Is Connected service call
     @GET("/HNGAPI/v0/api/MyHotixguest/isconnected")
     Call<ResponseBody> isConnectedQuery();
+
+    //Get List Pensionnaires service call
+    @GET("/HNGAPI/v0/api/MyHotixHouseKeeping/GetListPensionnaires?")
+    Call<ArrayList<Resident>> getListPensionnairesQuery();
 
 /***
  ** POST ********************************************************************************************

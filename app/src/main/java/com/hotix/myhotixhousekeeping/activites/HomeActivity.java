@@ -6,24 +6,26 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import com.hotix.myhotixhousekeeping.R;
+import com.hotix.myhotixhousekeeping.adapters.DashbordGridAdapter;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
+import com.hotix.myhotixhousekeeping.models.DasbordItem;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGEDIN;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
-import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
 
 public class HomeActivity extends AppCompatActivity {
@@ -31,22 +33,12 @@ public class HomeActivity extends AppCompatActivity {
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tv_home_lost_and_found)
-    AppCompatTextView tvLostFound;
-    @BindView(R.id.tv_home_maintenance_team)
-    AppCompatTextView tvMintenanceTeam;
-    @BindView(R.id.rl_home_rack_room)
-    RelativeLayout rlHomeRackRoom;
-    @BindView(R.id.rl_home_maintenance_orders)
-    RelativeLayout rlHomeMaintenanceOrders;
-    @BindView(R.id.rl_home_forecast)
-    RelativeLayout rlHomeForecast;
-    @BindView(R.id.rl_home_check_in)
-    RelativeLayout rlHomeCheckIn;
-    @BindView(R.id.rl_home_lost_and_found)
-    RelativeLayout rlHomeLostAndFound;
-    @BindView(R.id.rl_home_maintenance_team)
-    RelativeLayout rlHomeMaintenanceTeam;
+    @BindView(R.id.gv_home_dashbord)
+    GridView gvDashbord;
+
+    private DasbordItem mItem;
+    private ArrayList<DasbordItem> mItems;
+    private DashbordGridAdapter mGridAdapter;
 
     private MySettings mMySettings;
 
@@ -76,6 +68,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setBaseUrl(this);
+        if (getResources().getBoolean(R.bool.portrait_only)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     @Override
@@ -116,81 +111,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**********************************************************************************************/
-
-    @OnClick(R.id.rl_home_rack_room)
-    public void roomRack() {
-        if (GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
-            //Start the RoomRackActivity
-            Intent i = new Intent(this, RoomRackActivity.class);
-            startActivity(i);
-        } else {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        }
-
-    }
-
-    @OnClick(R.id.rl_home_maintenance_orders)
-    public void maintenanceOrders() {
-
-        if (GLOBAL_LOGIN_DATA.getHasAddPanne()) {
-            //Start the MaintenanceOrdersActivity
-            Intent i = new Intent(this, MaintenanceOrdersActivity.class);
-            startActivity(i);
-        } else {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        }
-
-    }
-
-    @OnClick(R.id.rl_home_forecast)
-    public void forecast() {
-
-        //Start the ForecastActivity
-        Intent i = new Intent(this, ForecastActivity.class);
-        startActivity(i);
-
-    }
-
-    @OnClick(R.id.rl_home_check_in)
-    public void checkIn() {
-
-        if (GLOBAL_LOGIN_DATA.getHasViewClient()) {
-            //Start the GuestArrivalsActivity
-            Intent i = new Intent(this, GuestArrivalsActivity.class);
-            startActivity(i);
-        } else {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        }
-
-    }
-
-    @OnClick(R.id.rl_home_lost_and_found)
-    public void lostFound() {
-
-        if (GLOBAL_LOGIN_DATA.getHasAddObjet()) {
-            //Start the LostAndFoundActivity
-            Intent i = new Intent(this, LostAndFoundActivity.class);
-            startActivity(i);
-        } else {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        }
-
-    }
-
-    @OnClick(R.id.rl_home_maintenance_team)
-    public void maintenanceTeam() {
-
-        if (GLOBAL_LOGIN_DATA.getHasFM()) {
-            //Start the MaintenanceTeamActivity
-            Intent i = new Intent(this, MaintenanceTeamActivity.class);
-            startActivity(i);
-        } else {
-            showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_not_authorized));
-        }
-
-    }
-
-    /**********************************************************************************************/
     //init views
     private void init() {
 
@@ -208,25 +128,88 @@ public class HomeActivity extends AppCompatActivity {
             getSupportActionBar().setSubtitle("");
         }
 
-//        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasFM())) {
-//            rlHomeMaintenanceTeam.setVisibility(View.GONE);
-//        }
-//
-//        if ((GLOBAL_LOGIN_DATA.getProfileId() == 16) || (!GLOBAL_LOGIN_DATA.getHasAddObjet())) {
-//            rlHomeLostAndFound.setVisibility(View.GONE);
-//        }
-//
-//        if (!GLOBAL_LOGIN_DATA.getHasAddPanne()) {
-//            rlHomeMaintenanceOrders.setVisibility(View.GONE);
-//        }
-//
-//        if (!GLOBAL_LOGIN_DATA.getHasViewClient()) {
-//            rlHomeCheckIn.setVisibility(View.GONE);
-//        }
-//
-//        if (!GLOBAL_LOGIN_DATA.getHasEtatLieu()) {
-//            rlHomeRackRoom.setVisibility(View.GONE);
-//        }
+        mItems = new ArrayList<DasbordItem>();
+
+        if (!(GLOBAL_LOGIN_DATA.getHasEtatLieu() == null) && (GLOBAL_LOGIN_DATA.getHasEtatLieu())) {
+            mItems.add(new DasbordItem(1, getString(R.string.text_room_rack), getResources().getDrawable(R.drawable.ic_room_rack)));
+        }
+
+        if (!(GLOBAL_LOGIN_DATA.getHasAddPanne() == null) && (GLOBAL_LOGIN_DATA.getHasAddPanne())) {
+            mItems.add(new DasbordItem(2, getString(R.string.text_maintenance_orders), getResources().getDrawable(R.drawable.ic_maintenance_orders)));
+        }
+
+        mItems.add(new DasbordItem(3, getString(R.string.text_forecast), getResources().getDrawable(R.drawable.ic_statistics)));
+
+        if (!(GLOBAL_LOGIN_DATA.getHasViewClient() == null) && (GLOBAL_LOGIN_DATA.getHasViewClient())) {
+            mItems.add(new DasbordItem(4, getString(R.string.text_check_in), getResources().getDrawable(R.drawable.ic_check_in)));
+        }
+
+        if (!(GLOBAL_LOGIN_DATA.getHasAddObjet() == null) && (GLOBAL_LOGIN_DATA.getHasAddObjet())) {
+            mItems.add(new DasbordItem(5, getString(R.string.text_lost_and_found), getResources().getDrawable(R.drawable.ic_lost_and_found)));
+        }
+
+        if (!(GLOBAL_LOGIN_DATA.getHasFM() == null) && (GLOBAL_LOGIN_DATA.getHasFM())) {
+            mItems.add(new DasbordItem(6, getString(R.string.text_maintenance_team), getResources().getDrawable(R.drawable.ic_maintenance_oteam)));
+        }
+
+        if (!(GLOBAL_LOGIN_DATA.getHasControlePensionnaire() == null) && (GLOBAL_LOGIN_DATA.getHasControlePensionnaire())) {
+            mItems.add(new DasbordItem(7, getString(R.string.text_residents), getResources().getDrawable(R.drawable.ic_residents)));
+        }
+
+        mGridAdapter = new DashbordGridAdapter(getApplicationContext(), mItems);
+        gvDashbord.setAdapter(mGridAdapter);
+
+        gvDashbord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mItem = mItems.get(position);
+                Intent i;
+                switch (mItems.get(position).getId()) {
+                    case 1:
+                        //Start the RoomRackActivity
+                        i = new Intent(getApplicationContext(), RoomRackActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 2:
+                        //Start the MaintenanceOrdersActivity
+                        i = new Intent(getApplicationContext(), MaintenanceOrdersActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 3:
+                        //Start the ForecastActivity
+                        i = new Intent(getApplicationContext(), ForecastActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 4:
+                        //Start the GuestArrivalsActivity
+                        i = new Intent(getApplicationContext(), GuestArrivalsActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 5:
+                        //Start the LostAndFoundActivity
+                        i = new Intent(getApplicationContext(), LostAndFoundActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 6:
+                        //Start the MaintenanceTeamActivity
+                        i = new Intent(getApplicationContext(), MaintenanceTeamActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case 7:
+                        //Start the MaintenanceTeamActivity
+                        i = new Intent(getApplicationContext(), ResidentsActivity.class);
+                        startActivity(i);
+                        break;
+                }
+
+            }
+        });
 
 
     }

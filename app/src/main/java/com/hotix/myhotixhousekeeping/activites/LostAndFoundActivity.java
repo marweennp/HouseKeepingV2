@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -80,6 +81,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
     private AppCompatTextView tvFoundBy;
     private AppCompatTextView tvBelongTo;
     private AppCompatTextView tvComment;
+    private NestedScrollView nsvDetailsContainer;
 
     // Loading View & Empty ListView
     private LinearLayout llLoadingView;
@@ -99,6 +101,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
     private int mTypeId = 1;
     private boolean btnClose = true;
     private Drawable mIconOne, mIconTwo;
+    private boolean land = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +129,10 @@ public class LostAndFoundActivity extends AppCompatActivity {
         int orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             initPortrait();
+            land = false;
         } else {
             initLandscape();
+            land = true;
         }
     }
 
@@ -437,6 +442,8 @@ public class LostAndFoundActivity extends AppCompatActivity {
         tvBelongTo = (AppCompatTextView) findViewById(R.id.tv_lost_and_found_details_belong_to);
         tvComment = (AppCompatTextView) findViewById(R.id.tv_lost_and_found_details_comment);
 
+        nsvDetailsContainer = (NestedScrollView) findViewById(R.id.nsv_main_container);
+
 
         lvFoundObjList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -557,6 +564,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
         Call<FoundObjData> userCall = service.getListObjetsTrouvesQuery(id, pic, startDate, endDate);
 
         llLoadingView.setVisibility(View.VISIBLE);
+        if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
         lvFoundObjList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
 
@@ -566,6 +574,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
                 llLoadingView.setVisibility(View.GONE);
                 lvFoundObjList.setVisibility(View.VISIBLE);
+                if (land) { nsvDetailsContainer.setVisibility(View.VISIBLE); }
                 rlEmptyView.setVisibility(View.GONE);
 
                 if (response.raw().code() == 200) {
@@ -592,6 +601,7 @@ public class LostAndFoundActivity extends AppCompatActivity {
             public void onFailure(Call<FoundObjData> call, Throwable t) {
                 llLoadingView.setVisibility(View.GONE);
                 lvFoundObjList.setVisibility(View.GONE);
+                if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
                 rlEmptyView.setVisibility(View.VISIBLE);
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);

@@ -200,4 +200,10 @@
     <string name="text_rooms">Chambres</string>
     <string name="text_da">(DA)</string>
     <string name="text_du">(DU)</string>
+    <string name="text_residents">Pensionnaires</string>
+    <string name="text_auto_update">Paramètres Automatique</string>
+    <string name="text_default_url">"Par défaut "</string>
+    <string name="text_search_filter">"Filtre de recherche "</string>
+    <string name="text_first">Premier service</string>
+    <string name="text_last">"Dernier service "</string>
 </resources>

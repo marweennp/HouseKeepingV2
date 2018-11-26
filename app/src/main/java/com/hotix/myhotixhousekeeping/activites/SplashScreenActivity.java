@@ -59,12 +59,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        CheckForUpdates check = new CheckForUpdates();
-        try {
-            check.execute();
-        } catch (Exception e) {
-            Log.e(TAG, getString(R.string.error_message_check_settings));
-        }
+
         if (mMySettings.getConfigured() && mMySettings.getAutoUpdate()) {
             UpdateHotelInfos(mMySettings.getHotelCode());
         } else {
@@ -159,23 +154,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
 
     }
-
-    private class CheckForUpdates extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... strings) {
-            mChecker.checkForUpdateByVersionCode(mMySettings.getLocalBaseUrl() + "Android/versionHouseKeeping.txt");
-            return String.valueOf(mChecker.isUpdateAvailable());
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            NWE_VERSION = Boolean.valueOf(s);
-        }
-    }
-
-    /**********************************************************************************************/
 
 
 

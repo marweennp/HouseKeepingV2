@@ -198,23 +198,15 @@ public class RoomRackActivity extends AppCompatActivity {
 
         mRoomRack = new ArrayList<RoomRack>();
 
-        if (getResources().getBoolean(R.bool.portrait_only)) {
-            gvRoomRack.setNumColumns(3);
-        } else {
-            int orientation = this.getResources().getConfiguration().orientation;
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                gvRoomRack.setNumColumns(5);
-            } else {
-                gvRoomRack.setNumColumns(8);
-            }
-        }
-
         // Loading View & Empty ListView
         llLoadingView = (LinearLayout) findViewById(R.id.ll_loading_view);
         rlEmptyView = (RelativeLayout) findViewById(R.id.rl_empty_view);
         tvEmptyViewText = (AppCompatTextView) findViewById(R.id.tv_empty_view_text);
         imgEmptyViewIcon = (AppCompatImageView) findViewById(R.id.img_empty_view_icon);
         btnEmptyViewRefresh = (AppCompatButton) findViewById(R.id.btn_empty_view_refresh);
+
+
+        rlEmptyView.setVisibility(View.GONE);
 
         mFloors = new ArrayList<Etage>();
         mFloors.add(new Etage(-1, -1, getResources().getString(R.string.all_all_floors)));

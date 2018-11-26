@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dashboard_margin">3dp</dimen>
+    <dimen name="item_grid_cell_height">160dp</dimen>
+    <dimen name="item_grid_cell_width">180dp</dimen>
+    <dimen name="dashbord_column_width">160dp</dimen>
+    <dimen name="dasbord_title_text_size">16sp</dimen>
+    <dimen name="dashboard_margin">10dp</dimen>
+    <dimen name="residents_rooms_column_width">110dp</dimen>
+    <!-- *************************************************************************************** -->
+    <dimen name="title_text">16sp</dimen>
+    <dimen name="sub_title_text">12sp</dimen>
+
 </resources>

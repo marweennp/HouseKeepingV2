@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_grid_cell_height">220dp</dimen>
+    <dimen name="item_grid_cell_width">290dp</dimen>
+    <dimen name="dashbord_column_width">280dp</dimen>
+    <dimen name="dasbord_title_text_size">22sp</dimen>
+    <!-- *************************************************************************************** -->
+    <dimen name="title_text">24sp</dimen>
+    <dimen name="sub_title_text">18sp</dimen>
+</resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activites.MaintenanceTeamActivity">
 
     <!-- ToolBar -->
@@ -20,8 +20,8 @@
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_below="@id/appbar"
+        android:orientation="horizontal"
         android:weightSum="5">
 
         <!-- List Container -->
@@ -47,8 +47,8 @@
                     android:id="@+id/rl_unassigned_rooms"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_alignParentTop="true">
+                    android:layout_alignParentTop="true"
+                    android:background="@color/colorPrimaryDark">
 
                     <!-- Total Unassigned Rooms Text -->
                     <android.support.v7.widget.AppCompatTextView
@@ -68,9 +68,9 @@
                         android:id="@+id/tv_unassigned_rooms_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@id/tv_unassigned_rooms_total_text"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="6dp"
+                        android:layout_toStartOf="@id/tv_unassigned_rooms_total_text"
                         android:text="@string/text_unassigned_rooms"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
@@ -82,8 +82,8 @@
                     android:id="@+id/lv_housekeeprs_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@color/colorPrimaryDark"
                     android:layout_below="@id/appbar"
+                    android:divider="@color/colorPrimaryDark"
                     android:dividerHeight="2px"
                     android:drawSelectorOnTop="true" />
 
@@ -127,12 +127,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_room_assign_unassigned"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_centerInParent="true"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -140,9 +140,17 @@
                     android:id="@+id/gv_room_assign_unassigned"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/rl_room_assign_top_head"
                     android:layout_above="@id/bottom_divider"
-                    android:numColumns="5"/>
+                    android:layout_below="@id/rl_room_assign_top_head"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:columnWidth="@dimen/residents_rooms_column_width"
+                    android:drawSelectorOnTop="true"
+                    android:gravity="center"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="auto_fit"
+                    android:stretchMode="spacingWidth"
+                    android:verticalSpacing="3dp" />
 
                 <!-- Bottom Divider -->
                 <View
@@ -181,14 +189,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@id/imgb_room_assign_add_all"
-                    android:layout_marginTop="4dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_toEndOf="@id/imgb_room_assign_add_all"
                     android:text="@string/text_room_assign_add_all"
                     android:textColor="@color/colorSecondaryDark"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <!-- Remove All icon -->
                 <android.support.v7.widget.AppCompatImageButton
@@ -210,14 +218,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_toStartOf="@id/imgb_room_assign_remove_all"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
+                    android:layout_toStartOf="@id/imgb_room_assign_remove_all"
                     android:text="@string/text_room_assign_remove_all"
                     android:textColor="@color/colorSecondaryDark"
                     android:textSize="14sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -240,12 +248,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
                         android:layout_marginStart="8dp"
                         android:text="@string/text_room_assign_assigned"
-                        android:layout_centerInParent="true"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -254,7 +262,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/rl_room_assign_bottom_head"
-                    android:numColumns="5"/>
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:columnWidth="@dimen/residents_rooms_column_width"
+                    android:drawSelectorOnTop="true"
+                    android:gravity="center"
+                    android:horizontalSpacing="3dp"
+                    android:numColumns="auto_fit"
+                    android:stretchMode="spacingWidth"
+                    android:verticalSpacing="3dp" />
 
             </RelativeLayout>
 

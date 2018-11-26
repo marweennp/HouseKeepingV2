@@ -6,6 +6,7 @@ import com.hotix.myhotixhousekeeping.models.FoundObj;
 import com.hotix.myhotixhousekeeping.models.Generic;
 import com.hotix.myhotixhousekeeping.models.Login;
 import com.hotix.myhotixhousekeeping.models.Panne;
+import com.hotix.myhotixhousekeeping.models.Resident;
 import com.hotix.myhotixhousekeeping.models.RoomRack;
 
 import java.util.ArrayList;
@@ -42,6 +43,10 @@ public class ConstantConfig {
     public static ArrayList<AffectedRoom> GLOBAL_ASSIGNED_ROOMS = new ArrayList<AffectedRoom>();
     public static RoomRack GLOBAL_ROOM_RACK = new RoomRack();
     public static ArrayList<RoomRack> GLOBAL_RACK = new ArrayList<RoomRack>();
+
+    //Global Residents
+    public static Resident GLOBAL_RESIDENT = new Resident();
+    public static ArrayList<Resident> GLOBAL_RESIDENT_LIST= new ArrayList<Resident>();
 
     //Global Found Obj
     public static FoundObj GLOBAL_FOUND_OBJ = new FoundObj();

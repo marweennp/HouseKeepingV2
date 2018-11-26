@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_close"
-        android:icon="@drawable/ic_check_circle_white_36dp"
-        android:title="@string/menu_item_close"
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_refresh_white_36dp"
+        android:title="@string/menu_item_refresh"
         app:showAsAction="ifRoom"></item>
 
 </menu>

@@ -56,8 +56,8 @@
                 android:id="@+id/rl_found_obj_date"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@color/grey_200"
-                android:layout_below="@id/v_found_obj_divider">
+                android:layout_below="@id/v_found_obj_divider"
+                android:background="@color/grey_200">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_found_obj_from_date"
@@ -186,7 +186,7 @@
                             android:layout_marginTop="10dp"
                             android:text="@string/text_lost_and_found_details"
                             android:textColor="@color/colorSecondaryDark"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
 
@@ -207,7 +207,7 @@
                             android:layout_marginTop="4dp"
                             android:text="@string/text_show_order_location"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Details location -->
@@ -223,6 +223,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_location_on_white_24dp" />
 
@@ -233,7 +234,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -255,7 +256,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_date_time"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Details Date -->
@@ -272,6 +273,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_today_white_24dp" />
 
@@ -282,7 +284,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -299,6 +301,7 @@
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
@@ -309,7 +312,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/grey_700"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -331,7 +334,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_order_description"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -350,7 +353,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -372,22 +375,23 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_lost_and_found_found_by"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Details Found By -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/tv_lost_and_found_details_found_by_title"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_toEndOf="@id/tv_lost_and_found_details_found_by_title"
                             android:orientation="horizontal">
 
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_person_white_24dp" />
 
@@ -398,7 +402,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -420,22 +424,23 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_lost_and_found_belong_to"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <!-- Details Belong to -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/tv_lost_and_found_details_belong_to_title"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_toEndOf="@id/tv_lost_and_found_details_belong_to_title"
                             android:orientation="horizontal">
 
                             <android.support.v7.widget.AppCompatImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
                                 android:tint="@color/colorPrimary"
                                 app:srcCompat="@drawable/ic_person_white_24dp" />
 
@@ -446,7 +451,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 
@@ -468,7 +473,7 @@
                             android:layout_marginTop="8dp"
                             android:text="@string/text_show_lost_and_found_comment"
                             android:textColor="@color/colorSecondary"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/title_text"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -488,7 +493,7 @@
                                 android:layout_marginStart="8dp"
                                 android:text=""
                                 android:textColor="@color/light_bg_dark_primary_text"
-                                android:textSize="16sp" />
+                                android:textSize="@dimen/title_text" />
 
                         </LinearLayout>
 

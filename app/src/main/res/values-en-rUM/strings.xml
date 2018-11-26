@@ -200,4 +200,10 @@
     <string name="text_rooms">Rooms</string>
     <string name="text_da">(ED)</string>
     <string name="text_du">(DU)</string>
+    <string name="text_residents">Residents</string>
+    <string name="text_auto_update">Auto Update Settings</string>
+    <string name="text_default_url">Default</string>
+    <string name="text_search_filter">Search Filter</string>
+    <string name="text_last">Last Service</string>
+    <string name="text_first">First Service</string>
 </resources>

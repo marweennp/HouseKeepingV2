@@ -64,6 +64,8 @@ public class UsersSettingsActivity extends AppCompatActivity {
     SwitchCompat swLocationState;
     @BindView(R.id.sw_users_settings_view_geusts)
     SwitchCompat swViewGeusts;
+    @BindView(R.id.sw_users_settings_controle_pensionnaire)
+    SwitchCompat swControlePensionnaire;
     @BindView(R.id.sp_users_settings)
     AppCompatSpinner spUsersSettings;
 
@@ -139,6 +141,8 @@ public class UsersSettingsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.setings_menu, menu);
         MenuItem item = menu.findItem(R.id.action_synic);
         item.setVisible(false);
+        MenuItem item2 = menu.findItem(R.id.action_test);
+        item2.setVisible(false);
         return true;
     }
 
@@ -299,6 +303,18 @@ public class UsersSettingsActivity extends AppCompatActivity {
             }
         });
 
+        swControlePensionnaire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+
+                if (bChecked) {
+                    swControlePensionnaire.setText(R.string.all_on);
+                } else {
+                    swControlePensionnaire.setText(R.string.all_off);
+                }
+            }
+        });
+
     }
 
     private void loadSettings(UserPermissions user) {
@@ -316,7 +332,7 @@ public class UsersSettingsActivity extends AppCompatActivity {
         swRoomState.setChecked(user.getHasChangeStatut());
         swLocationState.setChecked(user.getHasEtatLieu());
         swViewGeusts.setChecked(user.getHasViewClient());
-
+        swControlePensionnaire.setChecked(user.getHasControlePensionnaire());
     }
 
     private void saveSettings() {
@@ -384,7 +400,8 @@ public class UsersSettingsActivity extends AppCompatActivity {
                 swRoomState.isChecked() ? "1" : "0",
                 swLocationState.isChecked() ? "1" : "0",
                 swViewGeusts.isChecked() ? "1" : "0",
-                swHousekeepers.isChecked() ? "1" : "0");
+                swHousekeepers.isChecked() ? "1" : "0",
+                swControlePensionnaire.isChecked() ? "1" : "0");
 
         final ProgressDialog progressDialog = new ProgressDialog(UsersSettingsActivity.this);
         progressDialog.setIndeterminate(true);
@@ -410,6 +427,7 @@ public class UsersSettingsActivity extends AppCompatActivity {
                     mUsers.get(mSelected).setHasChangeStatut(swRoomState.isChecked());
                     mUsers.get(mSelected).setHasEtatLieu(swLocationState.isChecked());
                     mUsers.get(mSelected).setHasViewClient(swViewGeusts.isChecked());
+                    mUsers.get(mSelected).setHasControlePensionnaire(swControlePensionnaire.isChecked());
 
                     showSnackbar(findViewById(android.R.id.content), getString(R.string.message_successfully_updated));
                 } else {
