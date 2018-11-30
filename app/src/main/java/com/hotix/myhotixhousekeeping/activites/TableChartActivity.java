@@ -18,7 +18,6 @@ import android.widget.TableRow;
 import com.hotix.myhotixhousekeeping.R;
 import com.hotix.myhotixhousekeeping.helpers.MySession;
 import com.hotix.myhotixhousekeeping.helpers.MySettings;
-import com.hotix.myhotixhousekeeping.models.AffectedRoom;
 import com.hotix.myhotixhousekeeping.models.Forecast;
 
 import butterknife.BindView;
@@ -34,11 +33,9 @@ public class TableChartActivity extends AppCompatActivity {
     // Butter Knife BindView Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    TableLayout tl;
     private MySettings mMySettings;
     private MySession mMySession;
-
-    TableLayout tl ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +54,7 @@ public class TableChartActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -153,8 +151,8 @@ public class TableChartActivity extends AppCompatActivity {
         tvTotRoom.setText(obj.getTotCHB());
         tvTotPax.setText(obj.getTotPax());
 
-        tvOccRoom.setText(obj.getOccCHB()+"%");
-        tvOccPax.setText(obj.getOccPax()+"%");
+        tvOccRoom.setText(obj.getOccCHB() + "%");
+        tvOccPax.setText(obj.getOccPax() + "%");
 
         tvrest.setText(obj.getReste());
 

@@ -84,7 +84,7 @@ public class Utils {
                 } else {
                     BASE_URL = mMySettings.getLocalIpDefault() ? mMySettings.getPublicBaseUrl() : mMySettings.getLocalBaseUrl();
                     mMySettings.setLocalIpDefault(!mMySettings.getLocalIpDefault());
-                    Log.e("BASE_URL PublicBaseUrl", BASE_URL);
+                    Log.e("BASE_URL Switshed", BASE_URL);
                 }
             }
 
@@ -132,6 +132,24 @@ public class Utils {
         }
         return true;
     }
+
+    public static Date dateFromString(String date, String fromFormat) {
+        SimpleDateFormat sdf_from = new SimpleDateFormat(fromFormat);
+        Calendar c = Calendar.getInstance();
+        Date result;
+        result = Calendar.getInstance().getTime();
+        try {
+            if (stringEmptyOrNull(date)) {
+                result = Calendar.getInstance().getTime();
+            } else {
+                result = sdf_from.parse(date);
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+
 
     /**
      ***********************************************************************************************

@@ -30,7 +30,6 @@ public class ConstantConfig {
     public static Login GLOBAL_LOGIN_DATA = new Login();
     public static boolean GLOBAL_LOGEDIN = false;
 
-
     //Global Panne
     public static Panne GLOBAL_PANNE = new Panne();
 

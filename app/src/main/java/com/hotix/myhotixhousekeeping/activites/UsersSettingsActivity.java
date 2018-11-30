@@ -319,20 +319,38 @@ public class UsersSettingsActivity extends AppCompatActivity {
 
     private void loadSettings(UserPermissions user) {
 
+        if (!(user.getHasConfig() == null)) {
+            swConfiguration.setChecked(user.getHasConfig());
+            swConfiguration.setEnabled(!user.getHasConfig());
+        }
+        if (!(user.getHasFM() == null)) {
+            swHousekeepers.setChecked(user.getHasFM());
+        }
+        if (!(user.getHasAddPanne() == null)) {
+            swDeclareOrders.setChecked(user.getHasAddPanne());
+        }
+        if (!(user.getHasClosePanne() == null)) {
+            swCloseOrders.setChecked(user.getHasClosePanne());
+        }
+        if (!(user.getHasAddObjet() == null)) {
+            swDeclareFound.setChecked(user.getHasAddObjet());
+        }
+        if (!(user.getHasCloseObjet() == null)) {
+            swCloseFound.setChecked(user.getHasCloseObjet());
+        }
+        if (!(user.getHasMouchard() == null)) {
+            swRoomStatus.setChecked(user.getHasMouchard());
+        }
+        if (!(user.getHasChangeStatut() == null)) {
+            swRoomState.setChecked(user.getHasChangeStatut());
+        }
+        if (!(user.getHasEtatLieu() == null)) {
+            swLocationState.setChecked(user.getHasEtatLieu());
+        }
+        if (!(user.getHasControlePensionnaire() == null)) {
+            swControlePensionnaire.setChecked(user.getHasControlePensionnaire());
+        }
 
-        swConfiguration.setChecked(user.getHasConfig());
-        swConfiguration.setEnabled(!user.getHasConfig());
-
-        swHousekeepers.setChecked(user.getHasFM());
-        swDeclareOrders.setChecked(user.getHasAddPanne());
-        swCloseOrders.setChecked(user.getHasClosePanne());
-        swDeclareFound.setChecked(user.getHasAddObjet());
-        swCloseFound.setChecked(user.getHasCloseObjet());
-        swRoomStatus.setChecked(user.getHasMouchard());
-        swRoomState.setChecked(user.getHasChangeStatut());
-        swLocationState.setChecked(user.getHasEtatLieu());
-        swViewGeusts.setChecked(user.getHasViewClient());
-        swControlePensionnaire.setChecked(user.getHasControlePensionnaire());
     }
 
     private void saveSettings() {

@@ -35,6 +35,7 @@ import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +48,7 @@ import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_FORECA
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGEDIN;
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFormater;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFromString;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
@@ -149,12 +151,12 @@ public class ForecastActivity extends AppCompatActivity {
 
     @OnClick(R.id.et_forecast_start_date)
     public void getStartDate() {
-        startDatePickerDialog(etStartDate, "");
+        startDatePickerDialog(etStartDate, dateFromString(etStartDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.et_forecast_end_date)
     public void getEndDate() {
-        startDatePickerDialog(etEndDate);
+        startDatePickerDialog(etEndDate,dateFromString(etEndDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.btn_empty_view_refresh)
@@ -252,8 +254,9 @@ public class ForecastActivity extends AppCompatActivity {
 
     }
 
-    private void startDatePickerDialog(final AppCompatEditText et) {
+    private void startDatePickerDialog(final AppCompatEditText et, Date date) {
         Calendar currentTime = Calendar.getInstance();
+        currentTime.setTime(date);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -265,24 +268,8 @@ public class ForecastActivity extends AppCompatActivity {
 
         }, currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
-
     }
 
-    private void startDatePickerDialog(final AppCompatEditText et, String date) {
-        Calendar currentTime = Calendar.getInstance();
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-                et.setText(dateFormatter.format(newDate.getTime()));
-            }
-
-        }, currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-
-    }
 
     /**********************************************************************************************/
 

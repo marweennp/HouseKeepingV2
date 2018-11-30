@@ -50,6 +50,7 @@ import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +64,7 @@ import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_PANNE;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateColored;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFormater;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFromString;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
@@ -224,12 +226,12 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
     @OnClick(R.id.et_orders_start_date)
     public void getStartDate() {
-        startDatePickerDialog(etStartDate);
+        startDatePickerDialog(etStartDate, dateFromString(etStartDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.et_orders_end_date)
     public void getEndDate() {
-        startDatePickerDialog(etEndDate);
+        startDatePickerDialog(etEndDate, dateFromString(etEndDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.btn_empty_view_refresh)
@@ -493,8 +495,9 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
     }
 
-    private void startDatePickerDialog(final AppCompatEditText et) {
+    private void startDatePickerDialog(final AppCompatEditText et, Date date) {
         Calendar currentTime = Calendar.getInstance();
+        currentTime.setTime(date);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -506,7 +509,6 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
         }, currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
-
     }
 
     private void loadDetails() {
@@ -613,7 +615,9 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
         Call<PannesData> userCall = service.getListPannesClotureQuery(id, pic, startDate, endDate);
 
         llLoadingView.setVisibility(View.VISIBLE);
-        if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
+        if (land) {
+            nsvDetailsContainer.setVisibility(View.GONE);
+        }
         lvOrdersList.setVisibility(View.GONE);
         rlEmptyView.setVisibility(View.GONE);
 
@@ -623,7 +627,9 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
 
                 llLoadingView.setVisibility(View.GONE);
                 lvOrdersList.setVisibility(View.VISIBLE);
-                if (land) { nsvDetailsContainer.setVisibility(View.VISIBLE); }
+                if (land) {
+                    nsvDetailsContainer.setVisibility(View.VISIBLE);
+                }
                 rlEmptyView.setVisibility(View.GONE);
 
                 if (response.raw().code() == 200) {
@@ -652,7 +658,9 @@ public class MaintenanceOrdersActivity extends AppCompatActivity {
             public void onFailure(Call<PannesData> call, Throwable t) {
                 llLoadingView.setVisibility(View.GONE);
                 lvOrdersList.setVisibility(View.GONE);
-                if (land) { nsvDetailsContainer.setVisibility(View.GONE); }
+                if (land) {
+                    nsvDetailsContainer.setVisibility(View.GONE);
+                }
                 rlEmptyView.setVisibility(View.VISIBLE);
                 tvEmptyViewText.setText(R.string.error_message_server_unreachable);
                 imgEmptyViewIcon.setImageResource(R.drawable.ic_dns_white_48dp);

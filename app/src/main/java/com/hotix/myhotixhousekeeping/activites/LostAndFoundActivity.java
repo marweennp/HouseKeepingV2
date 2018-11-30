@@ -49,6 +49,7 @@ import com.hotix.myhotixhousekeeping.retrofit2.RetrofitInterface;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,6 +63,7 @@ import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_FOUND_
 import static com.hotix.myhotixhousekeeping.helpers.ConstantConfig.GLOBAL_LOGIN_DATA;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateColored;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFormater;
+import static com.hotix.myhotixhousekeeping.helpers.Utils.dateFromString;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.setBaseUrl;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.showSnackbar;
 import static com.hotix.myhotixhousekeeping.helpers.Utils.stringEmptyOrNull;
@@ -214,12 +216,12 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
     @OnClick(R.id.et_found_obj_start_date)
     public void getStartDate() {
-        startDatePickerDialog(etStartDate);
+        startDatePickerDialog(etStartDate, dateFromString(etStartDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.et_found_obj_end_date)
     public void getEndDate() {
-        startDatePickerDialog(etEndDate);
+        startDatePickerDialog(etEndDate, dateFromString(etEndDate.getText().toString(), "dd/MM/yyyy"));
     }
 
     @OnClick(R.id.btn_empty_view_refresh)
@@ -481,8 +483,9 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
     }
 
-    private void startDatePickerDialog(final AppCompatEditText et) {
+    private void startDatePickerDialog(final AppCompatEditText et, Date date) {
         Calendar currentTime = Calendar.getInstance();
+        currentTime.setTime(date);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -494,7 +497,6 @@ public class LostAndFoundActivity extends AppCompatActivity {
 
         }, currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
-
     }
 
     private void loadDetails() {
