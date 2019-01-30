@@ -41,8 +41,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     AppCompatImageView imgLogo;
     @BindView(R.id.tv_splash_screen_footer)
     AppCompatTextView tvFooter;
-    // Update
-    private UpdateChecker mChecker;
+
     private MySettings mMySettings;
 
     @Override
@@ -52,7 +51,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         //settings
         mMySettings = new MySettings(getApplicationContext());
-        mChecker = new UpdateChecker(this, false);
         //load logo img
         Picasso.get().load(R.mipmap.ic_launcher).fit().placeholder(R.mipmap.ic_launcher).into(imgLogo);
         //Force portrait on phones

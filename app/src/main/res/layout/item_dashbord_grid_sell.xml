@@ -26,7 +26,7 @@
             <RelativeLayout
                 android:id="@+id/rl_grid_sell_title"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:background="#FFFFFF">
 

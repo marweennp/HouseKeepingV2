@@ -56,7 +56,7 @@
     <string name="text_forecast">Prévision</string>
     <string name="text_check_in">Arrivées Prévues</string>
     <string name="text_lost_and_found">"Objets Trouvés "</string>
-    <string name="text_maintenance_team">Chambrières</string>
+    <string name="text_maintenance_team">Femme de Chambre</string>
     <string name="text_user_settings">"Paramètres utilisateur "</string>
     <string name="text_configuration">Configuration</string>
     <string name="text_see_housekeepers">Voir Les Femmes de Chambre</string>
@@ -174,7 +174,7 @@
     <string name="dialog_claim_closing_title">"Clôture Réclamation "</string>
     <string name="dialog_claim_closing_comment">Commentaire</string>
     <string name="dialog_hotel_settings_title">Paramètres de l\'hôtel</string>
-    <string name="dialog_hotel_settings_text">"Veuillez entrer votre code d'hôtel pour télécharger les paramètres. "</string>
+    <string name="dialog_hotel_settings_text">"Veuillez entrer votre code d\'hôtel pour télécharger les paramètres. "</string>
     <string name="dialog_hotel_settings_hotel_code">Code Hotel</string>
     <string name="dialog_contact_support_title">"Contactez le support "</string>
     <string name="dialog_contact_support_text">Vous avez entré un code d\'hôtel invalide! Veuillez contacter votre administrateur.</string>

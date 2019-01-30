@@ -347,6 +347,9 @@ public class UsersSettingsActivity extends AppCompatActivity {
         if (!(user.getHasEtatLieu() == null)) {
             swLocationState.setChecked(user.getHasEtatLieu());
         }
+        if (!(user.getHasViewClient() == null)) {
+            swViewGeusts.setChecked(user.getHasViewClient());
+        }
         if (!(user.getHasControlePensionnaire() == null)) {
             swControlePensionnaire.setChecked(user.getHasControlePensionnaire());
         }
