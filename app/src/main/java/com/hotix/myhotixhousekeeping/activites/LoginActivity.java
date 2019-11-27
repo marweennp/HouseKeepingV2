@@ -15,6 +15,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -76,11 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     //MySession
     private MySession mMySession;
 
-    private boolean permissionGranted = true;
     private KenBurnsView mKenBurns;
     private InputValidation mInputValidation;
-    // Update
-    private UpdateChecker mChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         mInputValidation = new InputValidation(this);
-        mChecker = new UpdateChecker(this, true);
         init();
 
     }
@@ -104,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (mMySettings.getFirstStart()) {
+            Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart() );
             startDownloadSettingsDialog();
         }
         setBaseUrl(this);
@@ -226,6 +224,8 @@ public class LoginActivity extends AppCompatActivity {
     //This method show Download Hotel Settings dialog.
     private void startDownloadSettingsDialog() {
 
+        Log.e(TAG, "Download Settings Dialog Started");
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
 
         View mView = getLayoutInflater().inflate(R.layout.dialog_hotel_settings, null);
@@ -245,6 +245,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (mInputValidation.isInputEditTextFilled(etHotelCode, ilHotelCode, getString(R.string.error_message_field_required))) {
                     try {
+                        Log.e(TAG, "Download Clicked");
                         lodeHotelInfos(etHotelCode.getText().toString());
                     } catch (Exception e) {
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_something_wrong));
@@ -375,6 +376,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void lodeHotelInfos(String code) {
 
+        Log.e(TAG, "Hotel Infos Loading Started : " + code);
+
         RetrofitInterface service = RetrofitClient.getHotixSupportApi().create(RetrofitInterface.class);
         Call<HotelSettings> userCall = service.getInfosQuery(code, FINAL_APP_ID);
 
@@ -387,10 +390,11 @@ public class LoginActivity extends AppCompatActivity {
         userCall.enqueue(new Callback<HotelSettings>() {
             @Override
             public void onResponse(Call<HotelSettings> call, Response<HotelSettings> response) {
-
+                Log.e(TAG, "Response : " + response.raw().code() );
                 progressDialog.dismiss();
 
                 if (response.raw().code() == 200) {
+
                     HotelSettings hotelSettings = response.body();
                     //Check if hotel id > 0
                     if (!(hotelSettings.getId() > 0)) {
@@ -429,6 +433,8 @@ public class LoginActivity extends AppCompatActivity {
                         mMySettings.setConfigured(true);
                         mMySettings.setSettingsUpdated(true);
 
+                        Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart() );
+
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.message_settings_updated));
                         setBaseUrl(getApplicationContext());
                     }
@@ -442,6 +448,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HotelSettings> call, Throwable t) {
+                Log.e(TAG, "Failure : " + t.toString() );
                 progressDialog.dismiss();
                 startDownloadSettingsDialog();
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_server_down));

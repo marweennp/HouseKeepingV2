@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.gv_home_dashbord)
     GridView gvDashbord;
 
-    private DasbordItem mItem;
     private ArrayList<DasbordItem> mItems;
     private DashbordGridAdapter mGridAdapter;
 
@@ -162,7 +161,6 @@ public class HomeActivity extends AppCompatActivity {
         gvDashbord.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mItem = mItems.get(position);
                 Intent i;
                 switch (mItems.get(position).getId()) {
                     case 1:
