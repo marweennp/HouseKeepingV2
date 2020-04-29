@@ -57,6 +57,7 @@ import static com.hotix.myhotixhousekeeping.helpers.Utils.validDates;
 public class ForecastActivity extends AppCompatActivity {
 
     // Butter Knife BindView Toolbar
+    // MB Git Test
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
