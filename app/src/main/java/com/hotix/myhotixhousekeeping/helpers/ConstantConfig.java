@@ -14,11 +14,13 @@ import java.util.ArrayList;
 public class ConstantConfig {
 
     /********************** *****************( Final )************************  *******************/
-    //FINAL BASE URL
-    public static final String FINAL_BASE_URL = "http://41.228.21.123:99/";
-    //public static final String FINAL_BASE_URL = "http://192.168.0.6:99/";
-    //FINAL App Id
-    public static final String FINAL_APP_ID = "2";
+    //HOTEL CONFIG BASE URL
+    public static final String FINAL_BASE_URL = "http://41.228.21.123:99/"; // HOTIX Public
+    //public static final String FINAL_BASE_URL = "http://192.168.0.6:99/"; // HOTIX Local
+
+    //FINAL APP ID
+    //public static final String FINAL_APP_ID = "1"; // MyGuest
+    public static final String FINAL_APP_ID = "2"; // HouseKeeping
 
     public static final int SETTINGS_RESULT = 101;
 
