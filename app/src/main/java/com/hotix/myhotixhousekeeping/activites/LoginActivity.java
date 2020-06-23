@@ -1,5 +1,6 @@
 package com.hotix.myhotixhousekeeping.activites;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -80,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
     private KenBurnsView mKenBurns;
     private InputValidation mInputValidation;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (mMySettings.getFirstStart()) {
-            Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart() );
+            Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart());
             startDownloadSettingsDialog();
         }
         setBaseUrl(this);
@@ -119,12 +121,12 @@ public class LoginActivity extends AppCompatActivity {
     public void startLogin() {
         if (checkNetwork(this)) {
             if (inputTextValidation()) {
+                btnLogin.setEnabled(false);
                 try {
                     login();
                 } catch (Exception e) {
                     showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_check_settings));
                 }
-                btnLogin.setEnabled(false);
             }
         } else {
             showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_no_internet));
@@ -144,9 +146,9 @@ public class LoginActivity extends AppCompatActivity {
         if (!mInputValidation.isInputEditTextFilled(etLogin, ilLogin, getString(R.string.error_message_field_required))) {
             return false;
         }
-        if (!mInputValidation.isInputEditTextFilled(etPassword, ilPassword, getString(R.string.error_message_field_required))) {
-            return false;
-        }
+//        if (!mInputValidation.isInputEditTextFilled(etPassword, ilPassword, getString(R.string.error_message_field_required))) {
+//            return false;
+//        }
 
         //Return true if all the inputs are valid
         return true;
@@ -390,7 +392,7 @@ public class LoginActivity extends AppCompatActivity {
         userCall.enqueue(new Callback<HotelSettings>() {
             @Override
             public void onResponse(Call<HotelSettings> call, Response<HotelSettings> response) {
-                Log.e(TAG, "Response : " + response.raw().code() );
+                Log.e(TAG, "Response : " + response.raw().code());
                 progressDialog.dismiss();
 
                 if (response.raw().code() == 200) {
@@ -433,7 +435,7 @@ public class LoginActivity extends AppCompatActivity {
                         mMySettings.setConfigured(true);
                         mMySettings.setSettingsUpdated(true);
 
-                        Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart() );
+                        Log.e(TAG, "MySettings FirstStart : " + mMySettings.getFirstStart());
 
                         showSnackbar(findViewById(android.R.id.content), getString(R.string.message_settings_updated));
                         setBaseUrl(getApplicationContext());
@@ -448,7 +450,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HotelSettings> call, Throwable t) {
-                Log.e(TAG, "Failure : " + t.toString() );
+                Log.e(TAG, "Failure : " + t.toString());
                 progressDialog.dismiss();
                 startDownloadSettingsDialog();
                 showSnackbar(findViewById(android.R.id.content), getString(R.string.error_message_server_down));
