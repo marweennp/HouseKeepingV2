@@ -93,7 +93,6 @@
             android:visibility="gone"
             android:indeterminate="true"/>
 
-
     </android.support.v7.widget.LinearLayoutCompat>
 
     <!-- Footer -->
