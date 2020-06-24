@@ -302,7 +302,7 @@ public class LoginActivity extends AppCompatActivity {
     /*************************************(  Login Logic  )****************************************/
     public void login() {
 
-        final String sLogin = etLogin.getText().toString().trim();
+        final String sLogin = etLogin.getText().toString().trim().toUpperCase();
         final String sPassword = etPassword.getText().toString().trim();
         mMySession.clearSessionDetails();
         mMySession.setLogin(sLogin);

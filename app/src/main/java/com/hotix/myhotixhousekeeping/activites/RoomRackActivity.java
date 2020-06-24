@@ -544,7 +544,7 @@ public class RoomRackActivity extends AppCompatActivity {
                         String typeProdId = String.valueOf(GLOBAL_ROOM_RACK.getTypeProduitId());
                         String statut = "1";
                         String oldStatut = String.valueOf(GLOBAL_ROOM_RACK.getStatutId());
-                        String comment = "com";
+                        String comment = "";
 
                         dialog.dismiss();
 
@@ -577,7 +577,7 @@ public class RoomRackActivity extends AppCompatActivity {
                         String typeProdId = String.valueOf(GLOBAL_ROOM_RACK.getTypeProduitId());
                         String statut = "2";
                         String oldStatut = String.valueOf(GLOBAL_ROOM_RACK.getStatutId());
-                        String comment = "com";
+                        String comment = "";
 
                         dialog.dismiss();
 
@@ -610,7 +610,7 @@ public class RoomRackActivity extends AppCompatActivity {
                         String typeProdId = String.valueOf(GLOBAL_ROOM_RACK.getTypeProduitId());
                         String statut = "3";
                         String oldStatut = String.valueOf(GLOBAL_ROOM_RACK.getStatutId());
-                        String comment = "com";
+                        String comment = "";
 
                         dialog.dismiss();
 
@@ -643,7 +643,7 @@ public class RoomRackActivity extends AppCompatActivity {
                         String typeProdId = String.valueOf(GLOBAL_ROOM_RACK.getTypeProduitId());
                         String statut = "4";
                         String oldStatut = String.valueOf(GLOBAL_ROOM_RACK.getStatutId());
-                        String comment = "com";
+                        String comment = "";
 
                         dialog.dismiss();
 
