@@ -161,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
         mKenBurns = (KenBurnsView) findViewById(R.id.ken_burns_images);
         mKenBurns.setImageResource(R.drawable.hotel);
 
+        etLogin.setText(mMySession.getLogin());
+
         loadeImage();
 
         try {

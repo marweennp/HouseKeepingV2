@@ -216,6 +216,7 @@ public class ResidentsActivity extends AppCompatActivity {
         }
 
         AppCompatTextView tvArreng = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_residents_arrangement);
+        AppCompatTextView tvCompany = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_residents_company);
         AppCompatTextView tvRoom = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_residents_details_room);
         AppCompatTextView tvA = (AppCompatTextView) mView.findViewById(R.id.tv_residents_adult);
         AppCompatTextView tvE = (AppCompatTextView) mView.findViewById(R.id.tv_residents_kid);
@@ -239,6 +240,11 @@ public class ResidentsActivity extends AppCompatActivity {
         if (!stringEmptyOrNull(GLOBAL_RESIDENT.getArrangement())) {
             tvArreng.setVisibility(View.VISIBLE);
             tvArreng.setText(GLOBAL_RESIDENT.getArrangement());
+        }
+
+        if (!stringEmptyOrNull(GLOBAL_RESIDENT.getSociete())) {
+            tvCompany.setVisibility(View.VISIBLE);
+            tvCompany.setText(GLOBAL_RESIDENT.getSociete());
         }
 
         if (GLOBAL_RESIDENT.getNbrA() > 0) {

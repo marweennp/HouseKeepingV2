@@ -341,6 +341,16 @@ public class RoomRackActivity extends AppCompatActivity {
         AppCompatTextView title = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_rack_options_title);
         title.setText(GLOBAL_ROOM_RACK.getTypeProduit() + " " + GLOBAL_ROOM_RACK.getNumChb());
 
+        AppCompatTextView comment = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_rack_options_comment);
+        comment.setText("");
+
+        RelativeLayout rlGuests = (RelativeLayout) mView.findViewById(R.id.rl_dialog_room_rack_options_guests);
+        AppCompatTextView guests = (AppCompatTextView) mView.findViewById(R.id.tv_dialog_room_rack_options_guests);
+
+        if (GLOBAL_ROOM_RACK.getGuests().size() > 0){
+            rlGuests.setVisibility(View.VISIBLE);
+            guests.setText(GLOBAL_ROOM_RACK.getGuests().size() + "");
+        }
 
         AppCompatButton btnCheckGuest = (AppCompatButton) mView.findViewById(R.id.btn_dialog_room_rack_options_view_guest);
         AppCompatButton btnClaimOrder = (AppCompatButton) mView.findViewById(R.id.btn_dialog_room_rack_options_claim_order);
